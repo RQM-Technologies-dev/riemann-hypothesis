@@ -1,0 +1,133 @@
+{
+  "experiment": "compactified_conjugate_return",
+  "digits": 60,
+  "scale_L": "20.0",
+  "symmetry": {
+    "max_xi_even_error": "1.6520079e-62",
+    "max_xi_imaginary_part": "8.2600393e-63",
+    "max_polar_radius_error": "7.7787691e-62"
+  },
+  "first_zeros": [
+    {
+      "index": 1,
+      "height": "14.13472514173469379",
+      "theta_deg": "70.50046846494309",
+      "conjugate_theta_deg": "289.4995315350569",
+      "unit_radius_squared_error": "7.7787691e-62",
+      "xi_abs_at_zero": "4.4210864e-64",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 2,
+      "height": "21.022039638771554993",
+      "theta_deg": "92.85438981194355",
+      "conjugate_theta_deg": "267.1456101880564",
+      "unit_radius_squared_error": "0.0",
+      "xi_abs_at_zero": "2.1557408e-65",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 3,
+      "height": "25.010857580145688763",
+      "theta_deg": "102.7046538844125",
+      "conjugate_theta_deg": "257.2953461155875",
+      "unit_radius_squared_error": "1.5557538e-61",
+      "xi_abs_at_zero": "2.0805526e-68",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 4,
+      "height": "30.42487612585951321",
+      "theta_deg": "113.3616158600296",
+      "conjugate_theta_deg": "246.6383841399704",
+      "unit_radius_squared_error": "7.7787691e-62",
+      "xi_abs_at_zero": "9.1357892e-69",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 5,
+      "height": "32.935061587739189691",
+      "theta_deg": "117.4630988757399",
+      "conjugate_theta_deg": "242.5369011242601",
+      "unit_radius_squared_error": "1.5557538e-61",
+      "xi_abs_at_zero": "9.9360476e-69",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 6,
+      "height": "37.586178158825671257",
+      "theta_deg": "123.9641765738741",
+      "conjugate_theta_deg": "236.0358234261259",
+      "unit_radius_squared_error": "0.0",
+      "xi_abs_at_zero": "1.0140425e-70",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 7,
+      "height": "40.918719012147495187",
+      "theta_deg": "127.903648985715",
+      "conjugate_theta_deg": "232.096351014285",
+      "unit_radius_squared_error": "7.7787691e-62",
+      "xi_abs_at_zero": "2.6574646e-71",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    },
+    {
+      "index": 8,
+      "height": "43.327073280914999519",
+      "theta_deg": "130.443419436515",
+      "conjugate_theta_deg": "229.556580563485",
+      "unit_radius_squared_error": "1.5557538e-61",
+      "xi_abs_at_zero": "3.6704569e-72",
+      "polar_conjugation_error": "0.0",
+      "completed_conjugation_error": "<1e-69"
+    }
+  ],
+  "pole_decay": [
+    {
+      "height": 20,
+      "xi_abs": "3.665542775560946e-5",
+      "distance_from_pole_degrees": "90.0"
+    },
+    {
+      "height": 40,
+      "xi_abs": "2.117621707907226e-11",
+      "distance_from_pole_degrees": "53.1301023542"
+    },
+    {
+      "height": 80,
+      "xi_abs": "2.434263346711702e-24",
+      "distance_from_pole_degrees": "28.0724869359"
+    },
+    {
+      "height": 160,
+      "xi_abs": "5.172312714338811e-51",
+      "distance_from_pole_degrees": "14.2500326978"
+    }
+  ],
+  "single_harmonic_nonlimit": {
+    "index": 20,
+    "plus_height": "181.294405673087752",
+    "minus_height": "185.826765814914946",
+    "plus_phase": [
+      "0.7071067811865475",
+      "3.23005e-60"
+    ],
+    "minus_phase": [
+      "-0.7071067811865475",
+      "-6.83107e-60"
+    ],
+    "claim": "The n=2 harmonic has no limiting phase at infinity"
+  },
+  "boundaries": [
+    "This angular change of coordinates does not locate zeros.",
+    "The completed xi decays at infinity, individual harmonic phases do not.",
+    "No analytic passage through infinity or RH proof is claimed."
+  ]
+}
