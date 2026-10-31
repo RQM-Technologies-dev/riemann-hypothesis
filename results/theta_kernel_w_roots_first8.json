@@ -1,0 +1,57 @@
+{
+  "research_date": "2026-10-30",
+  "method": "Coarse sign scans of the fixed Jacobi-theta Fourier cosine integral followed by 50-digit mpmath secant refinement. Known zetazero heights used ONLY after finding roots for accuracy check.",
+  "global_scale_L": "20",
+  "unit_hypersphere_radius": "1",
+  "first8": [
+    {
+      "index": 1,
+      "harmonic_height": "14.1347251417346937904572519835624702707842571",
+      "latitude_w": "0.3337991519447608827028791879786054671964256",
+      "difference_from_mpmath_zetazero": "-4.9848e-51"
+    },
+    {
+      "index": 2,
+      "harmonic_height": "21.0220396387715549926284795938969027773343405",
+      "latitude_w": "-0.04979789562955657142223990395977435499975762",
+      "difference_from_mpmath_zetazero": "-1.97525e-51"
+    },
+    {
+      "index": 3,
+      "harmonic_height": "25.0108575801456887632137909925628218186595497",
+      "latitude_w": "-0.2199254420120333062392419879168982896318534",
+      "difference_from_mpmath_zetazero": "-1.68072e-50"
+    },
+    {
+      "index": 4,
+      "harmonic_height": "30.42487612585951321031189753058409132018156",
+      "latitude_w": "-0.3965329705492371627554235974957688604317887",
+      "difference_from_mpmath_zetazero": "5.12746e-51"
+    },
+    {
+      "index": 5,
+      "harmonic_height": "32.9350615877391896906623689640749034888127156",
+      "latitude_w": "-0.4611772416269492984234510793021526504077283",
+      "difference_from_mpmath_zetazero": "-1.74363e-50"
+    },
+    {
+      "index": 6,
+      "harmonic_height": "37.5861781588256712572177634807053328214055974",
+      "latitude_w": "-0.5586744494591469343833275977174129537719865",
+      "difference_from_mpmath_zetazero": "2.09904e-50"
+    },
+    {
+      "index": 7,
+      "harmonic_height": "40.918719012147495187398126914633254395726166",
+      "latitude_w": "-0.6143354531053334987521222559089565681685928",
+      "difference_from_mpmath_zetazero": "-2.48098e-49"
+    },
+    {
+      "index": 8,
+      "harmonic_height": "43.3270732809149995194961221654068057826456684",
+      "latitude_w": "-0.6486968178712900833241910404575507387494841",
+      "difference_from_mpmath_zetazero": "6.89667e-49"
+    }
+  ],
+  "claim_boundary": "Critical-line zero roots from known classical Xi integral, no RH proof, w=-1 excluded as compactified infinity."
+}
