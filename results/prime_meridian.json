@@ -1,0 +1,44 @@
+{
+  "name": "Prime Meridian / Cayley-Li theta-cumulant investigation",
+  "base_repository_commit": "9163b62a67a62b20af7a9e147a732364dbf1b244",
+  "scope": "Mathematical coordinates only; no RH proof or novelty claim.",
+  "order": 12,
+  "runs": [
+    {"digits": 50, "terms": 8, "cutoff": "2.5"},
+    {"digits": 65, "terms": 10, "cutoff": "3"}
+  ],
+  "tilted_integral_normalizer": "0.5",
+  "normalizer_error_vs_half": "0.0",
+  "max_li_run_difference": "3.4514654e-51",
+  "max_li_reference_error": "0.0",
+  "rows": [
+    {"n": 1, "theta_li": "0.023095708966121033814310247906495", "reference_li": "0.023095708966121033814310247906495", "cumulant": "0.023095708966121033814310247906495", "positive_kernel_control_li": "5.0039486351990349781385598888628"},
+    {"n": 2, "theta_li": "0.092345735228046670385728486192068", "reference_li": "0.092345735228046670385728486192068", "cumulant": "0.046154317295804602757107990379077", "positive_kernel_control_li": "15.278797026297472135804734537688"},
+    {"n": 3, "theta_li": "0.2076389205543248037914920466178", "reference_li": "0.2076389205543248037914920466178", "cumulant": "-0.00022231646290421184552533647782916", "positive_kernel_control_li": "19.659522974990533351739212622193"},
+    {"n": 4, "theta_li": "0.36879047949224163859051148963776", "reference_li": "0.36879047949224163859051148963776", "cumulant": "-0.00044176332757013710996062784218361", "positive_kernel_control_li": "15.481217889343604069488692924252"},
+    {"n": 5, "theta_li": "0.57554271446117745243110640549286", "reference_li": "0.57554271446117745243110640549286", "cumulant": "0.000017162240538302585659226253915179", "positive_kernel_control_li": "22.336572828071230401048603098124"},
+    {"n": 6, "theta_li": "0.8275660122823792974250028220205", "reference_li": "0.8275660122823792974250028220205", "cumulant": "0.000033772370032651951392805876857135", "positive_kernel_control_li": "54.37830055826728479745615904091"},
+    {"n": 7, "theta_li": "1.124460117570959490582820108017", "reference_li": "1.124460117570959490582820108017", "cumulant": "-0.00000329341762778743592003713866472", "positive_kernel_control_li": "72.445449654916981240440581204772"},
+    {"n": 8, "theta_li": "1.4657556771470606326555145419777", "reference_li": "1.4657556771470606326555145419777", "cumulant": "-0.0000063950952791918340238232397689186", "positive_kernel_control_li": "26.257055816160565386156260733522"},
+    {"n": 9, "theta_li": "1.8509160483825341553260448679209", "reference_li": "1.8509160483825341553260448679209", "cumulant": "0.0000011400226609185336744196288212344", "positive_kernel_control_li": "-17.860475217634685900553003447039"},
+    {"n": 10, "theta_li": "2.2793393631931577436930340573684", "reference_li": "2.2793393631931577436930340573684", "cumulant": "0.0000021764507637344722529944185000395", "positive_kernel_control_li": "81.543304690295543338855384123572"},
+    {"n": 11, "theta_li": "2.7503608382201960603545470928538", "reference_li": "2.7503608382201960603545470928538", "cumulant": "-0.00000061351713732286269992863743254797", "positive_kernel_control_li": "235.89798532634210869583135624981"},
+    {"n": 12, "theta_li": "3.2632553206246198480790859899118", "reference_li": "3.2632553206246198480790859899118", "cumulant": "-0.0000011471350378487992817004124471256", "positive_kernel_control_li": "93.255087611146483039527641903691"}
+  ],
+  "control": {
+    "a": "6",
+    "c": "4",
+    "positive_first_orders": [1,2,3,4,5,6,7,8,10,11,12],
+    "negative_orders": [9],
+    "added_Xi_zero_real": "0.5235987755982988730771072",
+    "added_Xi_zero_imag": "0.2194929828208027847708411",
+    "added_xi_zero_real": "0.2805070171791972152291589",
+    "added_xi_zero_imag": "0.5235987755982988730771072",
+    "factor_zero_residual": "1.3244424e-65",
+    "Li_map_radius": "1.49804896566213231560211",
+    "quaternion_meridian_radius": "0.6675349223701800402136777"
+  },
+  "numerical_caution": "Finite truncations and precision comparisons; not interval certification or an all-orders theorem.",
+  "runtime_seconds": 15.078,
+  "environment": {"python": "3.13.5", "mpmath": "1.3.0"}
+}
