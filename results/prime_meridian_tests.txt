@@ -1,0 +1,23 @@
+Command run in local working directory containing prime_meridian.py and test_prime_meridian.py:
+python -m unittest -v test_prime_meridian
+
+Equivalent repository command:
+python -m unittest discover -s tests -p 'test_prime_meridian.py' -v
+
+Earlier repository suites were NOT rerun and are not part of this count.
+
+Actual captured output:
+test_control_eight_pass_then_nine_fail (test_prime_meridian.PrimeMeridianTests.test_control_eight_pass_then_nine_fail) ... ok
+test_first_two_theory_and_twelve_numeric (test_prime_meridian.PrimeMeridianTests.test_first_two_theory_and_twelve_numeric) ... ok
+test_generating_coefficient_recurrence (test_prime_meridian.PrimeMeridianTests.test_generating_coefficient_recurrence) ... ok
+test_independent_reference (test_prime_meridian.PrimeMeridianTests.test_independent_reference) ... ok
+test_not_all_cumulants_positive (test_prime_meridian.PrimeMeridianTests.test_not_all_cumulants_positive) ... ok
+test_off_axis_control_zero_and_radii (test_prime_meridian.PrimeMeridianTests.test_off_axis_control_zero_and_radii) ... ok
+test_positive_kernel (test_prime_meridian.PrimeMeridianTests.test_positive_kernel) ... ok
+test_single_global_cayley_chart (test_prime_meridian.PrimeMeridianTests.test_single_global_cayley_chart) ... ok
+test_tilt_normalizer (test_prime_meridian.PrimeMeridianTests.test_tilt_normalizer) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 7.028s
+
+OK
