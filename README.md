@@ -39,7 +39,8 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 5. [05 — Numerical results and next tests](docs/05-results-and-next-questions.md): reproducibility, claims matrix, independent-model requirements.
 6. [06 — Round S³ spectral test](docs/06-round-s3-spectral-test.md): rigorous single-shell no-go and the infinite zonal expansion.
 7. [07 — Riemann–Siegel conjugate wave balance](docs/07-riemann-siegel-conjugate-balance.md): the **exact Gamma-phase/Hardy Z relation** and the known conjugate harmonic sum with its essential remainder.
-8. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py).
+8. [08 — One exact theta harmonic equation for zero latitudes](docs/08-theta-kernel-zero-latitudes.md): **one global Jacobi-theta cosine integral** directly selects the critical-line hypersphere coordinates w; normalized quaternionic conjugate-phase form, numerical roots, and pole boundaries.
+9. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
@@ -47,11 +48,16 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 - [Perfect Closure — zero-to-operator bridge](https://github.com/RQM-Technologies-dev/perfect-closure/blob/main/archive/zeta-critical-line-program/papers/04-zeta-mass-closure-operator.md).
 - [Completed Zeta Stability](https://github.com/RQM-Technologies-dev/completed-zeta-stability): separate research program; do not conflate its mathematical/IBM tests with a proof.
 
+
+## Latest: one harmonic equation for all w-latitudes
+
+Using the classical Jacobi-theta Fourier kernel Phi, the critical-line zeros obey **one** exact cosine-integral equation: `C_L(w)=2∫₀∞ Phi(v) cos(L v sqrt((1-w)/(1+w))) dv=0`, for `-1<w<1`. With the single global `L=20`, integral root discovery (not using known zero locations as inputs) reproduces the first eight critical-line zeros and maps them into one common `S³` hypersphere. A normalized weight gives the equivalent **quaternionic conjugate-wave balance**. This is an exact coordinate reformulation of the established Xi transform and **does not exclude off-critical-line zeros** or prove RH. Full details: [08](docs/08-theta-kernel-zero-latitudes.md).
+
 ## Evidence status
 
 - **Exact:** Cayley mapping; its constant radius; conjugate angular reflection; `ξ(s)=ξ(1-s)`; `X(t)=X(-t)`; standard Euler and Hadamard identities in their proper domains.
 - **Established analysis, described here:** decay of the completed function on the critical line; smooth but non-real-analytic flat extension of its scalar angular pullback at the infinity pole; individual harmonic phases have no limit there.
-- **Numerically checked:** first eight ordinates, conjugate angles, polar norm, critical-line symmetry, pole decay, exact Gamma/Hardy Z identity and Riemann–Siegel conjugate-pair residual. **Ten local regression tests passed.**
+- **Numerically checked:** first eight ordinates, conjugate angles, polar norm, critical-line symmetry, pole decay, exact Gamma/Hardy Z identity and Riemann–Siegel conjugate-pair residual. **Fourteen local regression tests passed.**
 - **Unproved hypothesis:** a unique resonance selection law or independently derived operator that forces exactly the critical-line zeros. No RH proof is claimed.
 
 Run locally:
@@ -62,6 +68,7 @@ python -m unittest discover -s tests -v
 python experiments/compactified_return.py --digits 60 --zeros 8 --scale 20
 python experiments/s3_spectral_projection.py
 python experiments/riemann_siegel_polar.py
+python experiments/theta_kernel_w_roots.py --count 3
 ```
 
 We preserve the difference between coordinate geometry, an analytic identity, and a predictive theorem.
