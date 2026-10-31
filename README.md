@@ -31,12 +31,14 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 
 ## Reading order
 
+0. [00 — Research lineage and prior investigations](docs/00-research-lineage.md): preserves the Dirac, zeta, and Perfect Closure steps that led to this formulation.
 1. [01 — Polar quaternionic geometry](docs/01-polar-quaternionic-geometry.md): what a coordinate is, why infinity becomes a pole, fixed radius versus latitude spheres, conjugation, spinorial analogy.
 2. [02 — Equation-by-equation dictionary](docs/02-equation-dictionary.md): every term, variable, domain, and prerequisite.
 3. [03 — Complex harmonic series, Euler product, and reverse-zero reconstruction](docs/03-harmonic-series-and-zero-product.md): phases, where the series converges, Gamma versus primes, Hadamard product.
 4. [04 — Infinity-pole investigation](docs/04-infinity-pole-and-spinorial-return.md): new mathematical findings, local proof, limits, topological limitations, spectral-density prediction.
 5. [05 — Numerical results and next tests](docs/05-results-and-next-questions.md): reproducibility, claims matrix, independent-model requirements.
-6. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), and [sample results](results/compactified_return.json).
+6. [06 — Round S³ spectral test](docs/06-round-s3-spectral-test.md): rigorous single-shell no-go and the infinite zonal expansion.
+7. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json).
 
 ## Historical links
 
@@ -54,9 +56,10 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 Run locally:
 
 ```bash
-python -m pip install mpmath
+python -m pip install mpmath numpy
 python -m unittest discover -s tests -v
 python experiments/compactified_return.py --digits 60 --zeros 8 --scale 20
+python experiments/s3_spectral_projection.py
 ```
 
 We preserve the difference between coordinate geometry, an analytic identity, and a predictive theorem.
