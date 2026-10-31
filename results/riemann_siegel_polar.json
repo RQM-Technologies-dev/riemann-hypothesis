@@ -1,0 +1,76 @@
+{
+  "digits": 50,
+  "rows": [
+    {
+      "height": "14.1347251417346938",
+      "count": 1,
+      "hardy_z": "3.9537434729375e-51",
+      "paired_harmonics": "-0.3144378476381249",
+      "rs_remainder_difference": "0.3144378476381249",
+      "gamma_envelope": "0.001743303159191699",
+      "completed_xi": "-6.892575232651619e-54",
+      "xi_plus_AZ_error": "2.280592e-60"
+    },
+    {
+      "height": "21.022039638771555",
+      "count": 1,
+      "hardy_z": "-2.077649950990134e-51",
+      "paired_harmonics": "-0.4375813376274625",
+      "rs_remainder_difference": "0.4375813376274625",
+      "gamma_envelope": "1.561327024949726e-5",
+      "completed_xi": "3.243893446086592e-56",
+      "xi_plus_AZ_error": "9.88232e-62"
+    },
+    {
+      "height": "30.0",
+      "count": 2,
+      "hardy_z": "0.596028519239885",
+      "paired_harmonics": "0.9889482436183622",
+      "rs_remainder_difference": "-0.3929197243784773",
+      "gamma_envelope": "2.519446971925567e-8",
+      "completed_xi": "-1.501662247980207e-8",
+      "xi_plus_AZ_error": "8.305017e-59"
+    },
+    {
+      "height": "50.0",
+      "count": 2,
+      "hardy_z": "-0.340735005955025",
+      "paired_harmonics": "0.005319997758977847",
+      "rs_remainder_difference": "-0.3460550037140028",
+      "gamma_envelope": "9.280511455213616e-15",
+      "completed_xi": "3.162195125957889e-15",
+      "xi_plus_AZ_error": "2.629838e-65"
+    },
+    {
+      "height": "100.0",
+      "count": 3,
+      "hardy_z": "2.692697056664463",
+      "paired_harmonics": "2.239451082121458",
+      "rs_remainder_difference": "0.4532459745430056",
+      "gamma_envelope": "2.751904368791625e-31",
+      "completed_xi": "-7.410044794067286e-31",
+      "xi_plus_AZ_error": "1.180292e-80"
+    },
+    {
+      "height": "200.0",
+      "count": 5,
+      "hardy_z": "5.589783623150109",
+      "paired_harmonics": "5.413959927350192",
+      "rs_remainder_difference": "0.1758236957999167",
+      "gamma_envelope": "7.19478504401019e-65",
+      "completed_xi": "-4.02172916110935e-64",
+      "xi_plus_AZ_error": "1.252291e-113"
+    },
+    {
+      "height": "500.0",
+      "count": 8,
+      "hardy_z": "1.472447851055085",
+      "paired_harmonics": "1.723691357652479",
+      "rs_remainder_difference": "-0.2512435065973938",
+      "gamma_envelope": "1.679514413158383e-166",
+      "completed_xi": "-2.472997388471103e-166",
+      "xi_plus_AZ_error": "1.967793e-215"
+    }
+  ],
+  "method_note": "Remainder is exact Z minus finite conjugate-pair sum; no independent remainder evaluation."
+}
