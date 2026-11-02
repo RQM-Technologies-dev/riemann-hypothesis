@@ -10,29 +10,48 @@ The critical line `s=1/2+it` can be mapped by **one global inverse stereographic
 
 The strongest question is not whether this mapping is possible (it is), but whether a **new, independently defined harmonic closure law** can require zeta zeros to occupy the critical-line meridian.
 
-## Current primary research direction — w-distance saturation criterion (2026-11-02)
+## Primary research direction — symbolic-scale closure (2026-11-02)
 
-**Read first:** [09 — The positive w-distance sum rule and its exact RH equivalence](docs/09-w-distance-rh-equivalence.md). This is now the preferred mathematical test of the polar-closure hypothesis.
+**Read first:** [12 — Keep \(L\) symbolic: scale-covariant closure criterion](docs/12-symbolic-scale-and-defect.md), then [09 — The positive \(w\)-distance RH equivalence](docs/09-w-distance-rh-equivalence.md).
 
-On one unit four-dimensional hypersphere, the 3D latitude radius changes with the fourth coordinate \(w\). Use **one** global scale \(L=20\) to bend the whole critical line:
-
+The inverse-stereographic coordinate choice is valid for **every \(L>0\)**:
 \[
-w(t)=\frac{400-t^2}{400+t^2},\qquad
-d_w(t)=1+w(t)=\frac{800}{400+t^2}.
-\]
-
-The exact conditional-exhaustion test is
-
-\[
-\boxed{\displaystyle
-\mathrm{RH}\ \Longleftrightarrow\
-\sum_{\substack{\gamma>0\\\zeta(1/2+i\gamma)=0}}
-d_w(\gamma)
-=
-20\,\frac{\xi'(20.5)}{\xi(20.5)}
-=13.330990477997002487\ldots
+\boxed{
+\theta_L(t)=2\arctan(t/L),\qquad
+w_L(t)=\frac{L^2-t^2}{L^2+t^2},\qquad
+d_L(t)=1+w_L(t)=\frac{2L^2}{L^2+t^2}.
 }
 \]
+The zeta-zero ordinates \(\gamma_n\) are **independent of \(L\)**. Varying \(L\) only changes their angular positions on the common hypersphere; it does not move the complex zeros or change the truth of RH.
+
+For any \(L>0\), define the complete weighted deficiency
+\[
+\boxed{
+D(L)=L\,\frac{\xi'(\frac12+L)}{\xi(\frac12+L)}
+-\sum_{\substack{\gamma>0\\\xi(\frac12+i\gamma)=0}}
+\frac{2L^2}{L^2+\gamma^2}.
+}
+\]
+The entire positive-scale family satisfies
+\[
+\boxed{\mathrm{RH}\ \Longleftrightarrow\ D(L_0)=0
+\quad\text{for any one (hence every) }L_0>0.}
+\]
+The all-positive-\(L\) positivity proof uses complete off-critical-line conjugate **quartets**, not an incorrect assertion that each individual off-line term is positive for small \(L\).
+
+A *scale-free* alternative is
+\[
+\boxed{
+\mathcal E=\lim_{L\to0^+}\frac{D(L)}{L^2}
+=\frac{\xi''(\frac12)}{\xi(\frac12)}
+-2\sum_{\substack{\gamma>0\\\xi(\frac12+i\gamma)=0}}\frac1{\gamma^2}
+\ge0,\qquad
+\mathrm{RH}\Longleftrightarrow\mathcal E=0.
+}
+\]
+Crucially \(D(L)\to0\) automatically as \(L\to0^+\), **even if RH is false**. We must not mistake that coordinate degeneration for proof of complete closure.
+
+**Numerical illustration only:** at \(L=20\) the target is \(T(20)\approx13.330990477997\), as recorded in [09](docs/09-w-distance-rh-equivalence.md). It is not a privileged geometric scale.
 
 The sum runs over **all** positive-height critical-line zeros, with multiplicity. The right side is independently evaluable using the completed zeta function on the real axis. The inequality “left side \(\le\) right side” holds unconditionally, and the *difference equals a sum of strictly positive contributions from off-line zeros*. Therefore equality at the infinite limit is **equivalent** to RH; it has **not** been proved. A finite partial sum being smaller is expected even if RH is true.
 
@@ -52,11 +71,12 @@ T(L)=L\frac{\int_0^\infty v\Phi(v)\sinh(Lv)\,dv}
 \]
 without entering any zeros. **Jensen's theorem** then gives a genuine unconditional upper bound on all remaining *critical-line* \(w\)-distances at height above \(H\), and proves that tail tends to zero. [Full theorem and positive-kernel counterexample](docs/10-jacobi-theta-jensen-tail.md).
 
-A sharper **weighted off-line** bound follows from two *published* inputs: Platt–Trudgian's rigorous RH verification through \(H=3\times10^{12}\), and Bellotti–Wong's 2025 explicit zero-counting theorem. At global \(L=20\):
+A stronger **uniform normalized** bound follows from published verification through \(H=3\times10^{12}\), published explicit zero counting, and the off-line quartet identity:
 \[
-\boxed{0\le D(20)<1.214\times10^{-9}},
+\boxed{0\le D(L)/L^2\le2P_+(H)<2.960\times10^{-12}
+\quad\text{for all }L>0.}
 \]
-so the **infinite** on-line distance sum lies between approximately \(13.3309904767836\) and \(13.3309904779970\). [Full proof and exact upper-bound formula](docs/11-certified-distance-defect-bound.md).
+Here \(P_+(H)\) is an explicit upper bound on \(\sum_{\Im\rho>H}(\Im\rho)^{-2}\). At the illustrative \(L=20\), \(D(20)<1.184\times10^{-9}\), improving the earlier \(1.214\times10^{-9}\) bound. The full [symbolic derivation](docs/12-symbolic-scale-and-defect.md) is now primary; [the earlier derivation and external references](docs/11-certified-distance-defect-bound.md) remain useful.
 
 **This does not prove \(D(20)=0\)**. The finite-height verified range cannot be extended to infinity without a new theorem. The epsilon-sized upper bound is largely a consequence of the \(1/\gamma^2\) weighting of high zeros.
 
@@ -97,8 +117,9 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 8. [08 — One exact theta harmonic equation for zero latitudes](docs/08-theta-kernel-zero-latitudes.md): **one global Jacobi-theta cosine integral** directly selects the critical-line hypersphere coordinates w; normalized quaternionic conjugate-phase form, numerical roots, and pole boundaries.
 9. [09 — Positive w-distance RH criterion](docs/09-w-distance-rh-equivalence.md): **primary direction**, exact log-derivative identity, strict positivity of off-line contributions, and numeric exhaustion experiment.
 10. [10 — Jacobi-theta/Jensen tail theorem](docs/10-jacobi-theta-jensen-tail.md): rigorous unconditional convergence of the uncounted on-line weighted tail, and why positivity alone cannot prove RH.
-11. [11 — Verified-height defect bound](docs/11-certified-distance-defect-bound.md): use published finite-height RH verification and explicit total zero-counting to bound the remaining *possible off-line* weight.
-12. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+11. [11 — Verified-height defect bound](docs/11-certified-distance-defect-bound.md): published finite-height verification and explicit total zero-counting give a useful baseline bound.
+12. [12 — Symbolic-scale closure and normalized defect](docs/12-symbolic-scale-and-defect.md): **primary current theorem**, proof for all positive L, quartet factors and universal normalized bound.
+13. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
@@ -116,7 +137,7 @@ Using the classical Jacobi-theta Fourier kernel Phi, the critical-line zeros obe
 - **Exact:** Cayley mapping; its constant radius; conjugate angular reflection; `ξ(s)=ξ(1-s)`; `X(t)=X(-t)`; standard Euler and Hadamard identities in their proper domains.
 - **Established analysis, described here:** decay of the completed function on the critical line; smooth but non-real-analytic flat extension of its scalar angular pullback at the infinity pole; individual harmonic phases have no limit there.
 - **Numerically checked:** first eight ordinates, conjugate angles, polar norm, critical-line symmetry, pole decay, exact Gamma/Hardy Z identity and Riemann–Siegel conjugate-pair residual. **Fourteen earlier regression tests were reported passing; seven additional distance-criterion tests passed locally on 2026-11-02.**
-- **Unproved hypothesis:** a unique resonance selection law or independently derived operator that forces exactly the critical-line zeros. The new **w-distance saturation equality is equivalent to RH and remains unproved**, despite the rigorously derived very small positive upper bound on its possible off-line defect. No RH proof is claimed.
+- **Unproved hypothesis:** a unique resonance selection law or independently derived operator that forces exactly the critical-line zeros. The **symbolic-scale saturation equality and scale-free moment criterion are equivalent to RH and remain unproved**, despite the positive uniform bound on the defect. No RH proof is claimed.
 
 Run locally:
 
@@ -129,6 +150,7 @@ python experiments/riemann_siegel_polar.py
 python experiments/theta_kernel_w_roots.py --count 3
 python experiments/w_distance_rh_criterion.py --scale 20 --count 200 --digits 40
 python experiments/theta_tail_and_defect_bound.py --digits 40 --scale 20 --count 8
+python experiments/symbolic_scale_family.py --scales 0.1,0.5,1,5,20,100 --count 40
 # add --count 200 to repeat the longer 200-zero calculation
 ```
 
