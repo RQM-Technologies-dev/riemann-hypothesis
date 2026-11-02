@@ -188,3 +188,13 @@ python -m unittest discover -s tests -v
 - NIST DLMF §§[25.4](https://dlmf.nist.gov/25.4), [25.10](https://dlmf.nist.gov/25.10) on reflection and critical-strip zeros.
 - [Harvard notes on Hadamard products and logarithmic derivatives](https://people.math.harvard.edu/~elkies/M259.02/zeta2.pdf).
 - [Earlier quaternionic polar embedding](01-polar-quaternionic-geometry.md), [one theta-kernel zero-latitude equation](08-theta-kernel-zero-latitudes.md).
+
+
+## 8. Follow-on conclusion (2026-11-02): the tail *is* bounded; saturation is still unknown
+
+The next two investigations sharpen this RH-equivalent formulation, without assuming the conclusion:
+
+1. [10 — Jacobi-theta and Jensen](10-jacobi-theta-jensen-tail.md): the positive Jacobi kernel supplies the exact target as a hyperbolic moment, and Jensen's formula gives an **unconditional** upper bound on the remaining critical-line tail above height \(T\), tending to zero at rate \(O(\log T/T)\). This does not establish that the off-line defect \(D(L)\) vanishes. A positive-even-kernel countermodel shows why this is a serious distinction.
+2. [11 — Verified-height defect bound](11-certified-distance-defect-bound.md): Platt–Trudgian's certified RH verification to \(3\times10^{12}\) plus Bellotti–Wong's published total-zero bound implies \(0\le D(20)<1.214\times10^{-9}\). This does not give exact equality \(D(20)=0\), but it tightly brackets the uncounted on-line contribution after the first 200 computed zeros.
+
+**Current proof obligation:** produce an independent arithmetic theorem that forces \(D(L)=0\), not merely an estimate \(D(L)<\varepsilon\) for a fixed positive \(\varepsilon\). Neither the round hyperspherical geometry nor plain positivity/evenness of the Fourier kernel has that consequence.
