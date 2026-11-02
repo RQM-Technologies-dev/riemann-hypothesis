@@ -64,9 +64,17 @@ class WDistanceTests(unittest.TestCase):
 
     def test_invalid_numerical_scale(self):
         with self.assertRaises(ValueError):
-            M.xi_log_derivative_real(mp.mpf(1))
+            M.xi_log_derivative_real(mp.mpf("0.5"))
         with self.assertRaises(ValueError):
             M.off_line_pair_weight(mp.mpf("0.6"),mp.mpf("14"),self.L)
+
+    def test_any_positive_scale_with_pole_regularization(self):
+        for L in (mp.mpf("0.1"), mp.mpf("0.5"), mp.mpf("1"), mp.mpf("20")):
+            self.assertGreater(L*M.xi_log_derivative_real(mp.mpf("0.5")+L),0)
+        L=mp.mpf("0.5")
+        exact=L*(1+mp.euler/2-mp.log(2)-mp.log(mp.pi)/2)
+        self.assertLess(abs(L*M.xi_log_derivative_real(1)-exact),mp.mpf("1e-43"))
+        self.assertGreater(M.off_line_pair_weight(mp.mpf("0.1"),mp.mpf("0.125"),mp.mpf(14)),0)
 
 
 if __name__ == "__main__":
