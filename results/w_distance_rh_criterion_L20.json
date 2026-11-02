@@ -1,0 +1,67 @@
+{
+  "experiment": "w_distance_critical_line_exhaustion",
+  "status": "exact RH equivalence; NOT an RH proof",
+  "working_digits": 40,
+  "global_scale_L": "20.0",
+  "evaluation_point_x": "20.5",
+  "target_L_xi_prime_over_xi": "13.3309904779970024872650612609745016",
+  "partial_sums_on_known_critical_line": [
+    {
+      "count": 1,
+      "last_height": "14.1347251417346937904573",
+      "partial_w_distance": "1.3337991519447608827028791879786",
+      "remaining_target_minus_partial": "11.997191326052241604562182072996"
+    },
+    {
+      "count": 2,
+      "last_height": "21.0220396387715549926285",
+      "partial_w_distance": "2.2840012563152043112806392840188",
+      "remaining_target_minus_partial": "11.046989221681798175984421976956"
+    },
+    {
+      "count": 4,
+      "last_height": "30.4248761258595132103119",
+      "partial_w_distance": "3.6675428437539338422859736986062",
+      "remaining_target_minus_partial": "9.6634476342430686449790875623683"
+    },
+    {
+      "count": 8,
+      "last_height": "43.3270732809149995194961",
+      "partial_w_distance": "5.3846588816912140274028817252201",
+      "remaining_target_minus_partial": "7.9463315963057884598621795357544"
+    },
+    {
+      "count": 16,
+      "last_height": "67.0798105294941737144788",
+      "partial_w_distance": "7.1658843673250426953237267036572",
+      "remaining_target_minus_partial": "6.1651061106719597919413345573173"
+    },
+    {
+      "count": 40,
+      "last_height": "122.946829293552588200817",
+      "partial_w_distance": "9.2707712014862922647825827759403",
+      "remaining_target_minus_partial": "4.0602192765107102224824784850342"
+    },
+    {
+      "count": 100,
+      "last_height": "236.524229665816205802476",
+      "partial_w_distance": "10.847344387409099818225184432907",
+      "remaining_target_minus_partial": "2.4836460905879026690398768280676"
+    },
+    {
+      "count": 200,
+      "last_height": "396.381854222592186931999",
+      "partial_w_distance": "11.68351994129464651665188174012",
+      "remaining_target_minus_partial": "1.6474705367023559706131795208549"
+    }
+  ],
+  "hypothetical_off_line_quartet": {
+    "is_actual_zeta_zero": false,
+    "delta": "0.125",
+    "gamma": "14.13472514173469379",
+    "total_positive_weight": "2.66757520209443069842968495392",
+    "centered_product_form_difference": "4.5917748e-41",
+    "paired_cayley_radius_squared_product": "1.0"
+  },
+  "critical_warning": "A positive residual after any finite number of line zeros includes uncounted line zeros; it cannot be called an off-line contribution. The infinite residual is zero if and only if RH."
+}
