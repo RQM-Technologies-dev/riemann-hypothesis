@@ -2,6 +2,13 @@
 
 **2026-11-02.** Current best *quantitative* complement to the direct Jacobi-theta/Jensen tail bound in [10](10-jacobi-theta-jensen-tail.md). The numerical constants use published zero verification and a published explicit bound on the total zero-counting function. The main inequalities below are theorems **conditional on those cited published inputs**, not a solution of RH. Any finite-precision output is labelled approximate, not interval-certified.
 
+> **Stronger symbolic-\(L\) result (2026-11-02):** The \(1.214\times10^{-9}\) bound in this earlier note is valid but not optimal. Pairing off-line zeros into their conjugate quartets and using \(\gamma^2\ge2\delta^2\) above the published verified height gives
+> \[
+> \boxed{0\le D(L)/L^2\le2P_+(H)
+> <2.960\times10^{-12}\qquad\text{for every }L>0.}
+> \]
+> Consequently \(D(20)<1.184\times10^{-9}\). The full exact argument, including the quartet product and the scale-free \(L\to0\) moment, is in [12](12-symbolic-scale-and-defect.md). Nothing here proves \(D(L)=0\).
+
 ## 1. The exact positive-defect equation
 
 Fix global \(L>1/2\), let \(x_L=L+1/2\) and \(\rho=\beta+i\gamma\) run over nontrivial zeta zeros with \(\gamma>0\) and multiplicity. Define the one-hypersphere coordinate distance
