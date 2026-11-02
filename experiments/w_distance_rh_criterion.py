@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact positive distance sum at the zeta critical line; NOT a proof of RH.
+"""Scale-parametric positive distance sum at the zeta critical line; NOT a proof of RH.
 
 Run: python experiments/w_distance_rh_criterion.py --scale 20 --count 200 --digits 40
 Dependency: mpmath.
@@ -12,10 +12,12 @@ import mpmath as mp
 
 
 def xi_log_derivative_real(x: mp.mpf) -> mp.mpf:
-    """Log derivative of completed xi, computed without zero locations; x > 1."""
+    """Log derivative of xi for real x>1/2; handles the removable pole at x=1."""
     x = mp.mpf(x)
-    if x <= 1:
-        raise ValueError("numerical formula requires x > 1; use scale > 1/2")
+    if x <= mp.mpf("0.5"):
+        raise ValueError("requires real x>1/2, i.e. symbolic scale L>0")
+    if x == 1:
+        return 1 + mp.euler / 2 - mp.log(2) - mp.log(mp.pi) / 2
     zeta_x = mp.zeta(x)
     return (
         1 / x + 1 / (x - 1) - mp.log(mp.pi) / 2
@@ -42,8 +44,8 @@ def w_distance(gamma: mp.mpf, L: mp.mpf) -> mp.mpf:
 def off_line_pair_weight(delta: mp.mpf, gamma: mp.mpf, L: mp.mpf) -> mp.mpf:
     """Positive weight of an off-line reflection pair at fixed positive height."""
     L, delta, g = map(mp.mpf, (L, delta, gamma))
-    if L < mp.mpf("0.5") or abs(delta) >= mp.mpf("0.5") or g <= 0:
-        raise ValueError("need L >= 1/2, |delta| < 1/2, gamma > 0")
+    if L <= 0 or abs(delta) >= mp.mpf("0.5") or g <= abs(delta):
+        raise ValueError("need L > 0, |delta| < 1/2, gamma > |delta|")
     return 2 * L * (
         (L - delta) / ((L - delta)**2 + g**2)
         + (L + delta) / ((L + delta)**2 + g**2)
@@ -61,8 +63,8 @@ def run(digits: int = 40, count: int = 200, scale: str = "20") -> dict:
         raise ValueError("need digits >=20, count >=1")
     mp.mp.dps = digits
     L = mp.mpf(scale)
-    if L <= mp.mpf("0.5"):
-        raise ValueError("evaluation requires scale > 1/2; theorem holds at 1/2")
+    if L <= 0:
+        raise ValueError("require symbolic scale L > 0")
     x = L + mp.mpf("0.5")
     target = L * xi_log_derivative_real(x)
     partial = mp.mpf(0)
@@ -87,7 +89,8 @@ def run(digits: int = 40, count: int = 200, scale: str = "20") -> dict:
     )
     return {
         "experiment": "w_distance_critical_line_exhaustion",
-        "status": "exact RH equivalence; NOT an RH proof",
+        "status": "exact RH equivalence for every symbolic L>0; NOT an RH proof",
+        "geometry_uses_positive_symbolic_L": True,
         "working_digits": digits,
         "global_scale_L": mp.nstr(L, 20),
         "evaluation_point_x": mp.nstr(x, 20),
