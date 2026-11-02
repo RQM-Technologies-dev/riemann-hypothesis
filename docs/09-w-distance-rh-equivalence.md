@@ -2,6 +2,8 @@
 
 **Research note: 2026-11-02.** This is the preferred next direction for the quaternionic polar-closure program. The criterion below is an exact reformulation of the Riemann Hypothesis, **not a proof** and not a claim of a novel independently derived theorem. It follows from classical Hadamard factorization and symmetry of the completed zeta function.
 
+> **2026-11-02 symbolic-scale correction:** This file's original termwise positivity proof uses \(L\ge1/2\), because then each individual off-line summand is positive. The geometry works for **every \(L>0\)**. A stronger proof for *all* \(L>0\), grouping conjugate off-line zeros into complete quartets, establishes \(\mathrm{RH}\iff D(L)=0\) at any one scale. See [12 — symbolic-scale theorem and normalized defect](12-symbolic-scale-and-defect.md). The \(L=20\) table below is a numerical **example**, not a selected or privileged scale.
+
 ## 1. One hypersphere, one globally fixed scale
 
 The four-real-coordinate hypersphere is
@@ -111,7 +113,7 @@ This is the central rigorous interpretation: **does the sum of all on-sphere, on
 
 It is enough to prove \(D(L)=0\) at one fixed \(L\ge\tfrac12\), because a single off-line zero would create a strictly positive contribution at *every* such \(L\). This statement makes no assumption of RH in constructing \(D\).
 
-## 4. Working numerical scale \(L=20\)
+## 4. Numerical illustration only: \(L=20\)
 
 Choose \(L=20\) globally; then \(x_L=20.5\) and
 \[
