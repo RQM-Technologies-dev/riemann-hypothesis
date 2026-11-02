@@ -1,0 +1,47 @@
+{
+  "investigation": "Theta-kernel tail and certified-height weighted defect",
+  "date": "2026-11-02",
+  "status": "Proved analytic formulas with cited published inputs; decimal evaluations are mpmath, not interval-certified; RH not proved",
+  "fixed_L": "20",
+  "published_H": "3000000000000",
+  "independent_target": "13.330990477997002487265061260974501552",
+  "theta_hyperbolic_moment_numerical": "13.330990477997002487265061260974501552",
+  "xi_half": "0.497120778188314109912773739685397720",
+  "first_200_positive_critical_line_zeros": {
+    "last_height": "396.381854222592186931999",
+    "partial_w_distance": "11.68351994129464651665188174012",
+    "target_minus_partial": "1.6474705367023559706131795208549"
+  },
+  "unconditional_jacobi_theta_jensen_bound": {
+    "derivation": "N_line(T)<=log[xi(1/2+2T)/xi(1/2)]/(2 log 2); bound tail by 2L^2/log2 times integral from T to infinity of [t/(L^2+t^2)^2] log[xi(1/2+2t)/xi(1/2)] dt",
+    "at_200th_height_numerical": "14.11432935421513666776679",
+    "at_published_verified_height_numerical": "1.061242760264265915934981e-8",
+    "sharpness": "Valid but looser than total-minus-200 residual; establishes O(log(T)/T) decay unconditionally."
+  },
+  "published_zero_count_upper": {
+    "citation": "Bellotti and Wong, Mathematics of Computation, electronically published 2025-11-14, doi:10.1090/mcom/4133",
+    "a": "0.10076",
+    "b": "0.24460",
+    "c": "8.08344",
+    "Pplus_at_200th_height": "0.002182205555024808866665225",
+    "on_line_tail_after_200_upper": "1.74576444401984709333218",
+    "Pplus_at_verified_height": "1.479703630915032449546483e-12",
+    "on_line_tail_above_verified_height_upper": "1.183762904732025959637187e-9"
+  },
+  "published_RH_verified_height": {
+    "citation": "Platt and Trudgian 2021, Bull LMS, doi:10.1112/blms.12460",
+    "every_zero_through": "3e12",
+    "critical_line_only": true,
+    "off_line_defect_upper": "1.213356977350326608628116e-9",
+    "conservative_printable_bound": "D(20) < 1.214e-9"
+  },
+  "first_200_line_tail_two_sided": {
+    "symbolic_lower": "R_200 - 820*Pplus(3e12)",
+    "symbolic_upper": "R_200",
+    "lower_approx": "1.6474705354889989932635529122268",
+    "upper_approx": "1.6474705367023559706131795208549",
+    "certification_caveat": "Bounds are rigorous symbolically, but reported R_200 decimal endpoints require independently certified zero ordinate enclosures."
+  },
+  "positive_even_kernel_counterexample": "Convolution of uniform box with two positive Gaussians: Fourier transform sinc(t)*(exp(-t^2/2)+exp(-2t^2))/2 has infinitely many real zeros and off-real zeros at t^2=-2*pi*i*(2k+1)/3.",
+  "conclusion": "The uncounted on-line tail is tightly bounded numerically if published finite-height RH verification is used, but no positive bound proves the RH-equivalent defect is zero."
+}
