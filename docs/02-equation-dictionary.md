@@ -180,6 +180,54 @@ It has:
 \]
 These are rigorous compatibility identities for a *defined* field, not a derivation of RH.
 
+## I. The w-distance sum rule (current priority)
+
+The point on the unit hypersphere is \(q=\cos\theta+\mathbf u\sin\theta\), with \(w=\cos\theta\). For one global \(L>0\),
+\[
+w(t)=\frac{L^2-t^2}{L^2+t^2},
+\qquad
+d_w(t)=1+w(t)=\frac{2L^2}{L^2+t^2}.
+\]
+
+| Term | Definition and meaning |
+| --- | --- |
+| \(w\) | Fourth (scalar) coordinate on the unit hypersphere \(w^2+x^2+y^2+z^2=1\). |
+| \(r_{xyz}=\sqrt{1-w^2}\) | Radius of the two-sphere latitude in the other three coordinates; varies with \(w\), unlike the fixed ambient radius. |
+| \(w=-1\) | The **infinity pole** of the globally compactified critical-line meridian. |
+| \(d_w=1+w\) | Difference in the **w-coordinate** from a point to that pole; it is *not* intrinsic/geodesic distance along the hypersphere. |
+| \(L>0\) | Single Cayley coordinate scale chosen for the **whole** line and for every zero, not fitted by zero index. |
+| \(\gamma>0\) | Positive imaginary height of a critical-line zero \(s=1/2+i\gamma\). |
+| \(d_w(\gamma)=2L^2/(L^2+\gamma^2)\) | Positive w-distance associated with one on-line zero, with multiplicity. |
+| \(\rho=\beta+i\gamma\) | A general nontrivial zero of the completed zeta function, including hypothetical off-line zeros. |
+| \(\beta\in(0,1)\) | Real part of a general nontrivial zero. RH states that every \(\beta=1/2\). |
+| \(\delta=\beta-1/2\) | Horizontal displacement of a zero from the critical line. |
+| \(x_L=1/2+L\) | Real evaluation point. Require \(L\ge1/2\) to guarantee strict positivity of every zero contribution; the numerical direct formula uses \(L>1/2\). |
+| \(\xi'(x_L)\) | Complex derivative \(d\xi/ds\) evaluated at real \(s=x_L\). Not a derivative in physical time. |
+| \(\xi'(x_L)/\xi(x_L)\) | Logarithmic derivative of the completed zeta function at a real, zero-free argument. |
+| \(T(L)=L\,\xi'(x_L)/\xi(x_L)\) | Unconditional **total** weighted contribution from *all* nontrivial zeta zeros. |
+| \(S_{\rm line}(L)\) | Sum of all on-line positive-height w-distances, counting multiplicities; not available in closed form without solving the infinite problem. |
+| \(D(L)=T(L)-S_{\rm line}(L)\) | Nonnegative defect equal to contributions from **off-critical-line** zeros. RH iff \(D(L)=0\). |
+| \(\psi(z)=\Gamma'(z)/\Gamma(z)\) | Digamma function, used to calculate \(T(L)\) directly without zero input. |
+
+The exact identity is
+\[
+T(L)=\sum_{\substack{\rho=\beta+i\gamma\\\gamma>0}}
+\frac{2L(x_L-\beta)}{(x_L-\beta)^2+\gamma^2}.
+\]
+For \(L\ge1/2\), **every term is strictly positive**, and the terms corresponding to \(\beta=1/2\) equal \(d_w(\gamma)\). Hence
+\[
+\boxed{\displaystyle
+\mathrm{RH}\iff
+\sum_{\gamma\in\mathcal Z_{\rm line}^{+}}(1+w(\gamma))
+=L\frac{\xi'(1/2+L)}{\xi(1/2+L)}
+\quad(L\ge1/2).}
+\]
+At the demonstration scale \(L=20\), the right side is \(13.330990477997002487\ldots\). This is an **RH-equivalent criterion derived from established Hadamard-product identities**, not a solved proof of equality.
+
+**Crucial warning:** the deficit after a **finite** sum is the contribution of all *unlisted on-line zeros plus any off-line zeros*. It is **not** a measurable amount of off-line contribution. Only the limit over *all* on-line zeros can test \(D(L)=0\).
+
+See [09 — full proof, numerical checks, and limitations](09-w-distance-rh-equivalence.md).
+
 ## Status discipline
 
 **Proved geometry:** all unit-radius and conjugate-return identities.  
