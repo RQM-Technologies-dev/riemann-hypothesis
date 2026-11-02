@@ -38,7 +38,7 @@
   "first_200_line_tail_two_sided": {
     "symbolic_lower": "R_200 - 820*Pplus(3e12)",
     "symbolic_upper": "R_200",
-    "lower_approx": "1.6474705354889989932635529122268",
+    "lower_approx": "1.6474705354889989932628529122268",
     "upper_approx": "1.6474705367023559706131795208549",
     "certification_caveat": "Bounds are rigorous symbolically, but reported R_200 decimal endpoints require independently certified zero ordinate enclosures."
   },
