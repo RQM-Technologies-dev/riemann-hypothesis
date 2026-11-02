@@ -166,3 +166,26 @@ so the allowed latitudes increasingly crowd around \(w=-1\). The 3D slice radii 
 - Encyclopedia of Mathematics, Riemann xi function: https://encyclopediaofmath.org/wiki/Riemann_xi-function
 - Prior RQM polar geometry: [01](01-polar-quaternionic-geometry.md)
 - Prior RQM conjugate balancing: [07](07-riemann-siegel-conjugate-balance.md)
+
+
+## 8. Follow-on result (2026-11-02): positive \(w\)-distance exhaustion criterion
+
+The theta-kernel root equation identifies the positive **critical-line** heights. The follow-on question is whether *those* roots exhaust every nontrivial zeta zero.
+
+For the same fixed \(L>1/2\) and the w-coordinate already used above, define
+\[
+d_w(\gamma)=1+w(\gamma)=\frac{2L^2}{L^2+\gamma^2}
+\]
+for every positive critical-line zero height (counting multiplicity).
+
+Classical Hadamard factorization yields the exact criterion
+\[
+\boxed{\mathrm{RH}\ \Longleftrightarrow\
+\sum_{\zeta(1/2+i\gamma)=0,\ \gamma>0}d_w(\gamma)
+=L\frac{\xi'(1/2+L)}{\xi(1/2+L)}.}
+\]
+At \(L=20\), the right side is \(13.330990477997002487\ldots\).
+
+The difference between this total and the **infinite sum** of on-line distances is a sum of *strictly positive contributions* from all off-line zeros. This supplies a precise, falsifiable **RH-equivalent** question, not the missing proof that the difference is zero.
+
+The residual after *finitely many* on-line roots is not evidence of an off-line zero: it includes every uncounted on-line zero. See [09 — full derivation, variable glossary, and 200-zero numerical study](09-w-distance-rh-equivalence.md).
