@@ -42,6 +42,29 @@ The distance \(d_w\) is a **difference along the w-coordinate to the infinity po
 - [Executable 40-digit test with 200 verified-on-line zero heights](experiments/w_distance_rh_criterion.py)
 - [Saved numerical output](results/w_distance_rh_criterion_L20.json) and [seven new regression tests](tests/test_w_distance_rh_criterion.py)
 
+
+### Latest follow-on: bounded missing contribution (2026-11-02)
+
+The Jacobi-theta positive Fourier kernel supplies the **exact real-axis target**
+\[
+T(L)=L\frac{\int_0^\infty v\Phi(v)\sinh(Lv)\,dv}
+{\int_0^\infty\Phi(v)\cosh(Lv)\,dv},
+\]
+without entering any zeros. **Jensen's theorem** then gives a genuine unconditional upper bound on all remaining *critical-line* \(w\)-distances at height above \(H\), and proves that tail tends to zero. [Full theorem and positive-kernel counterexample](docs/10-jacobi-theta-jensen-tail.md).
+
+A sharper **weighted off-line** bound follows from two *published* inputs: Platt–Trudgian's rigorous RH verification through \(H=3\times10^{12}\), and Bellotti–Wong's 2025 explicit zero-counting theorem. At global \(L=20\):
+\[
+\boxed{0\le D(20)<1.214\times10^{-9}},
+\]
+so the **infinite** on-line distance sum lies between approximately \(13.3309904767836\) and \(13.3309904779970\). [Full proof and exact upper-bound formula](docs/11-certified-distance-defect-bound.md).
+
+**This does not prove \(D(20)=0\)**. The finite-height verified range cannot be extended to infinity without a new theorem. The epsilon-sized upper bound is largely a consequence of the \(1/\gamma^2\) weighting of high zeros.
+
+- [Reproducible equations, numerical diagnostics, and counterexample](experiments/theta_tail_and_defect_bound.py)
+- [Numerical results and certified-height assumptions](results/theta_tail_and_defect_bound_L20.json)
+- [New regression tests](tests/test_theta_tail_and_defect_bound.py) (committed; run with existing test suite)
+
+
 ## One-page equation summary
 
 Choose a unit imaginary quaternion `u²=-1`, fixed positive scale `L` and common radius `R`.
@@ -73,7 +96,9 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 7. [07 — Riemann–Siegel conjugate wave balance](docs/07-riemann-siegel-conjugate-balance.md): the **exact Gamma-phase/Hardy Z relation** and the known conjugate harmonic sum with its essential remainder.
 8. [08 — One exact theta harmonic equation for zero latitudes](docs/08-theta-kernel-zero-latitudes.md): **one global Jacobi-theta cosine integral** directly selects the critical-line hypersphere coordinates w; normalized quaternionic conjugate-phase form, numerical roots, and pole boundaries.
 9. [09 — Positive w-distance RH criterion](docs/09-w-distance-rh-equivalence.md): **primary direction**, exact log-derivative identity, strict positivity of off-line contributions, and numeric exhaustion experiment.
-10. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+10. [10 — Jacobi-theta/Jensen tail theorem](docs/10-jacobi-theta-jensen-tail.md): rigorous unconditional convergence of the uncounted on-line weighted tail, and why positivity alone cannot prove RH.
+11. [11 — Verified-height defect bound](docs/11-certified-distance-defect-bound.md): use published finite-height RH verification and explicit total zero-counting to bound the remaining *possible off-line* weight.
+12. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
@@ -91,7 +116,7 @@ Using the classical Jacobi-theta Fourier kernel Phi, the critical-line zeros obe
 - **Exact:** Cayley mapping; its constant radius; conjugate angular reflection; `ξ(s)=ξ(1-s)`; `X(t)=X(-t)`; standard Euler and Hadamard identities in their proper domains.
 - **Established analysis, described here:** decay of the completed function on the critical line; smooth but non-real-analytic flat extension of its scalar angular pullback at the infinity pole; individual harmonic phases have no limit there.
 - **Numerically checked:** first eight ordinates, conjugate angles, polar norm, critical-line symmetry, pole decay, exact Gamma/Hardy Z identity and Riemann–Siegel conjugate-pair residual. **Fourteen earlier regression tests were reported passing; seven additional distance-criterion tests passed locally on 2026-11-02.**
-- **Unproved hypothesis:** a unique resonance selection law or independently derived operator that forces exactly the critical-line zeros. The new **w-distance saturation equality is equivalent to RH and remains unproved.** No RH proof is claimed.
+- **Unproved hypothesis:** a unique resonance selection law or independently derived operator that forces exactly the critical-line zeros. The new **w-distance saturation equality is equivalent to RH and remains unproved**, despite the rigorously derived very small positive upper bound on its possible off-line defect. No RH proof is claimed.
 
 Run locally:
 
@@ -103,6 +128,8 @@ python experiments/s3_spectral_projection.py
 python experiments/riemann_siegel_polar.py
 python experiments/theta_kernel_w_roots.py --count 3
 python experiments/w_distance_rh_criterion.py --scale 20 --count 200 --digits 40
+python experiments/theta_tail_and_defect_bound.py --digits 40 --scale 20 --count 8
+# add --count 200 to repeat the longer 200-zero calculation
 ```
 
 We preserve the difference between coordinate geometry, an analytic identity, and a predictive theorem.
