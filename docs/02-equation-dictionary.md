@@ -228,6 +228,59 @@ At the demonstration scale \(L=20\), the right side is \(13.330990477997002487\l
 
 See [09 — full proof, numerical checks, and limitations](09-w-distance-rh-equivalence.md).
 
+## J. Theta-kernel tail theorem and certified-height defect bound (2026-11-02)
+
+The positive even arithmetic kernel \(\Phi(v)\) determines the completed function:
+\[
+X(z)=\xi(\tfrac12+iz)=2\int_0^\infty\Phi(v)\cos(zv)\,dv.
+\]
+At imaginary argument \(z=-iL\), the real-axis target becomes
+\[
+T(L)=
+L\frac{\int_0^\infty v\Phi(v)\sinh(Lv)\,dv}
+{\int_0^\infty\Phi(v)\cosh(Lv)\,dv}.
+\]
+
+| Term | Exact meaning |
+| --- | --- |
+| \(v\ge0\) | Mathematical integration coordinate of the Jacobi-theta Fourier kernel; **not time**. |
+| \(\Phi(v)\) | Classical positive, even, rapidly decaying arithmetic kernel built from derivatives of Jacobi's theta series. |
+| \(X(z)=\xi(1/2+iz)\) | Entire Riemann Xi function, now allowing complex parameter \(z\), whose real zeros are the critical-line zeta ordinates. |
+| \(\sinh,\cosh\) | Hyperbolic sine and cosine resulting from analytic substitution \(z=-iL\), unrelated to physical hyperbolic time. |
+| \(N_{\rm line}(T)\) | Number of **positive real zeros** of \(X\) up to height \(T\), with multiplicity; not presumed to count all zeta zeros. |
+| \(J(T)\) | Upper bound \(\frac{1}{2\log2}\log\frac{\xi(1/2+2T)}{\xi(1/2)}\) for \(N_{\rm line}(T)\), obtained using positivity and Jensen's formula. |
+| \(S_{\rm line}^{>T}(L)\) | Total remaining \(w\)-coordinate distances of the **on-line zeros above cutoff \(T\)**. |
+| \(B_\Theta(T,L)\) | Explicit theta-Jensen integral giving an unconditional upper bound on \(S_{\rm line}^{>T}\); it decays like \(O(\log T/T)\) for fixed \(L\). |
+| \(N_{\rm all}(T)\) | Number of *all* nontrivial zeta zeros with \(0<\Im\rho\le T\), including any hypothetical off-line zeros. |
+| \(M(T)\) | Leading term \(\frac{T}{2\pi}\log\frac{T}{2\pi e}\) in the Riemann–von Mangoldt zero count. |
+| \(a,b,c\) | Published Bellotti–Wong explicit counting-error coefficients \(0.10076,0.24460,8.08344\). |
+| \(E(T)\) | Upper bound \(a\log T+b\log\log T+c\) on \(|N_{\rm all}(T)-M(T)|\), valid for \(T\ge e\). |
+| \(P_+(H)\) | Analytically evaluated upper bound on \(\sum_{\Im\rho>H}1/(\Im\rho)^2\), from explicit zero counting. |
+| \(H=3\times10^{12}\) | Height through which published interval arithmetic verified all zeta zeros are on-line; **finite**, not infinite. |
+| \(D(L)\) | Nonnegative RH-equivalent off-line defect from Section I. A small strictly positive bound is not a proof of \(D(L)=0\). |
+
+The rigorous theta-Jensen tail inequality is
+\[
+0\le S_{\rm line}^{>T}(L)\le
+\boxed{B_\Theta(T,L)=\frac{2L^2}{\log2}
+\int_T^\infty
+\frac{t}{(L^2+t^2)^2}
+\log\frac{\xi(\tfrac12+2t)}{\xi(\tfrac12)}\,dt}.
+\]
+
+The independently obtained **external-verification-dependent** off-line bound is
+\[
+\boxed{0\le D(L)\le2L(L+\tfrac12)P_+(H)},
+\quad
+P_+(H)=\frac{\log(H/(2\pi))+1}{2\pi H}
++\frac{2a\log H+a/2+2b\log\log H+b/(2\log H)+2c}{H^2}.
+\]
+At \(L=20,H=3\times10^{12}\): \(0\le D(20)<1.214\times10^{-9}\).
+
+**Do not confuse \(S_{\rm line}^{>T}\) with \(D(L)\):** the first accounts for uncounted *on-line* zeros and tends to zero as the cutoff rises; the second accounts for potentially *off-line* zeros and is exactly zero if and only if RH is true.
+
+See [10](10-jacobi-theta-jensen-tail.md) and [11](11-certified-distance-defect-bound.md) for proof steps and citations.
+
 ## Status discipline
 
 **Proved geometry:** all unit-radius and conjugate-return identities.  
