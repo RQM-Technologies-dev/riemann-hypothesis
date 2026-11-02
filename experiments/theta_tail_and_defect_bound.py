@@ -39,9 +39,11 @@ def logxi_at_h(h: mp.mpf) -> mp.mpf:
 def target_from_real_axis(L: mp.mpf) -> mp.mpf:
     """L xi'(1/2+L)/xi(1/2+L), with no zero input."""
     L = mp.mpf(L)
-    if L <= mp.mpf("0.5"):
-        raise ValueError("numerical formula uses L>1/2")
+    if L <= 0:
+        raise ValueError("symbolic scale L must be positive")
     s = mp.mpf("0.5") + L
+    if s == 1:
+        return L*(1 + mp.euler/2 - mp.log(2) - mp.log(mp.pi)/2)
     return L * (1/s + 1/(s-1) - mp.log(mp.pi)/2
                 + mp.digamma(s/2)/2 + mp.diff(mp.zeta, s)/mp.zeta(s))
 
@@ -128,8 +130,8 @@ def run(digits: int=40, scale: str="20", count: int=8) -> dict:
         raise ValueError("need digits>=25 and count>=1")
     mp.mp.dps = digits
     L=mp.mpf(scale)
-    if L <= mp.mpf("0.5"):
-        raise ValueError("require scale > 1/2")
+    if L <= 0:
+        raise ValueError("require symbolic scale L > 0")
     target=target_from_real_axis(L)
     theta_val=theta_moment_target(L)
     gammas=[mp.im(mp.zetazero(n)) for n in range(1,count+1)]
@@ -146,7 +148,7 @@ def run(digits: int=40, scale: str="20", count: int=8) -> dict:
     def fmt(v,n=28):return mp.nstr(v,n)
     return {
         "title":"Jacobi theta Jensen + published finite-height zero-defect bounds",
-        "status":"Exact inequalities from published facts; numerical evaluation NOT interval-certified; NOT RH proof",
+        "status":"Symbolic L>0; exact inequalities from published facts; numerical evaluation NOT interval-certified; NOT RH proof",
         "precision_digits":digits, "scale_L":fmt(L), "count":count,
         "last_known_critical_zero_height":fmt(last),
         "xi_log_derivative_target":fmt(target),
