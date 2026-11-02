@@ -281,6 +281,40 @@ At \(L=20,H=3\times10^{12}\): \(0\le D(20)<1.214\times10^{-9}\).
 
 See [10](10-jacobi-theta-jensen-tail.md) and [11](11-certified-distance-defect-bound.md) for proof steps and citations.
 
+## K. Symbolic \(L>0\): the scale covariant closure family
+
+**2026-11-02 update:** the critical-line embedding is valid for *every* \(L>0\), and the RH-equivalent closure criterion is now proved valid for every positive \(L\) by **pairing off-line conjugate zeros**. Earlier sections used \(L\ge1/2\) to make each *individual* off-line term positive; that restriction is not necessary for the *complete quartet contribution*.
+
+| Term | Definition and role |
+| --- | --- |
+| \(L>0\) | Arbitrary, globally fixed stereographic coordinate scale; **not** a fitted zero and **not** a physical parameter. |
+| \(\gamma_n\) | Actual zeta-zero height, independent of any choice of \(L\). |
+| \(\theta_n(L)=2\arctan(\gamma_n/L)\) | Changed angular position of the **same** zero as the coordinate scale varies. |
+| \(d_L(\gamma)=2L^2/(L^2+\gamma^2)\) | Changed \(w\)-coordinate distance to the infinity pole; not intrinsic geodesic distance. |
+| \(G(L)\) | Integrated positive off-line defect: \(\log[\xi(1/2+L)/\xi(1/2)]-\sum_{\mathrm{line}}\log(1+L^2/\gamma^2)\). |
+| \(D(L)=LG'(L)\) | Derivative defect. If off-line roots exist it is strictly positive at every \(L>0\); if RH is true it vanishes identically. |
+| \(\delta>0,\gamma>0\) | Real offset and positive height of one hypothetical off-axis quartet \(1/2\pm\delta\pm i\gamma\). |
+| \(A_{\delta,\gamma}(L)\) | Positive real quartet factor \(1+[2(\gamma^2-\delta^2)L^2+L^4]/(\gamma^2+\delta^2)^2\), strictly greater than 1 for zeta zeros at any \(L>0\). |
+| \(\mathcal E=\lim_{L\to0^+}D(L)/L^2\) | \(L\)-free weighted off-axis moment; nonnegative, and zero iff RH. |
+| \(P_+(H)\) | Published-count-based bound on the upper inverse-square zero tail. Enables \(D(L)/L^2\le2P_+(H)\) uniformly across all \(L>0\), not zero. |
+
+The **symbolic** product form is
+\[
+\frac{\xi(\frac12+L)}{\xi(\frac12)}
+=\prod_{\gamma\ \mathrm{on\ line}}\left(1+\frac{L^2}{\gamma^2}\right)
+\prod_{\delta,\gamma\ \mathrm{off\ quartet}}
+\left[1+\frac{2(\gamma^2-\delta^2)L^2+L^4}{(\gamma^2+\delta^2)^2}\right].
+\]
+
+The **scale-free** (but still unproved) exhaustion condition is
+\[
+\boxed{\mathcal E=\frac{\xi''(\frac12)}{\xi(\frac12)}
+-2\sum_{\gamma\ \mathrm{on\ line}}\gamma^{-2}=0.}
+\]
+The total \(\xi''(1/2)/\xi(1/2)\) is directly evaluable from the Jacobi-theta function and equals approximately \(0.04620998623083794158\). The infinite sum over *all* line-zero reciprocal squares remains the unknown. A strictly positive uniform bound on \(\mathcal E\) is NOT a proof it is zero.
+
+See [full derivation](12-symbolic-scale-and-defect.md) and the [multi-scale demonstration](../experiments/symbolic_scale_family.py).
+
 ## Status discipline
 
 **Proved geometry:** all unit-radius and conjugate-return identities.  
