@@ -69,9 +69,16 @@ class ThetaTailAndDefectTests(unittest.TestCase):
         self.assertLess(abs(M.positive_kernel_countermodel(z)),mp.mpf("1e-35"))
         self.assertLess(abs(M.positive_kernel_countermodel(mp.pi)),mp.mpf("1e-35"))
 
+    def test_positive_scales_on_both_sides_of_one(self):
+        for L in (mp.mpf("0.1"), mp.mpf("0.5"), mp.mpf("1")):
+            self.assertGreater(M.target_from_real_axis(L), 0)
+        L=mp.mpf("0.5")
+        expected=L*(1+mp.euler/2-mp.log(2)-mp.log(mp.pi)/2)
+        self.assertLess(abs(M.target_from_real_axis(L)-expected),mp.mpf("1e-30"))
+
     def test_reject_unphysical_scale(self):
         with self.assertRaises(ValueError):
-            M.target_from_real_axis(mp.mpf("0.2"))
+            M.target_from_real_axis(mp.mpf("0"))
         with self.assertRaises(ValueError):
             M.zero_inverse_square_bound(mp.mpf("1"))
 
