@@ -1,0 +1,100 @@
+{
+  "experiment": "symbolic_scale_family",
+  "status": "A scale-covariant RH-equivalent identity, not a proof of RH",
+  "global_rule": "L>0 arbitrary, no individual-zero normalization",
+  "numeric_example_scales": [
+    "0.1",
+    "0.5",
+    "1",
+    "5",
+    "20",
+    "100"
+  ],
+  "precision": "mpmath 45 working digits, entries rounded for display",
+  "known_critical_line_roots_count": 40,
+  "published_verified_zero_height": "3e12",
+  "scale_free_normalized_off_line_bound": "D(L)/L^2 < 2.960e-12 for all L>0",
+  "rigorous_symbolic_bound": "D(L)/L^2 <= 2 P_+(3e12), derived from positivity of mirror-paired off-line quartet factors",
+  "small_L_total_normalized_limit": "xi''(1/2)/xi(1/2) ≈ 0.0462099862308379415778676208607",
+  "examples": [
+    {
+      "L": "0.1",
+      "first_zero_height_unchanged": "14.134725141734693790457",
+      "first_zero_polar_theta_degrees": "179.1893040291",
+      "first_zero_w": "-0.9998999001278",
+      "target_T_L": "0.00046209242807686",
+      "first_40_on_line_sum": "0.00035985947472237",
+      "finite_residual_includes_uncounted_line_zeros": "0.00010223295335449",
+      "T_over_L_squared": "0.046209242807686",
+      "synthetic_off_line_quartet_factor": "1.0001000839037",
+      "normalized_defect_bound": "<2.960e-12",
+      "defect_bound_at_this_L": "2.959407261830e-14"
+    },
+    {
+      "L": "0.5",
+      "first_zero_height_unchanged": "14.134725141734693790457",
+      "first_zero_polar_theta_degrees": "175.9481419989",
+      "first_zero_w": "-0.9975005055831",
+      "target_T_L": "0.011547854483061",
+      "first_40_on_line_sum": "0.0089920417245047",
+      "finite_residual_includes_uncounted_line_zeros": "0.0025558127585558",
+      "T_over_L_squared": "0.046191417932242",
+      "synthetic_off_line_quartet_factor": "1.0025036005055",
+      "normalized_defect_bound": "<2.960e-12",
+      "defect_bound_at_this_L": "7.398518154575e-13"
+    },
+    {
+      "L": "1",
+      "first_zero_height_unchanged": "14.134725141734693790457",
+      "first_zero_polar_theta_degrees": "171.9063905557",
+      "first_zero_w": "-0.9900393671518",
+      "target_T_L": "0.046135928060463",
+      "first_40_on_line_sum": "0.035912815462432",
+      "finite_residual_includes_uncounted_line_zeros": "0.01022311259803",
+      "T_over_L_squared": "0.046135928060463",
+      "synthetic_off_line_quartet_factor": "1.0100331884350",
+      "normalized_defect_bound": "<2.960e-12",
+      "defect_bound_at_this_L": "2.959407261830e-12"
+    },
+    {
+      "L": "5",
+      "first_zero_height_unchanged": "14.134725141734693790457",
+      "first_zero_polar_theta_degrees": "141.0386793001",
+      "first_zero_w": "-0.7775706266653",
+      "target_T_L": "1.1128272206949",
+      "first_40_on_line_sum": "0.85736005208463",
+      "finite_residual_includes_uncounted_line_zeros": "0.25546716861024",
+      "T_over_L_squared": "0.044513088827795",
+      "synthetic_off_line_quartet_factor": "1.2658588412603",
+      "normalized_defect_bound": "<2.960e-12",
+      "defect_bound_at_this_L": "7.398518154575e-11"
+    },
+    {
+      "L": "20",
+      "first_zero_height_unchanged": "14.134725141734693790457",
+      "first_zero_polar_theta_degrees": "70.50046846494",
+      "first_zero_w": "0.3337991519448",
+      "target_T_L": "13.330990477997",
+      "first_40_on_line_sum": "9.2707712014863",
+      "finite_residual_includes_uncounted_line_zeros": "4.0602192765107",
+      "T_over_L_squared": "0.033327476194993",
+      "synthetic_off_line_quartet_factor": "9.0110240565555",
+      "normalized_defect_bound": "<2.960e-12",
+      "defect_bound_at_this_L": "1.183762904732e-9"
+    },
+    {
+      "L": "100",
+      "first_zero_height_unchanged": "14.134725141734693790457",
+      "first_zero_polar_theta_degrees": "16.09060858431",
+      "first_zero_w": "0.9608245962077",
+      "target_T_L": "140.11492055909",
+      "first_40_on_line_sum": "51.541533144419",
+      "finite_residual_includes_uncounted_line_zeros": "88.573387414675",
+      "T_over_L_squared": "0.014011492055909",
+      "synthetic_off_line_quartet_factor": "2605.9364631037",
+      "normalized_defect_bound": "<2.960e-12",
+      "defect_bound_at_this_L": "2.959407261830e-8"
+    }
+  ],
+  "interpretation": "All roots retain original height gamma. T(L) and finite-sum residual vary with L. A finite residual is not the off-line defect. D(L)->0 at L->0 even if RH fails. No exhaustion proof."
+}
