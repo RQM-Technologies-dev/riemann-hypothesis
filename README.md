@@ -106,6 +106,20 @@ Both follow from **moments of the actual positive Jacobi-theta kernel**, with no
 The scale \(L>0\) remains **symbolic** throughout the geometric and exhaustion criteria: the new analytic growth theorem does not require choosing \(L\) at all.
 
 
+### Latest: higher-order theta moment certificates (2026-11-02)
+
+The kernel-only attempt at the scale-free \(\mathcal E=0\) exhaustion theorem **does not yet prove RH**. Instead, the exact global cosine minorant \(\cos z\ge P_{4m+2}(z)\), combined with moment monotonicity of the **actual Jacobi-theta kernel**, gives two rigorous families of *local sufficient conditions*:
+
+- [14 — Higher cosine moments](docs/14-higher-moment-cosine-certificate.md): unconditional zero-free condition \(\Re\Xi(x+iy)>0\) wherever an explicitly defined exact polynomial \(B_n(x)\) is positive for \(|y|\le1/2\). Ninth-order numerical first-root estimate: \(\approx9.913\).
+- [15 — Higher bilinear growth moments](docs/15-higher-moment-growth-certificate.md): the more relevant strict-growth condition \(\partial_y|\Xi(x+iy)|^2>0\) wherever the exact polynomial \(H_n(x)\) is positive for \(0<y\le1/2\). Ninth-order numerical first-root estimate: \(\approx7.184\), extending the previous approximate \(4.821\) threshold.
+
+These root **decimals are not interval-certified**; the theorem is the symbolic inequality with its exact theta-moment integrals. Every fixed finite-order minorant eventually turns negative, so the method cannot itself establish positivity at all heights or \(\mathcal E=0\). **All stereographic scales \(L>0\) remain symbolic:** these results constrain the analytic zeta-height coordinate, not the mapping scale.
+
+- [Zero-free experiment](experiments/higher_moment_cosine_certificate.py) and [tests](tests/test_higher_moment_cosine_certificate.py).
+- [Growth experiment](experiments/higher_moment_growth_certificate.py) and [tests](tests/test_higher_moment_growth_certificate.py).
+- [Numerical zero-free diagnostics](results/higher_moment_cosine_certificate.json) and [growth diagnostics](results/higher_moment_growth_certificate.json).
+
+
 ## One-page equation summary
 
 Choose a unit imaginary quaternion `u²=-1`, fixed positive scale `L` and common radius `R`.
@@ -141,7 +155,9 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 11. [11 — Verified-height defect bound](docs/11-certified-distance-defect-bound.md): published finite-height verification and explicit total zero-counting give a useful baseline bound.
 12. [12 — Symbolic-scale closure and normalized defect](docs/12-symbolic-scale-and-defect.md): **primary current theorem**, proof for all positive L, quartet factors and universal normalized bound.
 13. [13 — Jacobi-theta partial growth theorem](docs/13-theta-kernel-local-growth-certificate.md): kernel-only zero-free and strict-growth certificates, with rigorous oscillatory obstruction.
-14. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+14. [14 — Higher theta cosine moments](docs/14-higher-moment-cosine-certificate.md): exact polynomial zero-free criteria and their finite-order obstruction.
+15. [15 — Higher theta growth moments](docs/15-higher-moment-growth-certificate.md): exact bilinear strict-growth criteria with larger local range, still not RH.
+16. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
@@ -174,6 +190,8 @@ python experiments/w_distance_rh_criterion.py --scale 20 --count 200 --digits 40
 python experiments/theta_tail_and_defect_bound.py --digits 40 --scale 20 --count 8
 python experiments/symbolic_scale_family.py --scales 0.1,0.5,1,5,20,100 --count 40
 python experiments/theta_growth_certificate.py --digits 45
+python experiments/higher_moment_cosine_certificate.py --digits 40
+python experiments/higher_moment_growth_certificate.py --nodes 220
 # add --count 200 to repeat the longer 200-zero calculation
 ```
 
