@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-02",
+  "status": "Jacobi-theta local strict-growth certificate. No Riemann Hypothesis proof.",
+  "theory": "Complete xi Fourier transform from classical Jacobi theta kernel; all inequalities symbolic and unconditional in their stated domains.",
+  "source_docs": [
+    "docs/13-theta-kernel-local-growth-certificate.md",
+    "https://doi.org/10.3390/sym18081283",
+    "https://suvrit.github.io/papers/riem-xi/"
+  ],
+  "constants": {
+    "xi(1/2)": "0.497120778188314109912773739685397720",
+    "A(0)": "0.24856038909415705495638686984269886",
+    "A''(0)": "0.011485972157572718767624938248816085",
+    "A^(4)(1/2)": "0.0015190903818991620303367265046982409",
+    "xi''(1)/xi(1)": "0.04668772906845236626976471377162096209",
+    "Delta_star": "0.086046157268310578499906338870843611",
+    "zero_free_height_threshold": "6.54505985926647684370822129042526357709",
+    "strict_growth_height_threshold": "4.8211346138364797221189028517927452"
+  },
+  "proved_scope": [
+    "Xi(x+iy) != 0 for |x| < sqrt(2 xi(1)/xi''(1)), |y|<=1/2",
+    "partial_y |Xi(x+iy)|^2 > 0 for |x|<sqrt(2/(A4(1/2)/A''(0)-A''(0)/A(0))), 0<y<=1/2",
+    "Both follow from positive theta kernel and moment inequalities, without RH."
+  ],
+  "not_proved": [
+    "Global strict growth for all real x and 0<y<=1/2.",
+    "All nontrivial zeta zeros on the critical line.",
+    "Scale-independent exhaustion E=0."
+  ],
+  "numeric_status": "mpmath high precision, not outward-rounded interval certification."
+}
