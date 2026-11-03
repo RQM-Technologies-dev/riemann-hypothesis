@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-02",
+  "title": "Higher Jacobi-theta bilinear growth minorants: unconditional local strict-growth sufficient conditions",
+  "status": "The polynomial inequality is exact in its integral definition; the decimals are Gauss-Legendre diagnostics, not interval certificates. RH and E=0 remain unproved.",
+  "source_docs": [
+    "docs/15-higher-moment-growth-certificate.md",
+    "https://doi.org/10.3390/sym18081283",
+    "https://arxiv.org/abs/2608.19160"
+  ],
+  "numerical_setup": {
+    "theta_terms": 7,
+    "integration_v_from": 0,
+    "integration_v_to": 3,
+    "gauss_legendre_nodes_compared": [
+      160,
+      220,
+      350
+    ],
+    "precision": "numpy double quadrature, mpmath direct Xi derivative checks"
+  },
+  "roots": [
+    {
+      "n_odd": 1,
+      "degree": 2,
+      "first_positive_root_estimate": "4.842068638665"
+    },
+    {
+      "n_odd": 3,
+      "degree": 6,
+      "first_positive_root_estimate": "6.063465859017"
+    },
+    {
+      "n_odd": 5,
+      "degree": 10,
+      "first_positive_root_estimate": "6.855327468543"
+    },
+    {
+      "n_odd": 7,
+      "degree": 14,
+      "first_positive_root_estimate": "7.151018040916"
+    },
+    {
+      "n_odd": 9,
+      "degree": 18,
+      "first_positive_root_estimate": "7.184398593412"
+    }
+  ],
+  "exact_theorem": "For all odd n, all real x and 0<y<=1/2, G(x,y)>=y H_n(x), where G=(1/8)partial_y |Xi(x+iy)|^2 and H_n uses theta double-integral moments J_k^- for positive terms and J_k^+ for negative terms.",
+  "numerical_at_x7": {
+    "H_9": "0.000069400965145071",
+    "G_over_y_at_y_0_01": "0.0003600286971999345",
+    "G_over_y_at_y_0_1": "0.0003602250137902751",
+    "G_over_y_at_y_0_5": "0.0003650144552816253"
+  },
+  "interpretation": "Exact polynomial-root-defined positivity region; decimal root needs certified moment integration and interval root isolation. Every finite polynomial has negative leading coefficient and cannot prove all-height growth.",
+  "scale_L": "Symbolic >0 throughout."
+}
