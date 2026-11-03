@@ -85,6 +85,27 @@ Here \(P_+(H)\) is an explicit upper bound on \(\sum_{\Im\rho>H}(\Im\rho)^{-2}\)
 - [New regression tests](tests/test_theta_tail_and_defect_bound.py) (committed; run with existing test suite)
 
 
+### Latest mathematical investigation: a theta-only *partial* growth theorem (2026-11-02)
+
+The kernel-only attempt at the proposed scale-free exhaustion equality did **not** establish \(\mathcal E=0\). Instead, [13 — Jacobi-theta local growth certificate](docs/13-theta-kernel-local-growth-certificate.md) rigorously derives two unconditional partial bounds:
+
+\[
+\Xi(x+iy)\ne0\quad (|x|<6.545059859\ldots,\ |y|\le1/2),
+\]
+\[
+\partial_y|\Xi(x+iy)|^2>0\quad
+(|x|<4.821134613\ldots,\ 0<y\le1/2).
+\]
+
+Both follow from **moments of the actual positive Jacobi-theta kernel**, with no zero locations inserted. These are weaker than established finite-height zero-free results. The exact growth expression is a double integral with positive amplitudes but sign-changing cosine factors; controlling those oscillations for **all** real \(x\) remains equivalent to RH (Hinkkanen–Lagarias growth theorem; see Planat 2026).
+
+- [Proof and term-by-term derivation](docs/13-theta-kernel-local-growth-certificate.md).
+- [Reproducible moment experiment](experiments/theta_growth_certificate.py), [tests](tests/test_theta_growth_certificate.py), [numerical constants](results/theta_growth_certificate.json).
+- Related **preprint** updated 2026-11-02: Suvrit Sra, *On some positivity properties of the Riemann Xi function*, v3, https://suvrit.github.io/papers/riem-xi/ . Its very high **finite-order** positivity results do not imply full RH.
+
+The scale \(L>0\) remains **symbolic** throughout the geometric and exhaustion criteria: the new analytic growth theorem does not require choosing \(L\) at all.
+
+
 ## One-page equation summary
 
 Choose a unit imaginary quaternion `u²=-1`, fixed positive scale `L` and common radius `R`.
@@ -119,7 +140,8 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 10. [10 — Jacobi-theta/Jensen tail theorem](docs/10-jacobi-theta-jensen-tail.md): rigorous unconditional convergence of the uncounted on-line weighted tail, and why positivity alone cannot prove RH.
 11. [11 — Verified-height defect bound](docs/11-certified-distance-defect-bound.md): published finite-height verification and explicit total zero-counting give a useful baseline bound.
 12. [12 — Symbolic-scale closure and normalized defect](docs/12-symbolic-scale-and-defect.md): **primary current theorem**, proof for all positive L, quartet factors and universal normalized bound.
-13. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+13. [13 — Jacobi-theta partial growth theorem](docs/13-theta-kernel-local-growth-certificate.md): kernel-only zero-free and strict-growth certificates, with rigorous oscillatory obstruction.
+14. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
@@ -151,6 +173,7 @@ python experiments/theta_kernel_w_roots.py --count 3
 python experiments/w_distance_rh_criterion.py --scale 20 --count 200 --digits 40
 python experiments/theta_tail_and_defect_bound.py --digits 40 --scale 20 --count 8
 python experiments/symbolic_scale_family.py --scales 0.1,0.5,1,5,20,100 --count 40
+python experiments/theta_growth_certificate.py --digits 45
 # add --count 200 to repeat the longer 200-zero calculation
 ```
 
