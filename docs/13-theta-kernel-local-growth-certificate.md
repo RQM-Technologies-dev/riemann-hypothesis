@@ -178,7 +178,7 @@ A(0)=0.24856038909415705495639,
 \]
 \[
 A^{(4)}(1/2)=0.00151909038189916203034,
-\quad\Delta_*\approx0.086048\ldots.
+\quad\Delta_*\approx0.08604615726831\ldots.
 \]
 The decimal thresholds shown are ordinary high-precision approximations, **not machine-checked outward-rounded interval certificates**. The theorem is the exact symbolic inequality.
 
