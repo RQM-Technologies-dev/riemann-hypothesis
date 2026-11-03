@@ -1,0 +1,80 @@
+{
+  "status": "Exact symbolic global cosine-minorant hierarchy; numerical roots are NOT interval-certified and RH is not proved.",
+  "date": "2026-11-02",
+  "kernel": "Riemann's positive Jacobi-theta cosine kernel",
+  "stereographic_scale_L": "symbolic; no L parameter in the moment inequalities",
+  "endpoint_normalized_even_moments": {
+    "y=0": [
+      "1.0",
+      "0.046209986230837941577868",
+      "0.0059600172909394602173726",
+      "0.0012055338921491638999118",
+      "0.00032379772001648245619746",
+      "0.00010669164638738779965651",
+      "0.000041187405775676602836586",
+      "0.000018079622272123056958659",
+      "0.0000088374987400821140190955",
+      "0.0000047370447724217207857182"
+    ],
+    "y=1/2": [
+      "1.0",
+      "0.046687729068452366269765",
+      "0.0060763615275966481213469",
+      "0.0012391106701403056160017",
+      "0.00033529983984111773615018",
+      "0.0001112430497265157680661",
+      "0.000043220153661819386141389",
+      "0.000019086162406931883194621",
+      "0.0000093824914219344822911972",
+      "0.0000050562323506881018835387"
+    ]
+  },
+  "minorant_results": [
+    {
+      "n_odd": 1,
+      "degree": 2,
+      "root_estimate": "6.545059859266476843708",
+      "lower_at_x9": "-0.890853027272320834"
+    },
+    {
+      "n_odd": 3,
+      "degree": 6,
+      "root_estimate": "8.333952201410807415665",
+      "lower_at_x9": "-0.176136374875682226"
+    },
+    {
+      "n_odd": 5,
+      "degree": 10,
+      "root_estimate": "9.500409456029314087752",
+      "lower_at_x9": "0.0626693404441548321"
+    },
+    {
+      "n_odd": 7,
+      "degree": 14,
+      "root_estimate": "9.881883805872151241726",
+      "lower_at_x9": "0.0819458376837951034"
+    },
+    {
+      "n_odd": 9,
+      "degree": 18,
+      "root_estimate": "9.91309375849665290644",
+      "lower_at_x9": "0.0826099916837944655"
+    }
+  ],
+  "direct_normalized_completed_zeta_at_height_x9": {
+    "y=0": "0.131399292416040445790744692207",
+    "y=1/4": "0.130536163581024286081671950600",
+    "y=1/2": "0.127955667357945993275585078517"
+  },
+  "validation": "Original 7-harmonic theta truncation and finite v<=3 quadrature; verify output using committed experiment and add validated interval bounds before certifying a decimal threshold.",
+  "limitations": [
+    "No global strict growth theorem proved.",
+    "Xi changes sign on real axis at known zeros, so global Re Xi>0 is impossible.",
+    "Every finite-degree minorant has negative leading coefficient and cannot stay positive at all heights."
+  ],
+  "sources": [
+    "https://doi.org/10.3390/sym18081283",
+    "https://arxiv.org/abs/2608.19160",
+    "https://suvrit.github.io/papers/riem-xi/"
+  ]
+}
