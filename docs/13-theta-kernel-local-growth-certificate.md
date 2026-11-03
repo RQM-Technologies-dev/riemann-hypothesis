@@ -208,3 +208,17 @@ Find an independently justified arithmetic inequality—derived from the **speci
 Such a global estimate would establish the known growth criterion and therefore RH. No such estimate is established in this note.
 
 The conjectured angular/perfect-closure viewpoint is compatible with this analysis, but the stereographic parameter \(L\) is not used in the kernel inequality and remains fully symbolic as required.
+
+
+## 9. Follow-on (2026-11-02): higher-moment improvements and their limits
+
+The exact Jacobi-theta moment hierarchy in [14](14-higher-moment-cosine-certificate.md) sharpens the zero-free sufficient condition from the quadratic \(|x|<6.545\ldots\) to an **exact polynomial positivity region** with a numerical first-root estimate near \(9.913\).
+
+More relevant to the Hinkkanen–Lagarias growth criterion, [15](15-higher-moment-growth-certificate.md) applies global cosine minorants to the **bilinear theta growth integral**, proving
+\[
+\frac18\partial_y|X(x+iy)|^2\ge yH_n(x)
+\quad(0<y\le1/2).
+\]
+The positive region of the exact moment polynomial \(H_9\) has numerical first-root estimate near \(7.184\), extending the simpler moment bound near \(4.821\).
+
+These are rigorous analytic inequalities with **non-certified numeric root estimates**. Each fixed-degree minorant has a negative leading coefficient, and no all-height growth theorem or scale-free exhaustion proof has been obtained. The stereographic parameter \(L>0\) stays arbitrary and does not appear in the theta inequalities.
