@@ -1,0 +1,50 @@
+{
+  "status": "Finite high-precision mpmath checks of exact quaternionic S3/Jensen harmonic identities; not interval-certified and NOT RH proof",
+  "digits": 40,
+  "xi_at_half": "0.497120778188314109912773739685",
+  "xi_second_over_xi_at_half": "0.0462099862308379415778676208607",
+  "formula": "M4(R)=M2(R)-K2(R), K2(R)=(1/2pi)*integral cos(2theta) log|xi(1/2+R exp(i theta))| dtheta; when disk zero-free M4=log(xi(1/2)) - R^2 xi''(1/2)/(4 xi(1/2))",
+  "zero_free_examples": [
+    {
+      "radius": "1",
+      "complex_circle_mean": "-0.69892226794533141529836202",
+      "second_angular_harmonic": "0.0115524965577094853944669052",
+      "quaternionic_s3_mean": "-0.710474764503040900692828926",
+      "zero_free_exact_formula": "-0.710474764503040900692828926"
+    },
+    {
+      "radius": "5",
+      "complex_circle_mean": "-0.69892226794533141529836202",
+      "second_angular_harmonic": "0.28881241394273713486167263",
+      "quaternionic_s3_mean": "-0.987734681888068550160034651",
+      "zero_free_exact_formula": "-0.987734681888068550160034651"
+    },
+    {
+      "radius": "10",
+      "complex_circle_mean": "-0.69892226794533141529836202",
+      "second_angular_harmonic": "1.15524965577094853944669052",
+      "quaternionic_s3_mean": "-1.85417192371627995474505254",
+      "zero_free_exact_formula": "-1.85417192371627995474505254"
+    },
+    {
+      "radius": "13",
+      "complex_circle_mean": "-0.69892226794533141529836202",
+      "second_angular_harmonic": "1.95237191825290303166490698",
+      "quaternionic_s3_mean": "-2.651294186198234446963269",
+      "zero_free_exact_formula": "-2.651294186198234446963269"
+    }
+  ],
+  "polynomial_f_z_equals_1_plus_z_squared_over_25": [
+    {
+      "radius": "2",
+      "formula": "-0.08",
+      "numerical": "-0.08"
+    },
+    {
+      "radius": "7",
+      "formula": "0.4178424324260993303969419225",
+      "numerical": "0.4178424324260993303969419225"
+    }
+  ],
+  "interpretation": "The S3 surface measure isolates the second angular harmonic; this is not independent zero information and does not prove critical-line zero support."
+}
