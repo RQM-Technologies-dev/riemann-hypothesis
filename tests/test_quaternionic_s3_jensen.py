@@ -42,6 +42,13 @@ class QuaternionicS3JensenTests(unittest.TestCase):
             formula=M.polynomial_sphere_formula(radius,gamma)
             self.assertLess(abs(observed-formula),mp.mpf("1e-27"))
 
+    def test_crossing_first_xi_zero_sphere(self):
+        R=mp.mpf(20)
+        g=mp.im(mp.zetazero(1))
+        prediction=M.zero_free_formula(R)+M.first_zero_pair_correction(R,g)
+        actual=M.quaternionic_s3_mean(R)
+        self.assertLess(abs(actual-prediction),mp.mpf("1e-27"))
+
     def test_wrong_inputs_fail(self):
         with self.assertRaises(ValueError):
             M.quaternionic_s3_mean(0)
