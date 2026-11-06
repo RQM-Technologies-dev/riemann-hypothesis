@@ -1,0 +1,23 @@
+{
+  "status": "Finite numerical diagnostics; NOT proof of RH or PF_infinity",
+  "digits": 40,
+  "kernel_terms": 8,
+  "quadrature_upper_endpoint": "6 (infinity in exact formula)",
+  "theta_coefficients": [
+    "0.497120778188314109912773739685",
+    "0.0114859721575727187676249382488",
+    "0.000123452018070318006890345791495",
+    "0.000000832355481385527072004758725845"
+  ],
+  "kernel_minus_xi_derivative": [
+    "-5.7397185e-42",
+    "0.0",
+    "0.0",
+    "0.0"
+  ],
+  "a1_squared_minus_a0_a2": "0.0000705569931125013930942051386994",
+  "a2_squared_minus_a1_a3": "0.00000000567998888123692237230543325892",
+  "three_by_three_minor": "0.000000311214311593569034501642712005",
+  "quartic_merges_at_a_zero": true,
+  "counterexample_q4_plus4_at_1_plus_i": "(0.0 + 0.0j)"
+}
