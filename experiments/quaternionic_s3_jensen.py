@@ -83,6 +83,18 @@ def polynomial_sphere_formula(radius, gamma):
     return 2*mp.log(r/g)-g*g/(2*r*r)
 
 
+def first_zero_pair_correction(radius, gamma):
+    """Exact change in M4 after an imaginary pair +/-i*gamma enters radius R.
+
+    The difference is relative to extrapolating the zero-free quadratic
+    term. This formula does not assert that only one pair is inside.
+    """
+    r,g=mp.mpf(radius),mp.mpf(gamma)
+    if not r>g>0:
+        raise ValueError("require R>gamma>0")
+    return 2*mp.log(r/g)-g*g/(2*r*r)+r*r/(2*g*g)
+
+
 def run(digits=40, radii=("1","5","10","13")):
     if digits<28:
         raise ValueError("digits must be >=28")
@@ -119,6 +131,11 @@ def run(digits=40, radii=("1","5","10","13")):
             "piecewise_Jensen_formula": mp.nstr(predicted,26),
             "residual": mp.nstr(measured-predicted,8),
         })
+    # R=20 contains exactly the established first xi pair +/-i*gamma1.
+    gamma1=mp.im(mp.zetazero(1))
+    R20=mp.mpf(20)
+    R20_expected=zero_free_formula(R20)+first_zero_pair_correction(R20,gamma1)
+    R20_actual=quaternionic_s3_mean(R20)
     return {
         "status":"Exact mathematical identity; finite non-certified numerical checks; NOT RH proof",
         "precision_digits":digits,
@@ -126,6 +143,12 @@ def run(digits=40, radii=("1","5","10","13")):
         "xi_second_derivative_divided_by_center":mp.nstr(ratio,30),
         "radii_below_first_zero":entries,
         "polynomial_inside_and_outside_zero_radius":poly_checks,
+        "R20_first_xi_sphere_crossing":{
+            "first_zero_ordinate":mp.nstr(gamma1,30),
+            "predicted_with_single_pair_correction":mp.nstr(R20_expected,28),
+            "independent_S3_mean":mp.nstr(R20_actual,28),
+            "difference":mp.nstr(R20_actual-R20_expected,8),
+        },
     }
 
 
