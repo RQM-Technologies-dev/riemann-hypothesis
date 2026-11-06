@@ -4,6 +4,32 @@
 **Updated:** 2026-11-06  
 **Scope:** a complex harmonic series, its completed zeta function, and a four-real-dimensional *geometric model*; no physical time or particle-mass claim.
 
+## Primary quaternionic proof-development program — superposed zero-spheres (2026-11-06)
+
+**Current main path:** [21 — Direct quaternionic Jacobi-theta continuation and reflected zero-sphere superposition](docs/21-quaternionic-theta-superposed-zero-spheres.md) → [22 — Exact S³ Jensen second-harmonic identity](docs/22-quaternionic-s3-jensen-second-harmonic.md) → [17 — Clay zero-exclusion target](docs/17-clay-statement-and-proof-roadmap.md).
+
+The primary geometric object is now the **intrinsic slice-regular extension** 
+\[
+\mathcal X(q)=\xi(\tfrac12+q)
+=2\int_0^\infty\Phi(v)\cosh(qv)\,dv,\quad q\in\mathbb H.
+\]
+At \(q=a+ut\), \(u^2=-1\), it decomposes exactly as \(\mathcal X(a+ut)=2[C(t,a)+uS(t,a)]\). Zeros are complete quaternionic \(S^2\) zero-spheres \(\mathcal S_{a,t}\), paired with \(\mathcal S_{-a,t}\). A unit quaternion rotation preserves \(\Re q=a\), so it cannot identify these different spheres unless \(a=0\). **The proposed proof mechanism is an additional theta-specific analytic constraint on their superposition/zero-divisor**, not the already-known symmetry alone. Simple averaging does not create independent information: its squared norm remains \(4(C^2+S^2)\).
+
+A concrete higher-dimensional calculation gives the exact \(S^3\) logarithmic Jensen average
+\[
+\boxed{M_4(R)=M_2(R)-K_2(R),\qquad
+K_2(R)=\frac{1}{2\pi}\int_0^{2\pi}\cos(2\theta)
+\log|\xi(\tfrac12+Re^{i\theta})|\,d\theta.}
+\]
+Within any zero-free disk about the center,
+\[
+M_4(R)=\log\xi(\tfrac12)-\frac{R^2}{4}
+\frac{\xi''(\tfrac12)}{\xi(\tfrac12)}.
+\]
+The **second angular harmonic** explicitly probes the zero-divisor geometry. It has been independently checked numerically at \(R=1,5,10,13\), with [reproducible script](experiments/quaternionic_s3_jensen.py), [tests](tests/test_quaternionic_s3_jensen.py), and [finite results](results/quaternionic_s3_jensen.json). The identity and calculation **do not prove RH**; a genuinely new arithmetic/quaternionic inequality is needed to exclude every \(a\ne0\).
+
+**Next research task:** audit the published four-dimensional Jensen formula and connect its spherical-zero contribution to the theta-specific angular moment hierarchy. Seek an unconditional theorem forcing the zero measure to live only at \(\Re q=0\). Preserve the separate Cayley \(S^3\) coordinate scale \(L>0\) symbolically, and never confuse those mapped coordinates with the intrinsic \(S^2\) zero-spheres.
+
 ## First Clay-aligned investigation completed — modular inversion no-go (2026-11-06)
 
 **[18 — Exact modular-inversion obstruction and averaged theta growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md).** We constructed an explicit positive, even, fast-decaying perturbation of the actual Jacobi-theta kernel with the same weight-\(\tfrac12\) inversion symmetry, whose Fourier transform is
@@ -203,7 +229,7 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 
 ## Reading order
 
-**Current proof-oriented entry point:** [17 — Clay statement and roadmap](docs/17-clay-statement-and-proof-roadmap.md) → [18 — modular inversion obstruction](docs/18-modular-inversion-obstruction-and-averaged-growth.md) → [15 — signed theta-growth integral](docs/15-higher-moment-growth-certificate.md) → [16 — two folds and zero-spheres](docs/16-two-fold-zero-spheres-and-theta-positivity.md). The numbered list preserves the historical research lineage.
+**Current proof-oriented entry point:** [21 — Quaternionic theta/spherical superposition](docs/21-quaternionic-theta-superposed-zero-spheres.md) → [22 — 4D Jensen second harmonic](docs/22-quaternionic-s3-jensen-second-harmonic.md) → [17 — Official Clay objective](docs/17-clay-statement-and-proof-roadmap.md). Earlier [15–20](docs/20-inward-fold-normal-form-flux-and-jensen-obstruction.md) remain analytical comparators and obstruction tests.
 
 0. [00 — Research lineage and prior investigations](docs/00-research-lineage.md): preserves the Dirac, zeta, and Perfect Closure steps that led to this formulation.
 1. [01 — Polar quaternionic geometry](docs/01-polar-quaternionic-geometry.md): what a coordinate is, why infinity becomes a pole, fixed radius versus latitude spheres, conjugation, spinorial analogy.
@@ -225,8 +251,11 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 17. [17 — Official Clay proof target and roadmap](docs/17-clay-statement-and-proof-roadmap.md): exact statement, all-height theta-positivity and all-orders alternatives, investigation tracks, and proof acceptance criteria.
 18. [18 — Folded mirror channels and zero-collision obstruction](docs/18-mirror-channel-folding-and-zero-collision.md): cosine/sine theta channels, quartic splitting, precise noncollision criterion, Hermite–Biehler prior art, and research tests.
 19. [19 — Folded-channel phase, Wronskian and inward deformation](docs/19-folded-channel-inward-deformation-and-wronskian.md): exact C/S phase law, 1989 Hermite–Biehler outer boundary, finite high-precision alternating roots, collision sign test, and next theta-modular lemma.
-18. [18 — Modular inversion no-go and averaged growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md): exact off-axis counterexample, compact-tail-preserving obstruction, global L2 average growth, and the next theta-arithmetic lemma.
-20. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+Supplement. [18 — Modular inversion no-go and averaged growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md): exact off-axis counterexample, compact-tail-preserving obstruction, global L2 average growth, and the next theta-arithmetic lemma.
+20. [20 — Inward-fold normal form and Jensen obstruction](docs/20-inward-fold-normal-form-flux-and-jensen-obstruction.md): zero flux, phase constraint, and why fold-curvature positivity alone cannot prove RH.
+21. [21 — Quaternionic theta continuation and spherical superposition](docs/21-quaternionic-theta-superposed-zero-spheres.md): direct theta integral on H, S² zero-divisors, parity projections and exact coupling proof target.
+22. [22 — Quaternionic S³ Jensen second harmonic](docs/22-quaternionic-s3-jensen-second-harmonic.md): exact 4D angular harmonic, complete Hadamard zero-divisor expansion, and finite numerical verification.
+23. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
