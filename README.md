@@ -4,6 +4,25 @@
 **Updated:** 2026-11-06  
 **Scope:** a complex harmonic series, its completed zeta function, and a four-real-dimensional *geometric model*; no physical time or particle-mass claim.
 
+## First Clay-aligned investigation completed — modular inversion no-go (2026-11-06)
+
+**[18 — Exact modular-inversion obstruction and averaged theta growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md).** We constructed an explicit positive, even, fast-decaying perturbation of the actual Jacobi-theta kernel with the same weight-\(\tfrac12\) inversion symmetry, whose Fourier transform is
+\[
+\widehat\Psi(z)=\Xi(z)\bigl(1+0.98\cos z\bigr).
+\]
+It has **explicit nonreal auxiliary zeros** at \(z=\pi\pm0.2016884878\ldots i\) (inside the RH strip), showing that **inversion, positivity and decay alone cannot force RH**. These are **not** zeros of the original Riemann Xi function. A separate compactly supported positive perturbation proves that even preserving the original theta **tails exactly** is insufficient without further arithmetic structure.
+
+A genuine unconditional positive theorem also follows by Plancherel:
+\[
+E(y)=\int_{\mathbb R}|\Xi(x+iy)|^2dx
+=4\pi\int_0^\infty\Phi(u)^2\cosh(2yu)du,
+\quad
+E'(y)=8\pi\int_0^\infty u\Phi(u)^2\sinh(2yu)du>0\ (y>0).
+\]
+This is **averaged**, not **pointwise**, growth; it does not settle RH. Moreover, \(\partial_y|\Xi(x+iy)|^2\to0\) at large \(|x|\), so any *height-independent positive margin* is impossible.
+
+The next lemma must use the **exact Jacobi \(n^2\)-arithmetic structure** beyond inversion, generic positivity, kernel tails or first Laguerre inequalities. See [experiment](experiments/modular_symmetry_obstruction.py), [six tests](tests/test_modular_symmetry_obstruction.py), and [numerical results](results/modular_symmetry_obstruction.json). These were locally checked, not interval-certified or a proof of RH.
+
 ## Governing objective — Clay Millennium Prize statement (2026-11-06)
 
 **Start here:** [17 — Exact Clay problem statement and prioritized proof roadmap](docs/17-clay-statement-and-proof-roadmap.md), then [16 — Two-fold zero-spheres and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md).
@@ -165,7 +184,7 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 
 ## Reading order
 
-**Current proof-oriented entry point:** [17 — Clay statement and roadmap](docs/17-clay-statement-and-proof-roadmap.md) → [16 — two folds and positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md) → [15 — signed theta-growth integral](docs/15-higher-moment-growth-certificate.md). The numbered list preserves the historical research lineage.
+**Current proof-oriented entry point:** [17 — Clay statement and roadmap](docs/17-clay-statement-and-proof-roadmap.md) → [18 — modular inversion obstruction](docs/18-modular-inversion-obstruction-and-averaged-growth.md) → [15 — signed theta-growth integral](docs/15-higher-moment-growth-certificate.md) → [16 — two folds and zero-spheres](docs/16-two-fold-zero-spheres-and-theta-positivity.md). The numbered list preserves the historical research lineage.
 
 0. [00 — Research lineage and prior investigations](docs/00-research-lineage.md): preserves the Dirac, zeta, and Perfect Closure steps that led to this formulation.
 1. [01 — Polar quaternionic geometry](docs/01-polar-quaternionic-geometry.md): what a coordinate is, why infinity becomes a pole, fixed radius versus latitude spheres, conjugation, spinorial analogy.
@@ -185,7 +204,8 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 15. [15 — Higher theta growth moments](docs/15-higher-moment-growth-certificate.md): exact bilinear strict-growth criteria with larger local range, still not RH.
 16. [16 — Two folds, zero-spheres, and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md): complete symmetry/quartic derivation, slice-regular (S^2) lift, growth and total-nonnegativity equivalences, self-adjoint counterexample, and open proof task.
 17. [17 — Official Clay proof target and roadmap](docs/17-clay-statement-and-proof-roadmap.md): exact statement, all-height theta-positivity and all-orders alternatives, investigation tracks, and proof acceptance criteria.
-18. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+18. [18 — Modular inversion no-go and averaged growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md): exact off-axis counterexample, compact-tail-preserving obstruction, global L2 average growth, and the next theta-arithmetic lemma.
+19. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
