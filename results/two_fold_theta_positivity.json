@@ -19,5 +19,5 @@
   "a2_squared_minus_a1_a3": "0.00000000567998888123692237230543325892",
   "three_by_three_minor": "0.000000311214311593569034501642712005",
   "quartic_merges_at_a_zero": true,
-  "counterexample_q4_plus4_at_1_plus_i": "(0.0 + 0.0j)"
+  "counterexample_q4_plus4_at_1_plus_i": "0j"
 }
