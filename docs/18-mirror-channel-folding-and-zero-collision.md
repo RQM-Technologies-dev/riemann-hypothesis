@@ -158,7 +158,7 @@ P_\mu(x)=2\int_0^\infty K(u)\cosh(\mu u)\cos(xu)\,du,\quad
 Q_\mu(x)=2\int_0^\infty K(u)\sinh(\mu u)\sin(xu)\,du.
 \]
 
-These are **\(2C\) and \(2S\)** for our theta kernel. Their theorem and corollary yield an RH-equivalent Laguerre/Hermite–Biehler-style criterion on a signed double integral, and provide a serious prior-art starting point. See *Proceedings of the American Mathematical Society* 107 (1989), pp. 645–651, especially Theorem 3.4 and Corollary 3.5: https://www.ams.org/journals/proc/1989-107-03/S0002-9939-1989-0984799-1/ (verify link before using); accessible copy: https://scispace.com/pdf/fourier-transforms-and-the-hermite-biehler-theorem-2zumw94gvz.pdf
+These are **\(2C\) and \(2S\)** for our theta kernel. Their theorem and corollary yield an RH-equivalent Laguerre/Hermite–Biehler-style criterion on a signed double integral, and provide a serious prior-art starting point. See *Proceedings of the American Mathematical Society* 107 (1989), pp. 645–651, especially Theorem 3.4 and Corollary 3.5: accessible copy: https://scispace.com/pdf/fourier-transforms-and-the-hermite-biehler-theorem-2zumw94gvz.pdf
 
 **Novelty guardrail:** The mere \(C,S\) decomposition and Hermite–Biehler approach are **not new**. What could be new is a valid theta-specific *mechanism* establishing noncollision/interlacing globally, or a new quaternionic operator yielding that implication without assuming it.
 
