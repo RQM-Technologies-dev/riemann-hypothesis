@@ -39,6 +39,19 @@ Alternatively, prove infinite-order Toeplitz total nonnegativity for its theta-m
 
 **Status:** research roadmap only. **RH remains unsolved.**
 
+## First folded-channel investigation — inward deformation and phase collision (2026-11-06)
+
+**New primary working note:** [19 — Phase/Wronskian, Hermite–Biehler boundary and inward deformation](docs/19-folded-channel-inward-deformation-and-wronskian.md). Starting from \(\Xi(t+ia)=2(C-iS)\), analyticity gives the exact cross-channel Wronskian \(J=CS_t-SC_t=\frac18\partial_a|\Xi|^2\), and \(\partial_t\arg\Xi=-J/(C^2+S^2)\). A second identity gives
+\[
+\partial_aJ=C_t^2+S_t^2-CC_{tt}-SS_{tt}
+=\tfrac14\bigl(|\Xi'|^2-\Re(\Xi\overline{\Xi''})\bigr).
+\]
+At any hypothetical **simple off-line zero**, \(J=0\) and \(\partial_aJ=|\Xi'|^2/4>0\); every off-line zero, including higher multiplicities, forces a local sign reversal of \(J\) when crossing its spectral latitude. These are exact identities, **not a proof that such zeros are absent**.
+
+Csordas–Varga's 1989 Hermite–Biehler result supplies an **unconditional outer boundary**: the two theta channels have real-zero structure for shifts \(a\ge1/2\). The open research question is whether the **specific** Jacobi-theta kernel preserves this noncollision condition as \(a\) decreases toward 0 at **all** heights.
+
+A 45-digit [finite numerical experiment](experiments/folded_channel_collision_scan.py) with [saved results](results/folded_channel_collision_scan.json) and [new tests](tests/test_folded_channel_collision_scan.py) followed the two channels on heights \(8\le t\le45\). At shifts \(a=0.50,0.49,0.20,0.05\), eight C and eight S roots were found per shift, alternating in the sampled range. A deliberately modified positive kernel with nonreal zeros reproduced the predicted Wronskian sign reversal. These scans are **not certified exhaustive** and **cannot settle RH**. The next task is a theta-modular *uniform inward-preservation lemma* with explicit counterexample/failure gates.
+
 ## Mirror-channel hypothesis refinement (2026-11-06)
 
 **Read [18 — Mirror-channel folding, superposition and zero collision](docs/18-mirror-channel-folding-and-zero-collision.md).** The user's hypothesis is **not** that conjugation symmetry alone proves RH; it is that the paired quaternionic zero-spheres may be manifestations of *analytically coupled* mirror channels, and that understanding their folded superposition may reveal a theta-specific restriction on zero locations.
@@ -211,8 +224,9 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 16. [16 — Two folds, zero-spheres, and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md): complete symmetry/quartic derivation, slice-regular (S^2) lift, growth and total-nonnegativity equivalences, self-adjoint counterexample, and open proof task.
 17. [17 — Official Clay proof target and roadmap](docs/17-clay-statement-and-proof-roadmap.md): exact statement, all-height theta-positivity and all-orders alternatives, investigation tracks, and proof acceptance criteria.
 18. [18 — Folded mirror channels and zero-collision obstruction](docs/18-mirror-channel-folding-and-zero-collision.md): cosine/sine theta channels, quartic splitting, precise noncollision criterion, Hermite–Biehler prior art, and research tests.
+19. [19 — Folded-channel phase, Wronskian and inward deformation](docs/19-folded-channel-inward-deformation-and-wronskian.md): exact C/S phase law, 1989 Hermite–Biehler outer boundary, finite high-precision alternating roots, collision sign test, and next theta-modular lemma.
 18. [18 — Modular inversion no-go and averaged growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md): exact off-axis counterexample, compact-tail-preserving obstruction, global L2 average growth, and the next theta-arithmetic lemma.
-19. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+20. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
