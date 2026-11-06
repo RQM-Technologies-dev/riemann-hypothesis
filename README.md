@@ -1,7 +1,7 @@
 # Riemann Hypothesis — Quaternionic Polar Closure
 
 **Status:** exploratory mathematical research, not a proof of the Riemann Hypothesis.  
-**Updated:** 2026-11-02  
+**Updated:** 2026-11-06  
 **Scope:** a complex harmonic series, its completed zeta function, and a four-real-dimensional *geometric model*; no physical time or particle-mass claim.
 
 ## Core hypothesis
@@ -9,6 +9,14 @@
 The critical line `s=1/2+it` can be mapped by **one global inverse stereographic/Cayley transformation** into a closed quaternionic polar meridian. Positive zeta-zero ordinates occur on the outward traversal, their conjugates on the return traversal, and infinity is a common pole. All mapped points lie at the same ambient four-dimensional radius `R`; the different zero ordinates become different **angular locations**, not individually normalized radii.
 
 The strongest question is not whether this mapping is possible (it is), but whether a **new, independently defined harmonic closure law** can require zeta zeros to occupy the critical-line meridian.
+
+## New chapter — two-fold zero-spheres and theta-kernel positivity (2026-11-06)
+
+[16 — Two folds, quaternionic zero-spheres and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md) collects the recent research discussion into one complete, carefully qualified note. It derives the zeta zero quartet and its quartic, the intrinsic slice-regular lift into paired \(S^2\) zero-spheres, and the exact criterion that both spheres coincide precisely when a zero lies on the critical line. It also distinguishes these zero-spheres from the earlier common \(S^3\) Cayley-coordinate model and keeps the map scale \(L\) arbitrary.
+
+The note compares three potential analytic mechanisms: (1) **strict outward Xi-modulus growth** from the Jacobi-theta Fourier kernel, (2) **infinite-order Toeplitz total nonnegativity** of its positive even theta-moment coefficients, and (3) a **self-adjoint unitary-overlap representation**. The first two are RH-equivalent and **unproved globally**; the third is an exact construction but is not sufficient to prove RH. It includes counterexamples showing that two reflections or positive spectral measures alone cannot rule out off-line zeros.
+
+Reproducibility: [moment/quartic experiment](experiments/two_fold_theta_positivity.py), [unit tests](tests/test_two_fold_theta_positivity.py), and [saved finite numerical diagnostics](results/two_fold_theta_positivity.json). These finite examples do not prove RH or establish all infinite Toeplitz minors. For the prior rigorous partial bounds, see [13](docs/13-theta-kernel-local-growth-certificate.md), [14](docs/14-higher-moment-cosine-certificate.md), and [15](docs/15-higher-moment-growth-certificate.md).
 
 ## Primary research direction — symbolic-scale closure (2026-11-02)
 
@@ -157,7 +165,8 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 13. [13 — Jacobi-theta partial growth theorem](docs/13-theta-kernel-local-growth-certificate.md): kernel-only zero-free and strict-growth certificates, with rigorous oscillatory obstruction.
 14. [14 — Higher theta cosine moments](docs/14-higher-moment-cosine-certificate.md): exact polynomial zero-free criteria and their finite-order obstruction.
 15. [15 — Higher theta growth moments](docs/15-higher-moment-growth-certificate.md): exact bilinear strict-growth criteria with larger local range, still not RH.
-16. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+16. [16 — Two folds, zero-spheres, and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md): complete symmetry/quartic derivation, slice-regular (S^2) lift, growth and total-nonnegativity equivalences, self-adjoint counterexample, and open proof task.
+17. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
