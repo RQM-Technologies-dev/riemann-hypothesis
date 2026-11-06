@@ -4,6 +4,22 @@
 **Updated:** 2026-11-06  
 **Scope:** a complex harmonic series, its completed zeta function, and a four-real-dimensional *geometric model*; no physical time or particle-mass claim.
 
+## Governing objective — Clay Millennium Prize statement (2026-11-06)
+
+**Start here:** [17 — Exact Clay problem statement and prioritized proof roadmap](docs/17-clay-statement-and-proof-roadmap.md), then [16 — Two-fold zero-spheres and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md).
+
+Enrico Bombieri's official [Clay Mathematics Institute problem statement](https://www.claymath.org/wp-content/uploads/2022/05/riemann.pdf), §I, p. 1, requires **every nontrivial zero \(\rho\) of \(\zeta(s)\) to satisfy \(\Re\rho=\tfrac12\)**. Equivalently, every zero of the completed critical-line function \(\Xi(z)=\xi(\tfrac12+iz)\) must be real. Analytic continuation of zeta is already established; higher-dimensional representations alone are not proofs of the required zero exclusion.
+
+**Primary proof obligation:** obtain unconditionally from the *specific* Jacobi-theta kernel an all-height strict outward growth law
+\[
+\boxed{\partial_y|\Xi(x+iy)|^2>0,\quad x\in\mathbb R,\ 0<y\le\tfrac12.}
+\]
+Alternatively, prove infinite-order Toeplitz total nonnegativity for its theta-moment coefficients or construct an exact self-adjoint spectral correspondence to **every** Xi zero. These are RH-equivalent proof targets, **not established results**. Local inequalities, finite verified zeros, positive kernel amplitudes, and self-adjoint *overlap* representations do not suffice.
+
+**Priority order:** (A) theta-specific modular control of the signed oscillatory growth integral, uniformly at all spectral heights; (B) an all-orders Toeplitz factorization; (C) theta heat deformation / de Bruijn–Newman boundary as a distinct exploratory track. The reflection-quartet and paired quaternionic zero-sphere geometry serve as interpretation and hypothesis-generation tools, not substitutes for a new global analytic theorem. Keep the separate Cayley \(S^3\) coordinate scale \(L>0\) symbolic.
+
+**Status:** research roadmap only. **RH remains unsolved.**
+
 ## Core hypothesis
 
 The critical line `s=1/2+it` can be mapped by **one global inverse stereographic/Cayley transformation** into a closed quaternionic polar meridian. Positive zeta-zero ordinates occur on the outward traversal, their conjugates on the return traversal, and infinity is a common pole. All mapped points lie at the same ambient four-dimensional radius `R`; the different zero ordinates become different **angular locations**, not individually normalized radii.
@@ -18,9 +34,9 @@ The note compares three potential analytic mechanisms: (1) **strict outward Xi-m
 
 Reproducibility: [moment/quartic experiment](experiments/two_fold_theta_positivity.py), [unit tests](tests/test_two_fold_theta_positivity.py), and [saved finite numerical diagnostics](results/two_fold_theta_positivity.json). These finite examples do not prove RH or establish all infinite Toeplitz minors. For the prior rigorous partial bounds, see [13](docs/13-theta-kernel-local-growth-certificate.md), [14](docs/14-higher-moment-cosine-certificate.md), and [15](docs/15-higher-moment-growth-certificate.md).
 
-## Primary research direction — symbolic-scale closure (2026-11-02)
+## Supporting research direction — symbolic-scale closure (2026-11-02)
 
-**Read first:** [12 — Keep \(L\) symbolic: scale-covariant closure criterion](docs/12-symbolic-scale-and-defect.md), then [09 — The positive \(w\)-distance RH equivalence](docs/09-w-distance-rh-equivalence.md).
+**For this supporting line of work:** read [12 — Keep \(L\) symbolic: scale-covariant closure criterion](docs/12-symbolic-scale-and-defect.md), then [09 — The positive \(w\)-distance RH equivalence](docs/09-w-distance-rh-equivalence.md).
 
 The inverse-stereographic coordinate choice is valid for **every \(L>0\)**:
 \[
@@ -149,6 +165,8 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 
 ## Reading order
 
+**Current proof-oriented entry point:** [17 — Clay statement and roadmap](docs/17-clay-statement-and-proof-roadmap.md) → [16 — two folds and positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md) → [15 — signed theta-growth integral](docs/15-higher-moment-growth-certificate.md). The numbered list preserves the historical research lineage.
+
 0. [00 — Research lineage and prior investigations](docs/00-research-lineage.md): preserves the Dirac, zeta, and Perfect Closure steps that led to this formulation.
 1. [01 — Polar quaternionic geometry](docs/01-polar-quaternionic-geometry.md): what a coordinate is, why infinity becomes a pole, fixed radius versus latitude spheres, conjugation, spinorial analogy.
 2. [02 — Equation-by-equation dictionary](docs/02-equation-dictionary.md): every term, variable, domain, and prerequisite.
@@ -166,7 +184,8 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 14. [14 — Higher theta cosine moments](docs/14-higher-moment-cosine-certificate.md): exact polynomial zero-free criteria and their finite-order obstruction.
 15. [15 — Higher theta growth moments](docs/15-higher-moment-growth-certificate.md): exact bilinear strict-growth criteria with larger local range, still not RH.
 16. [16 — Two folds, zero-spheres, and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md): complete symmetry/quartic derivation, slice-regular (S^2) lift, growth and total-nonnegativity equivalences, self-adjoint counterexample, and open proof task.
-17. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+17. [17 — Official Clay proof target and roadmap](docs/17-clay-statement-and-proof-roadmap.md): exact statement, all-height theta-positivity and all-orders alternatives, investigation tracks, and proof acceptance criteria.
+18. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
