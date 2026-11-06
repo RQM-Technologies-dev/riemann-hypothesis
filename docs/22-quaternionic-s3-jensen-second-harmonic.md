@@ -182,6 +182,33 @@ M_4(R)=\log f(0)
 \tag{J9}
 \]
 
+### Independent check across the first zero-sphere
+
+We also tested the **full divisor identity** outside the first zero radius. For \(R=20\), the only centered xi pair inside the radius is \(\alpha=\pm i\gamma_1\), with \(\gamma_1=14.1347251417346937904573\ldots\); the next zero height is above 20. Relative to the zero-free quadratic expression (J4), crossing this one spherical zero radius adds the explicit correction
+
+\[
+\boxed{
+\Delta_{\gamma_1}(R)
+=2\log\frac R{\gamma_1}
+-\frac{\gamma_1^2}{2R^2}
++\frac{R^2}{2\gamma_1^2}
+\quad(R>\gamma_1).
+}
+\tag{J11}
+\]
+
+At \(R=20\), direct 35-digit \(S^3\) quadrature and the corrected divisor formula agree:
+
+\[
+\begin{aligned}
+\text{zero-free quadratic baseline}&\approx-5.319920891029125573085124107,\\
+\Delta_{\gamma_1}(20)&\approx1.445506211824741196923649526,\\
+\boxed{M_4(20)}&\approx\boxed{-3.874414679204384376161474581}.
+\end{aligned}
+\]
+
+This tests the actual **spherical zero crossing**, not just the local power series. The agreement is numerical, not interval-certified, and uses the established first critical-line zero ordinate as input. **It cannot exclude hypothetical off-center zeros at arbitrarily large heights.**
+
 This **explicit quaternionic Jensen-type expansion** contains a different weighting of zero locations from ordinary Jensen: it depends on the *second angular harmonic* \(\operatorname{Re}(\alpha^2)\) or \(\operatorname{Re}(\alpha^{-2})\).
 
 For a representative \(\alpha=a+it\),
