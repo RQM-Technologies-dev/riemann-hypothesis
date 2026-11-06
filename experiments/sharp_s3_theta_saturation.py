@@ -57,6 +57,8 @@ def toy_local_moment(a, t):
     """quartic''(0)/(4 quartic(0))."""
     a, t = mp.mpf(a), mp.mpf(t)
     r2 = a*a+t*t
+    if r2 <= 0:
+        raise ValueError("zero radius")
     return (t*t-a*a)/(r2*r2)
 
 
