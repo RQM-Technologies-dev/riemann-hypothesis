@@ -1,0 +1,24 @@
+{
+  "status": "Exact RH-equivalent saturation criterion remains UNPROVED; finite precision stress tests only.",
+  "digits": 40,
+  "original_xi_fpp_over_4f": "0.011552496557709485394466905215169507",
+  "toy_quartet": {
+    "a": "0.2",
+    "t": "14.13",
+    "independent_radial_Jensen_integral": "0.00500758900113121435535554132287481678",
+    "local_quadratic_coefficient": "0.00500558292532287433030543567123060005",
+    "observed_difference": "0.00000200607580834002505010565164421673718",
+    "exact_positive_fold_penalty_coefficient": "0.00000200607580834002505010565164421673718",
+    "difference_minus_formula": "6.7174745e-44"
+  },
+  "modified_positive_even_theta_kernel": {
+    "epsilon": "0.49",
+    "off_axis_parameter_b": "0.201688487798836053004338678585587332",
+    "extra_gap_from_zero_sum": "0.000840611132743891910453500558192838562",
+    "extra_gap_closed_formula": "0.000840611132743891910453500558192838562",
+    "cross_check_difference": "-1.5246127e-42",
+    "warning": "These are additional nonreal zeros of the perturbed kernel, not of the original Riemann Xi."
+  },
+  "unproved_equality": "integral_0^infty (M2(R)-log(xi(1/2)))/R^3 dR = xi''(1/2)/(4xi(1/2))",
+  "method": "Independently recomputed inverse-square Jensen integral for a synthetic quartet, xi derivative from mpmath, and closed-form hyperbolic gap vs infinite series. No interval arithmetic or all-height RH verification."
+}
