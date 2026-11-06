@@ -6,7 +6,7 @@
 
 ## Primary quaternionic proof-development program — superposed zero-spheres (2026-11-06)
 
-**Current main path:** [21 — Direct quaternionic Jacobi-theta continuation and reflected zero-sphere superposition](docs/21-quaternionic-theta-superposed-zero-spheres.md) → [22 — Exact S³ Jensen second-harmonic identity](docs/22-quaternionic-s3-jensen-second-harmonic.md) → [17 — Clay zero-exclusion target](docs/17-clay-statement-and-proof-roadmap.md).
+**Current main path:** [21 — Direct quaternionic theta continuation](docs/21-quaternionic-theta-superposed-zero-spheres.md) → [22 — S³ Jensen second harmonic](docs/22-quaternionic-s3-jensen-second-harmonic.md) → [23 — Positive reflected-sphere folding penalty](docs/23-positive-quaternionic-folding-penalty.md) → [17 — Clay zero-exclusion target](docs/17-clay-statement-and-proof-roadmap.md).
 
 The primary geometric object is now the **intrinsic slice-regular extension** 
 \[
@@ -29,6 +29,22 @@ M_4(R)=\log\xi(\tfrac12)-\frac{R^2}{4}
 The **second angular harmonic** explicitly probes the zero-divisor geometry. It has been independently checked numerically at \(R=1,5,10,13\), with [reproducible script](experiments/quaternionic_s3_jensen.py), [tests](tests/test_quaternionic_s3_jensen.py), and [finite results](results/quaternionic_s3_jensen.json). The identity and calculation **do not prove RH**; a genuinely new arithmetic/quaternionic inequality is needed to exclude every \(a\ne0\).
 
 **Next research task:** audit the published four-dimensional Jensen formula and connect its spherical-zero contribution to the theta-specific angular moment hierarchy. Seek an unconditional theorem forcing the zero measure to live only at \(\Re q=0\). Preserve the separate Cayley \(S^3\) coordinate scale \(L>0\) symbolically, and never confuse those mapped coordinates with the intrinsic \(S^2\) zero-spheres.
+
+### New quantitative result: positive folding penalty (2026-11-06)
+
+[23 — Exact positive reflected-sphere folding penalty](docs/23-positive-quaternionic-folding-penalty.md) compares an off-center zeta-zero quartet with an **artificial radius-preserving folded reference** containing the same four roots counted with multiplicity. The normalized four-dimensional spherical log-mean difference is
+\[
+\boxed{
+\mathfrak F_R(a,t)=
+\begin{cases}
+2a^2R^2/(a^2+t^2)^2,&R^2\le a^2+t^2,\\
+2a^2/R^2,&R^2\ge a^2+t^2.
+\end{cases}
+}
+\]
+It is strictly positive for any off-fold displacement \(a\ne0\), and is zero precisely when the two reflected spheres occupy the same centered slice. [High-precision angular experiment](experiments/quaternionic_fold_penalty.py), [tests](tests/test_quaternionic_fold_penalty.py), and [numerical results](results/quaternionic_fold_penalty.json) verify the algebraic formula in both radial regimes and validate the original xi normalization in known zero-free disks.
+
+**Critical limit:** the folded reference is built using **hypothetical unknown zero locations**; a positive difference against that reference is not a theorem that xi must realize the reference. A new **theta-only independent equality or inequality forcing the total folding penalty to vanish** is still missing. Do not present the comparison theorem, finite checks, or the prior scale-free \(\mathcal E\) equivalence as RH proof.
 
 ## First Clay-aligned investigation completed — modular inversion no-go (2026-11-06)
 
@@ -255,7 +271,8 @@ Supplement. [18 — Modular inversion no-go and averaged growth](docs/18-modular
 20. [20 — Inward-fold normal form and Jensen obstruction](docs/20-inward-fold-normal-form-flux-and-jensen-obstruction.md): zero flux, phase constraint, and why fold-curvature positivity alone cannot prove RH.
 21. [21 — Quaternionic theta continuation and spherical superposition](docs/21-quaternionic-theta-superposed-zero-spheres.md): direct theta integral on H, S² zero-divisors, parity projections and exact coupling proof target.
 22. [22 — Quaternionic S³ Jensen second harmonic](docs/22-quaternionic-s3-jensen-second-harmonic.md): exact 4D angular harmonic, complete Hadamard zero-divisor expansion, and finite numerical verification.
-23. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+23. [23 — Positive reflected-sphere folding penalty](docs/23-positive-quaternionic-folding-penalty.md): a normalized S³ logarithmic comparison detects off-center displacement quadratically, with critical circularity warning.
+24. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
