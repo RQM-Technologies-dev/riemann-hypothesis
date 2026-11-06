@@ -39,6 +39,12 @@ Alternatively, prove infinite-order Toeplitz total nonnegativity for its theta-m
 
 **Status:** research roadmap only. **RH remains unsolved.**
 
+## Mirror-channel hypothesis refinement (2026-11-06)
+
+**Read [18 — Mirror-channel folding, superposition and zero collision](docs/18-mirror-channel-folding-and-zero-collision.md).** The user's hypothesis is **not** that conjugation symmetry alone proves RH; it is that the paired quaternionic zero-spheres may be manifestations of *analytically coupled* mirror channels, and that understanding their folded superposition may reveal a theta-specific restriction on zero locations.
+
+For real spectral height \(t\) and transverse displacement \(a\), the actual Jacobi-theta Fourier representation gives \(\Xi(t+ia)=2[C(t,a)-iS(t,a)]\), with \(C\) even and \(S\) odd under \(a\mapsto-a\). At the fold \(a=0\), \(S(t,0)=0\) identically; off the fold, a zero requires **simultaneous** cancellation \(C=S=0\). The refined proof target is to derive from the special theta kernel a global no-common-zero/interlacing constraint for all \(0<a\le1/2\), without assuming RH. The 1989 Hermite–Biehler research of Csordas and Varga already uses the same cosine/sine channels, so it is essential prior art. This is an **RH-equivalent target**, not a result proved by the decomposition itself.
+
 ## Core hypothesis
 
 The critical line `s=1/2+it` can be mapped by **one global inverse stereographic/Cayley transformation** into a closed quaternionic polar meridian. Positive zeta-zero ordinates occur on the outward traversal, their conjugates on the return traversal, and infinity is a common pole. All mapped points lie at the same ambient four-dimensional radius `R`; the different zero ordinates become different **angular locations**, not individually normalized radii.
@@ -204,6 +210,7 @@ The completed zeta function is `ξ(s)=½s(s−1)π^(−s/2)Γ(s/2)ζ(s)`. Its re
 15. [15 — Higher theta growth moments](docs/15-higher-moment-growth-certificate.md): exact bilinear strict-growth criteria with larger local range, still not RH.
 16. [16 — Two folds, zero-spheres, and theta positivity](docs/16-two-fold-zero-spheres-and-theta-positivity.md): complete symmetry/quartic derivation, slice-regular (S^2) lift, growth and total-nonnegativity equivalences, self-adjoint counterexample, and open proof task.
 17. [17 — Official Clay proof target and roadmap](docs/17-clay-statement-and-proof-roadmap.md): exact statement, all-height theta-positivity and all-orders alternatives, investigation tracks, and proof acceptance criteria.
+18. [18 — Folded mirror channels and zero-collision obstruction](docs/18-mirror-channel-folding-and-zero-collision.md): cosine/sine theta channels, quartic splitting, precise noncollision criterion, Hermite–Biehler prior art, and research tests.
 18. [18 — Modular inversion no-go and averaged growth](docs/18-modular-inversion-obstruction-and-averaged-growth.md): exact off-axis counterexample, compact-tail-preserving obstruction, global L2 average growth, and the next theta-arithmetic lemma.
 19. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
