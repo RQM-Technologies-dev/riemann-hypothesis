@@ -4,6 +4,25 @@
 **Updated:** 2026-11-06  
 **Scope:** a complex harmonic series, its completed zeta function, and a four-real-dimensional *geometric model*; no physical time or particle-mass claim.
 
+## Sharp quaternionic saturation audit — exact criterion, not yet a proof (2026-11-06)
+
+**Read [24 — Sharp angular saturation and theta-only equality audit](docs/24-sharp-angular-saturation-audit.md)** following [23 — positive per-quartet fold penalty](docs/23-positive-quaternionic-folding-penalty.md).
+
+A sharp 4D Jensen inequality can be written using **only radial data obtained from the original xi function**: \(M_4(R)\ge M_2(R)-B(R)\), where \(M_4\) is the quaternionic \(S^3_R\) mean, \(M_2\) the ordinary complex circular mean, and \(B\) a sharp envelope recovered from the radial Jensen zero-count measure. Equality for any \(R>0\) is **equivalent to RH**.
+
+The more compact equality target is
+\[
+\boxed{
+\mathcal D_0=
+\int_0^\infty\frac{M_2(R)-\log\xi(\tfrac12)}{R^3}\,dR
+-\frac{\xi''(\tfrac12)}{4\xi(\tfrac12)}
+=2\sum_{\text{off-line quartets}}\frac{a^2}{(a^2+t^2)^2}\ge0.
+}
+\]
+Thus \(\mathcal D_0=0\iff\mathrm{RH}\), **but no proof that it vanishes was obtained**. Although the entire left side can be defined with the genuine Jacobi-theta transform and no supplied zero table, Jensen's formula shows that the integral encodes the *unknown full radial zero distribution*; theta positivity and reflection do not automatically make it equal to the local xi moment.
+
+A precise negative control uses a different positive even kernel \(\Phi_\varepsilon=\Phi+\varepsilon(\Phi(\cdot-1)+\Phi(\cdot+1))\) with \(\varepsilon=0.49\), introducing nonreal auxiliary zeros. Its **additional folding deficit** is exactly \(0.00084061113274389191045\ldots>0\), verified by an independent hyperbolic closed formula and zero-series calculation. This is **not** a counterexample to RH. The [reproducible experiment](experiments/sharp_s3_theta_saturation.py), [tests](tests/test_sharp_s3_theta_saturation.py), and [numerical results](results/sharp_s3_theta_saturation.json) document the validation. The next genuine proof step must find a **theta-arithmetic** mechanism forcing saturation for the actual kernel, not merely restate the criterion.
+
 ## Primary quaternionic proof-development program — superposed zero-spheres (2026-11-06)
 
 **Current main path:** [21 — Direct quaternionic theta continuation](docs/21-quaternionic-theta-superposed-zero-spheres.md) → [22 — S³ Jensen second harmonic](docs/22-quaternionic-s3-jensen-second-harmonic.md) → [23 — Positive reflected-sphere folding penalty](docs/23-positive-quaternionic-folding-penalty.md) → [17 — Clay zero-exclusion target](docs/17-clay-statement-and-proof-roadmap.md).
@@ -272,7 +291,8 @@ Supplement. [18 — Modular inversion no-go and averaged growth](docs/18-modular
 21. [21 — Quaternionic theta continuation and spherical superposition](docs/21-quaternionic-theta-superposed-zero-spheres.md): direct theta integral on H, S² zero-divisors, parity projections and exact coupling proof target.
 22. [22 — Quaternionic S³ Jensen second harmonic](docs/22-quaternionic-s3-jensen-second-harmonic.md): exact 4D angular harmonic, complete Hadamard zero-divisor expansion, and finite numerical verification.
 23. [23 — Positive reflected-sphere folding penalty](docs/23-positive-quaternionic-folding-penalty.md): a normalized S³ logarithmic comparison detects off-center displacement quadratically, with critical circularity warning.
-24. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
+24. [24 — Sharp S³ saturation audit](docs/24-sharp-angular-saturation-audit.md): theta-only RH-equivalent Jensen integral, radial sharp bound, exact perturbed-kernel excess deficit, and the unproved saturation step.
+25. [Executable experiment](experiments/compactified_return.py), [regression tests](tests/test_compactified_return.py), [sample results](results/compactified_return.json); plus [S³ projection experiment](experiments/s3_spectral_projection.py) and [its numerical coefficients](results/s3_spectral_projection.json); plus [Riemann–Siegel polar balance](experiments/riemann_siegel_polar.py), [verification data](results/riemann_siegel_polar.json), and [its tests](tests/test_riemann_siegel_polar.py); plus [exact theta-kernel latitude solver](experiments/theta_kernel_w_roots.py), [first eight w-roots](results/theta_kernel_w_roots_first8.json) and [new tests](tests/test_theta_kernel_w_roots.py).
 
 ## Historical links
 
