@@ -1,0 +1,62 @@
+{
+  "status": "Numerical diagnostics validating an exact 4D folding penalty; NOT a proof of RH, not interval-certified.",
+  "digits": 40,
+  "quaternionic_sphere_measure": "(2/pi)sin(theta)^2 dtheta",
+  "reflected_quartet_checks": [
+    {
+      "a": "0.25",
+      "t": "1.5",
+      "R": "0.8",
+      "integrated_difference": "0.0149598246895544192841490138787",
+      "formula": "0.0149598246895544192841490138787",
+      "quadrature_minus_formula": "-5.2016199e-42"
+    },
+    {
+      "a": "0.25",
+      "t": "1.5",
+      "R": "2.0",
+      "integrated_difference": "0.03125",
+      "formula": "0.03125",
+      "quadrature_minus_formula": "0.0"
+    },
+    {
+      "a": "0.20",
+      "t": "14.13",
+      "R": "10.0",
+      "integrated_difference": "0.000200607580834002505010565164422",
+      "formula": "0.000200607580834002505010565164422",
+      "quadrature_minus_formula": "4.2038954e-42"
+    },
+    {
+      "a": "0.20",
+      "t": "14.13",
+      "R": "17.0",
+      "integrated_difference": "0.000276816608996539792387543252595",
+      "formula": "0.000276816608996539792387543252595",
+      "quadrature_minus_formula": "-1.4573504e-43"
+    },
+    {
+      "a": "0",
+      "t": "1.5",
+      "R": "0.8",
+      "integrated_difference": "0.0",
+      "formula": "0.0",
+      "quadrature_minus_formula": "0.0"
+    }
+  ],
+  "actual_centered_xi_zero_free_radius_checks": [
+    {
+      "R": "1",
+      "integrated_mean": "-0.710474764503040900692828925694",
+      "exact_expression": "-0.710474764503040900692828925694",
+      "quadrature_minus_expression": "0.0"
+    },
+    {
+      "R": "3",
+      "integrated_mean": "-0.802894736964716783848564167415",
+      "exact_expression": "-0.802894736964716783848564167415",
+      "quadrature_minus_expression": "-1.1479437e-41"
+    }
+  ],
+  "caution": "Folded radial reference is artificial and relies on hypothetical off-line zeros. Positive fold cost does not establish its actual vanishing."
+}
