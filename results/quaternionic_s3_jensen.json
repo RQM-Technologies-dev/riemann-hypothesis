@@ -46,5 +46,15 @@
       "numerical": "0.4178424324260993303969419225"
     }
   ],
-  "interpretation": "The S3 surface measure isolates the second angular harmonic; this is not independent zero information and does not prove critical-line zero support."
+  "interpretation": "The S3 surface measure isolates the second angular harmonic; this is not independent zero information and does not prove critical-line zero support.",
+  "first_xi_spherical_zero_crossing": {
+    "radius": "20",
+    "first_zero_height": "14.1347251417346937904573",
+    "zero_free_baseline": "-5.319920891029125573085124107",
+    "first_pair_correction": "1.445506211824741196923649526",
+    "corrected_s3_mean": "-3.874414679204384376161474581",
+    "independently_integrated_s3_mean": "-3.874414679204384376161474581",
+    "numerical_difference": "-3.0092655e-36",
+    "note": "Uses known first critical-line xi zero and established absence of any additional centered xi zeros inside radius 20; not an all-height exclusion."
+  }
 }
