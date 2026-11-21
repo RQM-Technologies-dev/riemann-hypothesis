@@ -15,6 +15,16 @@ In the following table $H=\binom{T-1}{\dim Y_j}$ and $j$ is the weight index. Th
 
 Here $I_\lambda$ is Lean’s natural-number value of `Q.Ila`. The height hypotheses prove its finiteness. The definition of `rLa` switches off the étale contribution at the terminal index. The separate lemma `lenQ_of_ge` proves that the quotient contribution vanishes **at each place**. The terminal formula therefore retains two terms, either of which may require a bound. [Definition of rLa](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Formalism/SharpRestriction/GenusPolyhedralBounds/RelativeIndexClassSets/PublishedIntClosHolds.lean#L371) · [Vanishing of lenQ](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Formalism/SharpRestriction/GenusPolyhedralBounds/RelativeIndexClassSets/LenAtEqZeroOfSubsingleton.lean#L146)
 
+## What “exact witness” means
+
+The expression `rLa` is the particular *allowance* used by the upstream proof. The actual surviving lattice length can be smaller. Over a discrete valuation ring $R$ with fraction field $K$, write the invariant factors of $M/\Theta$ as $R/(\pi^{d_t})$. Then
+
+$$R_e(M/\Theta)=\sum_t (d_t-e)_+
+=\max_{U\subseteq M\otimes_R K}
+\bigl[\operatorname{length}_R((M\cap U)/(\Theta\cap U))-e\dim_K U\bigr].$$
+
+For the upper bound, $D_U=(M\cap U)/(\Theta\cap U)$ injects into $M/\Theta$, hence $\pi^eD_U$ injects into $\pi^e(M/\Theta)$. Also $D_U/\pi^eD_U$ is a quotient of $(M\cap U)/\pi^e(M\cap U)$, of length $e\dim_K U$. Add these two bounds. For equality choose $U$ spanned by the Smith basis vectors with $d_t>e$. Each contributes exactly $d_t-e$. This elementary identity explains why controlling one scalar length can replace the subspace estimate at a fixed depth. The proposed Lean route obtains the allowance from the theta family and sends the scalar length straight to the projectors.
+
 ## Where the terminal witness comes from
 
 In the interior, `theorem_zero_of_refined_inputs` takes the local points from `hQf hj` and passes the explicit function to `concl_of_nat`. At the terminal index, `conclAtM_of_atMInputs` opens `AtMInputs` to obtain its own local points, basis, curve, tie, lift, and heights. The terminal depth bound gives `CombBound`. Following `theorem_zero_of_named_inputs` through the split theorem leads to `sumC` and the same explicit `rLa` expression on those terminal points. In the interior, `rLa_tsum_le_comb` supplies summability and the first sum estimate, and `sumGC4` bounds it by the row budget. In both branches the bound takes the form
