@@ -38,3 +38,9 @@ python3 lean/replay_transport.py /path/to/patched/upstream
 ```
 
 The small replay selects complete definitions and proofs from three checksum-verified upstream files, including the proofs of the completion comparison, index ramification formula, and weighted sum. It compiles those declarations with their dependencies, checks the RQM modules, and runs Lean’s independent kernel checker on the new modules. The ordinary source files import the upstream owning module. The targeted driver substitutes the extracted import so the unrelated arithmetic interfaces need not be rebuilt. The candidate geometric modules and the global entry point are outside this target.
+
+For a full patched upstream checkout, the family replay command below builds the original owning modules and checks the candidate files against them in dependency order. It includes the normalized arithmetic run, whose upstream import graph is substantially larger than the targeted transport replay. This is an experimental target. The global `Main` caller still needs wiring before an end-to-end audit is possible.
+
+```sh
+python3 lean/replay_transport.py --family /path/to/patched/upstream
+```

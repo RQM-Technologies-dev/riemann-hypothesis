@@ -101,3 +101,5 @@ theorem exists_theta_run : ∃ x₀ : ℝ → ℝ → ℝ, ∀ (D : D7) (T : Top
   exact thetaRunOnPage h hinj EX p j hj large₂ CL (Cq H.CA H.CK) H C2 A2 CT ka wL wF Tn nP nW h0 hn
 
 end GlobalTheory.FinalJoin
+
+#print axioms GlobalTheory.FinalJoin.exists_theta_run

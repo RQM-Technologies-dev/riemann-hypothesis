@@ -36,11 +36,19 @@ def imports(*names):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("upstream", type=Path, help="Patched, pinned Lean project")
-    root = parser.parse_args().upstream.resolve()
+    parser.add_argument("--family", action="store_true",
+                        help="Check the arithmetic candidates with their full upstream modules")
+    args = parser.parse_args()
+    root = args.upstream.resolve()
     core = pinned(root, OWNER, "e08fa8017b40fc9b07514b91304e38d11382d6586df6e13c15be9366a5470c19")
     weights = pinned(root, WEIGHT, "f9cd7b6481f0f48c1d914de7aa3cdb06e8d3548403e803d7f9a4d0e9a5b8e895")
     uniformizer = pinned(root, UNIFORMIZER, "98378281e1788079559d151c5b5d3c439b181021277d8d9cc7e587e7ac43e58a")
-    subprocess.run(["lake", "build", *[f"+{n}:olean" for n in (ROW, SPAN, FORMS, BASIS, VAL)]], cwd=root, check=True)
+    targets = [ROW, SPAN, FORMS, BASIS, VAL]
+    if args.family:
+        targets.extend([OWNER, UNIFORMIZER,
+                        "Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.TheoremZeroBundledOfLift",
+                        "Development.AbelianVarietyTheory.Proofs.HeightProofs.ExistsThresholdRunHolds"])
+    subprocess.run(["lake", "build", *[f"+{n}:olean" for n in targets]], cwd=root, check=True)
     lean_path = subprocess.check_output(["lake", "env", "printenv", "LEAN_PATH"], cwd=root, text=True).strip()
     with tempfile.TemporaryDirectory(prefix="scalar-passage-") as tmp:
         out = Path(tmp)
@@ -50,6 +58,16 @@ def main():
             path.write_text(source)
             subprocess.run(["lean", f"--root={out}", "-j", "2", "-DmaxSynthPendingDepth=3", "-DmaxHeartbeats=4000000",
                             "-o", str(out / f"{name}.olean"), str(path)], cwd=root, env=env, check=True)
+
+        if args.family:
+            sources = ["ScalarDepth", "ScalarAmbient", "ScalarCompletion", "ScalarRamification", "ScalarPassage",
+                       "ThetaDepth", "ThetaCoordinates", "ThetaRowInput", "ThetaWitnessRows", "candidates/ThetaScalar",
+                       "candidates/ThetaFamilyWitness", "candidates/ThetaChosenInputs"]
+            for source in sources:
+                path = HERE / (source + ".lean")
+                check(path.stem, path.read_text())
+                subprocess.run(["leanchecker", "-v", path.stem], cwd=root, env=env, check=True)
+            return
 
         check("ScalarDepth", (HERE / "ScalarDepth.lean").read_text())
         check("ScalarAmbient", (HERE / "ScalarAmbient.lean").read_text())

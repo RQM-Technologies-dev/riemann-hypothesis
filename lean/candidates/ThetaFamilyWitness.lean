@@ -153,3 +153,6 @@ theorem rowOfFamily {j : ℕ} {X : PJ D B P j} {ka wL wF : WeightFamilies.Wt D j
     (unif X _) (unif_irreducible X _) ⟨thetaExcess_finite _ _ _ _ _ _ _ _ hM hΘ hspan, hbound⟩
 
 end Formalism.MainNotions.Gaps.EtaleWeightGaps
+
+#print axioms Formalism.MainNotions.Gaps.EtaleWeightGaps.thetaFamilyWitness
+#print axioms Formalism.MainNotions.Gaps.EtaleWeightGaps.paired_of_theta_points
