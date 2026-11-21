@@ -1,0 +1,980 @@
+--- a/src/Formalism/LocalToGlobal/IndefiniteForms/IndefiniteTree/ExampleSatisfiesConditionsAtFive.lean
++++ b/src/Formalism/LocalToGlobal/IndefiniteForms/IndefiniteTree/ExampleSatisfiesConditionsAtFive.lean
+@@ -259,11 +259,12 @@
+     (∀ g : P, (O.Th v j).map ((O.ρ j g).restrictScalars (𝓞 K)) ≤ O.Th v j) ∧
+     O.σ v j ≠ 0 ∧ O.Th v j ≤ sc (O.σ v j) (O.ThK v j)
+ 
+-def LatticeIndexBoundAtPairs (O : OnObj S P c) : Prop :=
++def LatticeIndexBoundAtPairs (O : OnObj S P c) (direct : Bool := false) : Prop :=
+   (AtPair S fun v => ∀ j, IsLatIn ⊤ (O.Th1 v j) ∧ O.Th1 v j ≤ O.Th v j ∧ O.a v j ≠ 0 ∧
+     vw v (O.a v j) = (O.E v j : ℤ) ∧
+-    ∀ W : Submodule K (Fin (O.nZ j) → K),
+-      (lix v (cut W (O.Ms j)) (cut W (O.Th1 v j)) : ℝ) ≤ (O.E v j : ℝ) * (finrank K W : ℝ) + O.r v j) ∧
++    (if direct then (lix v (sc (O.a v j) (O.Ms j) ⊔ O.Th1 v j) (O.Th1 v j) : ℝ) ≤ O.r v j else
++      ∀ W : Submodule K (Fin (O.nZ j) → K),
++      (lix v (cut W (O.Ms j)) (cut W (O.Th1 v j)) : ℝ) ≤ (O.E v j : ℝ) * (finrank K W : ℝ) + O.r v j)) ∧
+   0 ≤ O.de2 ∧ O.de2 ≤ 1 ∧ (∀ v j, 0 ≤ O.r1 v j ∧ 0 ≤ O.r2 v j) ∧
+   ∀ j, ∀ S' : Finset (HeightOneSpectrum (𝓞 K)),
+     ∑ v ∈ S', lw v * O.r1 v j ≤ (O.nZ j : ℝ) * (O.f * O.m * O.b * O.de2) ∧
+@@ -405,6 +406,59 @@
+   first
+   | exact Submodule.map_id L
+   | (ext x; simp)
++
++theorem local_bound_for (direct : Bool) (row : LocalConditionsWeightedAtPlace direct) (O : OnObj S P c) (v : HeightOneSpectrum (𝓞 K)) (j : Bs.J) (t : Bs.Tup)
++    (hMk : LeafMackey O) (hSup : LeafSup O) (hProj : LeafProj O)
++    (hC : Function.Injective (O.φ j) ∧ LinearMap.range (O.φ j) = O.Zg j ∧
++      (S.M j).map ((O.φ j).restrictScalars (𝓞 K)) = cut (O.Zg j) (O.Ms j))
++    (hT : O.TjId j v t)
++    (hSp : IsLatIn ⊤ (O.Th v j) ∧ IsLatIn ⊤ (O.ThK v j))
++    (hS : O.Th v j ≤ O.Ms j ∧ (∀ g : P, (O.Th v j).map ((O.ρ j g).restrictScalars (𝓞 K)) ≤ O.Th v j) ∧
++      O.σ v j ≠ 0 ∧ O.Th v j ≤ sc (O.σ v j) (O.ThK v j))
++    (h0 : IsLatIn ⊤ (O.Th1 v j) ∧ O.Th1 v j ≤ O.Th v j ∧ O.a v j ≠ 0 ∧ vw v (O.a v j) = (O.E v j : ℤ) ∧
++      (if direct then (lix v (sc (O.a v j) (O.Ms j) ⊔ O.Th1 v j) (O.Th1 v j) : ℝ) ≤ O.r v j else
++      ∀ W : Submodule K (Fin (O.nZ j) → K),
++        (lix v (cut W (O.Ms j)) (cut W (O.Th1 v j)) : ℝ) ≤ (O.E v j : ℝ) * (finrank K W : ℝ) + O.r v j))
++    (hD : (O.Th0 v j).FG ∧ O.Th0 v j ≤ (eig (O.ρ j) O.U O.ψ).restrictScalars (𝓞 K) ∧
++      sc ((Nat.card O.U : ℕ) : K) (cut (eig (O.ρ j) O.U O.ψ) (O.ThK v j)) ≤ O.Th0 v j)
++    (hJ : IsLatIn (O.Zg j) ((O.Th0 v j).map ((O.e j).restrictScalars (𝓞 K))) ∧
++      IsLatIn (O.Zg j) (O.eJ v j) ∧ O.Th0 v j ≤ O.ThJ v j)
++    (hU : O.θ' v j ∘ₗ O.eX v j = O.e j ∘ₗ O.θ' v j)
++    (hK : ∀ x ∈ LinearMap.range (O.eX v j), x - O.pr v j x ∈ LinearMap.ker (O.θ' v j))
++    (h2 : IsLatIn (O.Zg j) (O.X₃ v j) ∧ IsLatIn (O.Zg j) (O.Im v j) ∧
++      Formalism.HermitianLatticesTheory.localization₂ v.asIdeal (O.X₃ v j) ≤ Formalism.HermitianLatticesTheory.localization₂ v.asIdeal (O.Im v j))
++    (h1 : (lix v (cut (O.Zg j) (O.Ms j)) (O.X₃ v j) : ℝ) ≤
++      (lix v (cut (O.Zg j) (O.Ms j)) (O.eJ v j) : ℝ) + (ramw v : ℝ) * O.ε0 v j) :
++    (idx v (S.M j) (matLat (S.θ j t) (Df.Tl j t)) : ℝ) ≤
++      (ramw v : ℝ) * ((O.e0 v j + O.vU0 v) * (S.dW j : ℝ) +
++        (O.r v j / (ramw v : ℝ) + (O.nZ j : ℝ) * O.vU0 v) / (O.U.index : ℝ) + O.ε0 v j) := by
++  have hrem : (if direct then (lix v (O.Ms j) ((O.Ms j) ⊓ sc (O.a v j)⁻¹ (O.Th v j)) : ℝ) ≤ O.r v j else
++      ∀ W : Submodule K (Fin (O.nZ j) → K),
++        (lix v (cut W (O.Ms j)) (cut W (O.Th1 v j)) : ℝ) ≤ (O.E v j : ℝ) * (finrank K W : ℝ) + O.r v j) := by
++    cases direct
++    · exact h0.2.2.2.2
++    · exact excess_of_theta_sum K _ v _ _ _ (hSup j).1 h0.1 hSp.1 h0.2.1 hS.1 _ h0.2.2.1
++        (by rw [h0.2.2.2.1]; positivity) _ h0.2.2.2.2
++  have key := row K (Fin (O.nZ j) → K) v P (O.ρ j) O.U O.ψ hMk (O.V₀ j) (O.e j) (hProj j).1 (hProj j).2
++    (O.Ms j) (O.Th1 v j) (O.Th v j) (O.ThK v j) (O.Th0 v j) (O.ThJ v j) (O.X₃ v j)
++    (hSup j).1 h0.1 hSp.1 hSp.2 h0.2.1 hS.1 hD.1 hD.2.1 (hSup j).2 hS.2.1 (O.σ v j) hS.2.2.1 hS.2.2.2 hD.2.2
++    (O.a v j) (O.E v j) (O.r v j) h0.2.2.1 h0.2.2.2.1 hrem hJ.1 hJ.2.1 hJ.2.2 h2.1
++    (Fin (O.nX v j) → K) (O.θ' v j) (O.eX v j) (O.pr v j) (O.Mt v j) hU hK h2.2.1 h2.2.2
++    ((ramw v : ℝ) * O.ε0 v j) h1 (S.dW j) (O.φ j) hC.1 hC.2.1 (S.M j) (matLat (S.θ j t) (Df.Tl j t)) hC.2.2 hT
++  rw [Module.finrank_fin_fun] at key
++  have hr : (ramw v : ℝ) ≠ 0 := (ramw_pos v).ne'
++  have hi : (O.U.index : ℝ) ≠ 0 := (index_pos O.U).ne'
++  have e : (ramw v : ℝ) * ((O.e0 v j + O.vU0 v) * (S.dW j : ℝ) +
++        (O.r v j / (ramw v : ℝ) + (O.nZ j : ℝ) * O.vU0 v) / (O.U.index : ℝ) + O.ε0 v j) =
++      ((O.E v j : ℝ) - (vw v (O.σ v j) : ℝ) + (vw v ((Nat.card O.U : ℕ) : K) : ℝ)) * (S.dW j : ℝ) +
++        (O.r v j + (O.nZ j : ℝ) * (vw v ((Nat.card O.U : ℕ) : K) : ℝ)) / (O.U.index : ℝ) +
++          (ramw v : ℝ) * O.ε0 v j := by
++    unfold OnObj.e0 OnObj.vU0
++    field_simp
++    try ring
++  first
++  | (rw [e]; exact key)
++  | linarith [key, e]
+ 
+ theorem local_bound (O : OnObj S P c) (v : HeightOneSpectrum (𝓞 K)) (j : Bs.J) (t : Bs.Tup)
+     (hMk : LeafMackey O) (hSup : LeafSup O) (hProj : LeafProj O)
+@@ -429,27 +483,8 @@
+       (lix v (cut (O.Zg j) (O.Ms j)) (O.eJ v j) : ℝ) + (ramw v : ℝ) * O.ε0 v j) :
+     (idx v (S.M j) (matLat (S.θ j t) (Df.Tl j t)) : ℝ) ≤
+       (ramw v : ℝ) * ((O.e0 v j + O.vU0 v) * (S.dW j : ℝ) +
+-        (O.r v j / (ramw v : ℝ) + (O.nZ j : ℝ) * O.vU0 v) / (O.U.index : ℝ) + O.ε0 v j) := by
+-  have key := local_conditions_weighted_at_place K (Fin (O.nZ j) → K) v P (O.ρ j) O.U O.ψ hMk (O.V₀ j) (O.e j) (hProj j).1 (hProj j).2
+-    (O.Ms j) (O.Th1 v j) (O.Th v j) (O.ThK v j) (O.Th0 v j) (O.ThJ v j) (O.X₃ v j)
+-    (hSup j).1 h0.1 hSp.1 hSp.2 h0.2.1 hS.1 hD.1 hD.2.1 (hSup j).2 hS.2.1 (O.σ v j) hS.2.2.1 hS.2.2.2 hD.2.2
+-    (O.a v j) (O.E v j) (O.r v j) h0.2.2.1 h0.2.2.2.1 h0.2.2.2.2 hJ.1 hJ.2.1 hJ.2.2 h2.1
+-    (Fin (O.nX v j) → K) (O.θ' v j) (O.eX v j) (O.pr v j) (O.Mt v j) hU hK h2.2.1 h2.2.2
+-    ((ramw v : ℝ) * O.ε0 v j) h1 (S.dW j) (O.φ j) hC.1 hC.2.1 (S.M j) (matLat (S.θ j t) (Df.Tl j t)) hC.2.2 hT
+-  rw [Module.finrank_fin_fun] at key
+-  have hr : (ramw v : ℝ) ≠ 0 := (ramw_pos v).ne'
+-  have hi : (O.U.index : ℝ) ≠ 0 := (index_pos O.U).ne'
+-  have e : (ramw v : ℝ) * ((O.e0 v j + O.vU0 v) * (S.dW j : ℝ) +
+-        (O.r v j / (ramw v : ℝ) + (O.nZ j : ℝ) * O.vU0 v) / (O.U.index : ℝ) + O.ε0 v j) =
+-      ((O.E v j : ℝ) - (vw v (O.σ v j) : ℝ) + (vw v ((Nat.card O.U : ℕ) : K) : ℝ)) * (S.dW j : ℝ) +
+-        (O.r v j + (O.nZ j : ℝ) * (vw v ((Nat.card O.U : ℕ) : K) : ℝ)) / (O.U.index : ℝ) +
+-          (ramw v : ℝ) * O.ε0 v j := by
+-    unfold OnObj.e0 OnObj.vU0
+-    field_simp
+-    try ring
+-  first
+-  | (rw [e]; exact key)
+-  | linarith [key, e]
++        (O.r v j / (ramw v : ℝ) + (O.nZ j : ℝ) * O.vU0 v) / (O.U.index : ℝ) + O.ε0 v j) :=
++  local_bound_for false local_conditions_weighted_at_place O v j t hMk hSup hProj hC hT hSp hS h0 hD hJ hU hK h2 h1
+ 
+ theorem L_eq (O : OnObj S P c) : O.L = O.xe := by
+   unfold OnObj.L OnObj.b
+@@ -471,7 +506,7 @@
+   · rw [div_le_div_iff₀ hpos (by norm_num)]
+     linarith
+ 
+-theorem r_nonneg (O : OnObj S P c) (hT0 : LatticeIndexBoundAtPairs O) (v : HeightOneSpectrum (𝓞 K)) (j : Bs.J) : 0 ≤ O.r v j := by
++theorem r_nonneg {direct : Bool} (O : OnObj S P c) (hT0 : LatticeIndexBoundAtPairs O direct) (v : HeightOneSpectrum (𝓞 K)) (j : Bs.J) : 0 ≤ O.r v j := by
+   obtain ⟨-, -, -, hr, -⟩ := hT0
+   unfold OnObj.r
+   split_ifs
+@@ -600,9 +635,9 @@
+   unfold OnObj.Cb
+   linarith [mul_nonneg hBn hlq, hBg, hBq, hBs, h1, h2]
+ 
+-theorem on_core (N : IndefNum Bs) (O : OnObj S P c) (CE : ℝ) (hRk : RankRows S)
++theorem on_core_for (direct : Bool) (row : LocalConditionsWeightedAtPlace direct) (N : IndefNum Bs) (O : OnObj S P c) (CE : ℝ) (hRk : RankRows S)
+     (hMk : LeafMackey O) (hSup : LeafSup O) (hProj : LeafProj O) (hC : TieCoord O)
+-    (hSp : LeafSpan O) (hS : LeafLemmaS O) (hT0 : LatticeIndexBoundAtPairs O) (hD : LeafData O) (hJ : LeafRankJ O)
++    (hSp : LeafSpan O) (hS : LeafLemmaS O) (hT0 : LatticeIndexBoundAtPairs O direct) (hD : LeafData O) (hJ : LeafRankJ O)
+     (hI : LeafIdentity O) (h2 : LeafTW2 O) (h1 : LeafTW1 O)
+     (hSh : LeafShareI O) (hIU : LeafIndexU O) (hBS : LeafBadShare O) (hUn : LeafUnip O)
+     (hG : LeafDepthGood N O) (hR : LeafDepthRam N O) (h2p : LeafDepth2 N O) (hL : LeafDepthLevel N O)
+@@ -624,7 +659,7 @@
+   have hloc1 : ∀ w ∈ S.Tw, ∀ j, (idx w (S.M j) (matLat (S.θ j (S.μ w)) (Df.Tl j (S.μ w))) : ℝ) ≤
+       (ramw w : ℝ) * ((O.e0 w j + O.vU0 w) * (S.dW j : ℝ) +
+         (O.r w j / (ramw w : ℝ) + (O.nZ j : ℝ) * O.vU0 w) / (O.U.index : ℝ) + O.ε0 w j) := fun w hw j =>
+-    local_bound O w j (S.μ w) hMk hSup hProj (hC.1 j) (hC.2 w hw j).1 ((hSp w hw).1 j) ((hS w hw).1 j)
++    local_bound_for direct row O w j (S.μ w) hMk hSup hProj (hC.1 j) (hC.2 w hw j).1 ((hSp w hw).1 j) ((hS w hw).1 j)
+       ((hT0.1 w hw).1 j) ((hD w hw).1 j) ((hJ w hw).1 j) ((hI w hw).1 j).1 ((hI w hw).1 j).2 ((h2 w hw).1 j)
+       ((h1.1 w hw).1 j).2
+   have hloc2 : ∀ w ∈ S.Tw, ∀ j,
+@@ -632,7 +667,7 @@
+       (ramw (conjPl w) : ℝ) * ((O.e0 (conjPl w) j + O.vU0 (conjPl w)) * (S.dW j : ℝ) +
+         (O.r (conjPl w) j / (ramw (conjPl w) : ℝ) + (O.nZ j : ℝ) * O.vU0 (conjPl w)) / (O.U.index : ℝ) +
+           O.ε0 (conjPl w) j) := fun w hw j =>
+-    local_bound O (conjPl w) j (S.μ w) hMk hSup hProj (hC.1 j) (hC.2 w hw j).2 ((hSp w hw).2 j)
++    local_bound_for direct row O (conjPl w) j (S.μ w) hMk hSup hProj (hC.1 j) (hC.2 w hw j).2 ((hSp w hw).2 j)
+       ((hS w hw).2 j) ((hT0.1 w hw).2 j) ((hD w hw).2 j) ((hJ w hw).2 j) ((hI w hw).2 j).1 ((hI w hw).2 j).2
+       ((h2 w hw).2 j) ((h1.1 w hw).2 j).2
+ 
+@@ -869,6 +904,24 @@
+     rw [e3]
+     unfold OnObj.Rb at h
+     linarith
++
++theorem on_core (N : IndefNum Bs) (O : OnObj S P c) (CE : ℝ) (hRk : RankRows S)
++    (hMk : LeafMackey O) (hSup : LeafSup O) (hProj : LeafProj O) (hC : TieCoord O)
++    (hSp : LeafSpan O) (hS : LeafLemmaS O) (hT0 : LatticeIndexBoundAtPairs O) (hD : LeafData O) (hJ : LeafRankJ O)
++    (hI : LeafIdentity O) (h2 : LeafTW2 O) (h1 : LeafTW1 O)
++    (hSh : LeafShareI O) (hIU : LeafIndexU O) (hBS : LeafBadShare O) (hUn : LeafUnip O)
++    (hG : LeafDepthGood N O) (hR : LeafDepthRam N O) (h2p : LeafDepth2 N O) (hL : LeafDepthLevel N O)
++    (hPg : LeafPage O) (hSz : LeafSizes O) (hX : LeafX O) (hBad : LeafBad O)
++    (hJS : LeafJSum O) (hJE : LeafJExp N O) (hCE : c.CE ≤ CE) (tE1 : ErrorConstantMatchesDefinition N O CE) : ONwith S N O.errOn := on_core_for false local_conditions_weighted_at_place N O CE hRk hMk hSup hProj hC hSp hS hT0 hD hJ hI h2 h1 hSh hIU hBS hUn hG hR h2p hL hPg hSz hX hBad hJS hJE hCE tE1
++
++theorem on_core_excess (N : IndefNum Bs) (O : OnObj S P c) (CE : ℝ) (hRk : RankRows S)
++    (hMk : LeafMackey O) (hSup : LeafSup O) (hProj : LeafProj O) (hC : TieCoord O)
++    (hSp : LeafSpan O) (hS : LeafLemmaS O) (hT0 : LatticeIndexBoundAtPairs O true) (hD : LeafData O) (hJ : LeafRankJ O)
++    (hI : LeafIdentity O) (h2 : LeafTW2 O) (h1 : LeafTW1 O)
++    (hSh : LeafShareI O) (hIU : LeafIndexU O) (hBS : LeafBadShare O) (hUn : LeafUnip O)
++    (hG : LeafDepthGood N O) (hR : LeafDepthRam N O) (h2p : LeafDepth2 N O) (hL : LeafDepthLevel N O)
++    (hPg : LeafPage O) (hSz : LeafSizes O) (hX : LeafX O) (hBad : LeafBad O)
++    (hJS : LeafJSum O) (hJE : LeafJExp N O) (hCE : c.CE ≤ CE) (tE1 : ErrorConstantMatchesDefinition N O CE) : ONwith S N O.errOn := on_core_for true (local_conditions_weighted_at_place_for true local_conditions_weighted_excess) N O CE hRk hMk hSup hProj hC hSp hS hT0 hD hJ hI h2 h1 hSh hIU hBS hUn hG hR h2p hL hPg hSz hX hBad hJS hJE hCE tE1
+ 
+ theorem on_of_leaves (N : IndefNum Bs) (O : OnObj S P c) (CE : ℝ) (hRk : RankRows S)
+     (hMk : LeafMackey O) (hSup : LeafSup O) (hProj : LeafProj O) (hC : TieCoord O)
+@@ -1290,6 +1343,26 @@
+   simp only [mul_zero, Finset.sum_const_zero, Nat.cast_one]
+   constructor <;> linarith
+ 
++theorem example_direct_excess_condition : LatticeIndexBoundAtPairs (exampleObject K v0 Tw0) true := by
++  have h : ∀ (v : HeightOneSpectrum (𝓞 K)) (j : Unit),
++      IsLatIn ⊤ ((exampleObject K v0 Tw0).Th1 v j) ∧ (exampleObject K v0 Tw0).Th1 v j ≤ (exampleObject K v0 Tw0).Th v j ∧
++      (exampleObject K v0 Tw0).a v j ≠ 0 ∧ vw v ((exampleObject K v0 Tw0).a v j) = ((exampleObject K v0 Tw0).E v j : ℤ) ∧
++      (lix v (sc ((exampleObject K v0 Tw0).a v j) ((exampleObject K v0 Tw0).Ms j) ⊔
++        (exampleObject K v0 Tw0).Th1 v j) ((exampleObject K v0 Tw0).Th1 v j) : ℝ) ≤
++        (exampleObject K v0 Tw0).r v j := by
++    intro v j
++    refine ⟨stdLat_isLatIn K 1, le_rfl, one_ne_zero, toy_vw_one v, ?_⟩
++    rw [example_r_eq_zero]
++    change (lix v (sc (1 : K) (stdLat K 1) ⊔ stdLat K 1) (stdLat K 1) : ℝ) ≤ 0
++    rw [sc_one', sup_idem]
++    simp [lix, Formalism.HermitianLatticesTheory.lidx]
++  have hb := example_b_ge v0 Tw0
++  refine ⟨fun w _ => ⟨h w, h (conjPl w)⟩, by norm_num, le_rfl, fun _ _ => ⟨le_rfl, le_rfl⟩, fun _ S' => ?_⟩
++  show ∑ v ∈ S', lw v * (0 : ℝ) ≤ ((1 : ℕ) : ℝ) * (8 * 1 * (exampleObject K v0 Tw0).b * 1) ∧
++    ∑ v ∈ S', lw v * (0 : ℝ) ≤ ((1 : ℕ) : ℝ) * (8 * 1 * (exampleObject K v0 Tw0).b * 1)
++  simp only [mul_zero, Finset.sum_const_zero, Nat.cast_one]
++  constructor <;> linarith
++
+ theorem example_lattice_condition : LeafData (exampleObject K v0 Tw0) := by
+   have key : ∀ (v : HeightOneSpectrum (𝓞 K)) (j : Unit), ((exampleObject K v0 Tw0).Th0 v j).FG ∧
+       (exampleObject K v0 Tw0).Th0 v j ≤
+@@ -1512,9 +1585,9 @@
+ theorem example_ON (h3 : ∀ w ∈ Tw0, plc w = 3) :
+     ({ exampleIndefiniteData K v0 Tw0 0 with err0 := (exampleObject K v0 Tw0).errOn } : IndefData (exampleDf K v0)).ON
+       (exampleConstants K v0 1 (exampleC.CE * (exampleObject K v0 Tw0).E1u)) := by
+-  exact on_built (exampleConstants K v0 1 (exampleC.CE * (exampleObject K v0 Tw0).E1u)) (exampleObject K v0 Tw0) exampleC.CE (example_row_rank_condition v0 Tw0)
++  exact on_core_excess (exampleConstants K v0 1 (exampleC.CE * (exampleObject K v0 Tw0).E1u)) (exampleObject K v0 Tw0) exampleC.CE (example_row_rank_condition v0 Tw0)
+     (example_mackey_condition v0 Tw0) (example_sup_condition v0 Tw0) (example_projection_condition v0 Tw0) (example_coordinate_compatibility v0 Tw0) (example_span_condition v0 Tw0) (example_stable_lattice_condition v0 Tw0)
+-    (example_theorem_zero_condition v0 Tw0) (example_lattice_condition v0 Tw0) (example_rank_condition v0 Tw0) (example_identity_condition v0 Tw0) (example_second_twist_condition v0 Tw0) (example_first_twist_condition v0 Tw0)
++    (example_direct_excess_condition v0 Tw0) (example_lattice_condition v0 Tw0) (example_rank_condition v0 Tw0) (example_identity_condition v0 Tw0) (example_second_twist_condition v0 Tw0) (example_first_twist_condition v0 Tw0)
+     (example_share_condition v0 Tw0) (example_index_condition v0 Tw0) (example_bad_share_condition v0 Tw0) (example_unipotent_condition v0 Tw0)
+     (example_depth_condition_good v0 Tw0 h3 1 _ (by norm_num)) (example_depth_condition_ramified v0 Tw0 h3 1 _) (example_depth_condition_dyadic v0 Tw0 h3 1 _)
+     (example_depth_condition_level v0 Tw0 h3 1 _) (example_numerical_condition v0 Tw0) (example_size_condition₂ v0 Tw0) (example_size_condition v0 Tw0) (example_bad_primes_condition v0 Tw0)
+@@ -1675,9 +1748,9 @@
+ theorem example_satisfies_conditions_at_five :
+     ({ exampleIndefiniteData K v0 Tw0 0 with err0 := (exampleObject K v0 Tw0).errOn } : IndefData (exampleDf K v0)).ON
+       (exampleConstants K v0 1 (exampleC.CE * (exampleObject K v0 Tw0).E1u)) := by
+-  exact on_built (exampleConstants K v0 1 (exampleC.CE * (exampleObject K v0 Tw0).E1u)) (exampleObject K v0 Tw0) exampleC.CE (example_row_rank_condition v0 Tw0)
++  exact on_core_excess (exampleConstants K v0 1 (exampleC.CE * (exampleObject K v0 Tw0).E1u)) (exampleObject K v0 Tw0) exampleC.CE (example_row_rank_condition v0 Tw0)
+     (example_mackey_condition v0 Tw0) (example_sup_condition v0 Tw0) (example_projection_condition v0 Tw0) (example_coordinate_compatibility v0 Tw0) (example_span_condition v0 Tw0) (example_stable_lattice_condition v0 Tw0)
+-    (example_theorem_zero_condition v0 Tw0) (example_lattice_condition v0 Tw0) (example_rank_condition v0 Tw0) (example_identity_condition v0 Tw0) (example_second_twist_condition v0 Tw0) (example_first_twist_condition v0 Tw0)
++    (example_direct_excess_condition v0 Tw0) (example_lattice_condition v0 Tw0) (example_rank_condition v0 Tw0) (example_identity_condition v0 Tw0) (example_second_twist_condition v0 Tw0) (example_first_twist_condition v0 Tw0)
+     (example_share_condition v0 Tw0) (example_index_condition v0 Tw0) (example_bad_share_condition v0 Tw0) (example_unipotent_condition v0 Tw0)
+     (example_good_depth_condition v0 Tw0 h5 1 _) (example_ramified_depth_condition v0 Tw0 h5 1 _) (example_depth_two_condition v0 Tw0 h5 1 _)
+     (example_level_depth_condition v0 Tw0 h5 1 _) (example_numerical_condition v0 Tw0) (example_size_condition₂ v0 Tw0) (example_size_condition v0 Tw0) (example_bad_primes_condition v0 Tw0)
+--- a/src/Formalism/MirabolicMackeyTheory/LocalConditionsWeighted.lean
++++ b/src/Formalism/MirabolicMackeyTheory/LocalConditionsWeighted.lean
+@@ -10,7 +10,7 @@
+ 
+ open Formalism.DivisionValues
+ 
+-def OnLocalJ : Prop :=
++def OnLocalJ (direct : Bool := false) : Prop :=
+   ∀ (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z] [Module K Z]
+     [Module (𝓞 K) Z] [IsScalarTower (𝓞 K) K Z] [FiniteDimensional K Z]
+     (w : HeightOneSpectrum (𝓞 K)) (P : Type) [Group P] [Finite P] (ρ : Representation K P Z)
+@@ -24,7 +24,8 @@
+     ∀ (σ : K), σ ≠ 0 → Th ≤ sc σ ThK →
+     sc ((Nat.card U : ℕ) : K) (cut (eig ρ U ψ) ThK) ≤ Th0 →
+     ∀ (a : K) (E : ℕ) (r : ℝ), a ≠ 0 → vw w a = (E : ℤ) →
+-    (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r) →
++    (if direct then (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r else
++      (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r)) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (Th0.map (e.restrictScalars (𝓞 K))) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (ThJ.map (e.restrictScalars (𝓞 K))) → Th0 ≤ ThJ →
+     IsLatIn (eig ρ U ψ ⊓ V₀) X₃ → IsLatIn (eig ρ U ψ ⊓ V₀) X₄ → X₃ ≤ X₄ →
+@@ -157,7 +158,7 @@
+     d' ^ 4 * nW + 2 * d' ^ 3 ≤ PP →
+       n1 * d' * (RR * d' ^ 3) / (4 * g') + 2 * (RR * d' ^ 3) * DF ^ 2 / g' ≤ RR * PP * DF ^ 2 / qmin
+ 
+-def LocalConditionsWeighted : Prop :=
++def LocalConditionsWeighted (direct : Bool := false) : Prop :=
+   ∀ (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z] [Module K Z]
+     [Module (𝓞 K) Z] [IsScalarTower (𝓞 K) K Z] [FiniteDimensional K Z]
+     (w : HeightOneSpectrum (𝓞 K)) (P : Type) [Group P] [Finite P] (ρ : Representation K P Z)
+@@ -171,7 +172,8 @@
+     ∀ (σ : K), σ ≠ 0 → Th ≤ sc σ ThK →
+     sc ((Nat.card U : ℕ) : K) (cut (eig ρ U ψ) ThK) ≤ Th0 →
+     ∀ (a : K) (E : ℕ) (r : ℝ), a ≠ 0 → vw w a = (E : ℤ) →
+-    (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th1) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r) →
++    (if direct then (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r else
++      (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th1) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r)) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (Th0.map (e.restrictScalars (𝓞 K))) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (ThJ.map (e.restrictScalars (𝓞 K))) → Th0 ≤ ThJ →
+     IsLatIn (eig ρ U ψ ⊓ V₀) X₃ →
+--- a/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/GlobalBoundRefinements.lean
++++ b/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/GlobalBoundRefinements.lean
+@@ -28,13 +28,15 @@
+       (lix w A (Th0.map (e.restrictScalars (𝓞 K))) : ℝ) := by exact_mod_cast a
+   linarith
+ 
+-theorem local_conditions_family : OnLocalJ := by
++theorem local_conditions_family_for (direct : Bool) (applyRow : OnLocal direct) : OnLocalJ direct := by
+   intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hr M Th ThK Th0 ThJ X₃ X₄ hM hTh hThK hle hFG hEig hMs hTs
+     σ hσ hsc hdata a E r ha hE hT0 h0 hJ h0J h3 h4 h34 ε hTW d φ hinj hrng Mj Tj hMj hTj
+-  exact onLocal K Z w P ρ U ψ hMk V₀ e he hr M Th ThK Th0 X₃ X₄ hM hTh hThK hle hFG hEig hMs hTs σ hσ hsc hdata
++  exact applyRow K Z w P ρ U ψ hMk V₀ e he hr M Th ThK Th0 X₃ X₄ hM hTh hThK hle hFG hEig hMs hTs σ hσ hsc hdata
+     a E r ha hE hT0 h0 h3 h4 h34 ε
+     (twist_chain K Z w _ e _ Th0 ThJ X₃ (idxCutLe K Z w ⊤ _ M Th hM hTh hle le_top).1 h0 hJ h0J ε hTW)
+     d φ hinj hrng Mj Tj hMj hTj
++
++theorem local_conditions_family : OnLocalJ := local_conditions_family_for false onLocal
+ 
+ theorem onLocal_of_onLocalJ (h : OnLocalJ) : OnLocal := by
+   exact fun K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hr M Th ThK Th0 X₃ X₄ hM hTh hThK hle hFG hEig hMs hTs
+@@ -301,11 +303,36 @@
+       have c1 := mul_le_mul_of_nonneg_left (htw w hw) (by linarith : (0 : ℝ) ≤ (ramw w : ℝ))
+       linarith
+ 
+-theorem local_conditions_weighted : LocalConditionsWeighted := by
++/-- Transport the scalar remainder from the initial theta lattice to its stable enlargement. -/
++theorem excess_of_theta_sum
++    (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z]
++    [Module K Z] [Module (𝓞 K) Z] [IsScalarTower (𝓞 K) K Z] [FiniteDimensional K Z]
++    (w : HeightOneSpectrum (𝓞 K)) (M Th1 Th : Submodule (𝓞 K) Z)
++    (hM : IsLatIn ⊤ M) (h1 : IsLatIn ⊤ Th1) (hTh : IsLatIn ⊤ Th)
++    (h1Th : Th1 ≤ Th) (hThM : Th ≤ M) (a : K) (ha : a ≠ 0) (hv : 0 ≤ vw w a)
++    (r : ℝ) (h : (lix w (sc a M ⊔ Th1) Th1 : ℝ) ≤ r) :
++    (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r := by
++  rw [three_forms_sum K Z w M Th1 hM h1 (h1Th.trans hThM) a ha hv] at h
++  have hi := idxMono K Z w ⊤ M (M ⊓ sc a⁻¹ Th1) (M ⊓ sc a⁻¹ Th) hM
++    (latInter K Z M Th1 hM h1 _ (inv_ne_zero ha))
++    (latInter K Z M Th hM hTh _ (inv_ne_zero ha))
++    (inf_le_inf_left M (Submodule.map_mono h1Th))
++  exact (by exact_mod_cast hi : (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤
++    (lix w M (M ⊓ sc a⁻¹ Th1) : ℝ)).trans h
++
++private theorem direct_choice {A B C : Prop} (h : if (true : Bool) then A else B) :
++    if (true : Bool) then A else C := h
++
++theorem local_conditions_family_excess : OnLocalJ true :=
++  local_conditions_family_for true (onLocal_excess_of idxMono idxCutLe idxTransport latInter idxPsiGood lemmaGG)
++
++theorem local_conditions_weighted_excess : LocalConditionsWeighted true := by
+   intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hr M Th1 Th ThK Th0 ThJ X₃ hM hTh1 hTh hThK h1le hle hFG hEig
+     hMs hTs σ hσ hsc hdata a E r ha hE hT0 h0 hJ h0J h3 X _ _ _ _ θ' eX pr Mt hc hk h4 h34 ε hTW d φ hinj hrng
+     Mj Tj hMj hTj
+-  have hT0' := enlarge_initial_lattice K Z w M Th1 Th hM hTh1 hTh h1le hle (E : ℝ) r hT0
++  have hT0' : (if (true : Bool) then (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r else
++      ∀ W : Submodule K Z, (lix w (cut W M) (cut W Th) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r) :=
++    @direct_choice _ (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th1) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r) _ hT0
+   have hc' : (θ'.restrictScalars (𝓞 K)) ∘ₗ (eX.restrictScalars (𝓞 K)) =
+       (e.restrictScalars (𝓞 K)) ∘ₗ (θ'.restrictScalars (𝓞 K)) :=
+     LinearMap.ext fun x => LinearMap.congr_fun hc x
+@@ -316,9 +343,18 @@
+     exact LinearMap.mem_ker.2 (LinearMap.mem_ker.1 (hk _ (LinearMap.mem_range_self eX y)))
+   have hid := theta_identity (𝓞 K) X Z (θ'.restrictScalars (𝓞 K)) (eX.restrictScalars (𝓞 K))
+     (pr.restrictScalars (𝓞 K)) (e.restrictScalars (𝓞 K)) hc' hk' Mt
+-  exact local_conditions_family K Z w P ρ U ψ hMk V₀ e he hr M Th ThK Th0 ThJ X₃
++  exact local_conditions_family_excess K Z w P ρ U ψ hMk V₀ e he hr M Th ThK Th0 ThJ X₃
+     ((Mt.map (θ'.restrictScalars (𝓞 K))).map (e.restrictScalars (𝓞 K))) hM hTh hThK hle hFG hEig hMs hTs
+     σ hσ hsc hdata a E r ha hE hT0' h0 hJ h0J h3 h4 h34 ε hTW d φ hinj hrng Mj Tj hMj (hTj.trans hid)
++
++theorem local_conditions_weighted : LocalConditionsWeighted := by
++  intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hr M Th1 Th ThK Th0 ThJ X₃ hM hTh1 hTh hThK h1le hle hFG hEig
++    hMs hTs σ hσ hsc hdata a E r ha hE hT0 h0 hJ h0J h3 X _ _ _ _ θ' eX pr Mt hc hk h4 h34 ε hTW d φ hinj hrng
++    Mj Tj hMj hTj
++  have h := (threeForms K Z w M Th hM hTh hle a E r ha hE).mp
++    (enlarge_initial_lattice K Z w M Th1 Th hM hTh1 hTh h1le hle (E : ℝ) r hT0)
++  exact local_conditions_weighted_excess K Z w P ρ U ψ hMk V₀ e he hr M Th1 Th ThK Th0 ThJ X₃ hM hTh1 hTh hThK h1le hle hFG hEig
++    hMs hTs σ hσ hsc hdata a E r ha hE h h0 hJ h0J h3 X θ' eX pr Mt hc hk h4 h34 ε hTW d φ hinj hrng Mj Tj hMj hTj
+ 
+ theorem localConditionsFamily_of_weighted (h : LocalConditionsWeighted)
+     (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z] [Module K Z]
+--- a/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/LemmaGG.lean
++++ b/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/LemmaGG.lean
+@@ -46,21 +46,44 @@
+   ext i
+   exact congrFun h3 i
+ 
++/-- The coset maps control the scalar-filtered row on the same quotient. -/
++theorem gg_len_depth {ι : Type*} [Fintype ι] [DecidableEq ι] (a n : R)
++    (s : ι → Y →ₗ[R] Q) (t : ι → Q →ₗ[R] Y)
++    (hts : ∀ i j y, t i (s j y) = if i = j then n • y else 0) :
++    (Fintype.card ι : ℕ∞) * Module.length R
++        (LinearMap.range ((a * n) • (LinearMap.id : Y →ₗ[R] Y))) ≤
++      Module.length R (LinearMap.range (a • (LinearMap.id : Q →ₗ[R] Q))) := by
++  let D := LinearMap.range (a • (LinearMap.id : Q →ₗ[R] Q))
++  let S (i : ι) := (a • s i).codRestrict D (fun y => ⟨s i y, rfl⟩)
++  let T (i : ι) := (t i).comp D.subtype
++  apply gg_len_range (a * n) S T
++  intro i j y
++  change t i (a • s j y) = _
++  rw [map_smul, hts]
++  split_ifs <;> simp [mul_smul]
++
+ theorem gg_len_split (f : Y →ₗ[R] Y) :
+     Module.length R Y =
+       Module.length R (LinearMap.range f) + Module.length R (Y ⧸ LinearMap.range f) :=
+   Module.length_eq_add_of_exact (LinearMap.range f).subtype (LinearMap.range f).mkQ
+     (Submodule.injective_subtype _) (Submodule.mkQ_surjective _) (LinearMap.exact_subtype_mkQ _)
+ 
+-theorem gg_core {Z : Type*} [AddCommGroup Z] [Module R Z] {ι : Type*} [Fintype ι] [DecidableEq ι]
++/-- Length of a scalar image on the quotient of a lattice by its intersection with another. -/
++noncomputable def scalarImageLength {Z : Type*} [AddCommGroup Z] [Module R Z]
++    (a : R) (A B : Submodule R Z) : ℕ∞ :=
++  Module.length R (LinearMap.range (a • (LinearMap.id : (A ⧸ B.comap A.subtype) →ₗ[R] _)))
++
++theorem gg_core_with_depth {Z : Type*} [AddCommGroup Z] [Module R Z] {ι : Type*} [Fintype ι] [DecidableEq ι]
+     (n : R) (A A' C B B' : Submodule R Z) (s t : ι → Z →ₗ[R] Z)
+     (hsA : ∀ i, ∀ a ∈ A, s i a ∈ B) (hsA' : ∀ i, ∀ a ∈ A', s i a ∈ B')
+     (htB : ∀ i, ∀ b ∈ B, t i b ∈ A) (htB' : ∀ i, ∀ b ∈ B', t i b ∈ A')
+     (hts : ∀ i j, ∀ a ∈ A, t i (s j a) = if i = j then n • a else 0)
+     (hC : ∀ c ∈ C, c ∈ A → ∃ a ∈ A, c = n • a) :
+-    (Fintype.card ι : ℕ∞) * Module.length R (A ⧸ A'.comap A.subtype) ≤
++    ((Fintype.card ι : ℕ∞) * Module.length R (A ⧸ A'.comap A.subtype) ≤
+       Module.length R (B ⧸ B'.comap B.subtype) +
+-        (Fintype.card ι : ℕ∞) * Module.length R (A ⧸ C.comap A.subtype) := by
++        (Fintype.card ι : ℕ∞) * Module.length R (A ⧸ C.comap A.subtype)) ∧
++    (∀ a : R, (Fintype.card ι : ℕ∞) * scalarImageLength (a * n) A A' ≤
++      scalarImageLength a B B') := by
+   have hs' : ∀ i, A'.comap A.subtype ≤ (B'.comap B.subtype).comap ((s i).restrict (hsA i)) := by
+     intro i x hx
+     rw [Submodule.mem_comap, Submodule.mem_comap, Submodule.subtype_apply,
+@@ -88,7 +111,10 @@
+         split_ifs <;> simp
+       rw [e]
+       split_ifs <;> simp
+-  have k1 := gg_len_range n sb tb hb
++  refine ⟨?_, fun a => gg_len_depth a n sb tb hb⟩
++  have k1 := (gg_len_depth (1 : R) n sb tb hb).trans
++    (Module.length_le_of_injective _ (Submodule.injective_subtype _))
++  rw [one_mul] at k1
+   have k2 := gg_len_split (n • (LinearMap.id : (A ⧸ A'.comap A.subtype) →ₗ[R] _))
+   have k3 : Module.length R ((A ⧸ A'.comap A.subtype) ⧸
+       LinearMap.range (n • (LinearMap.id : (A ⧸ A'.comap A.subtype) →ₗ[R] _))) ≤
+@@ -112,6 +138,17 @@
+     exact ⟨Submodule.Quotient.mk y2, rfl⟩
+   rw [k2, mul_add]
+   exact add_le_add k1 (mul_le_mul_right k3 _)
++
++theorem gg_core {Z : Type*} [AddCommGroup Z] [Module R Z] {ι : Type*} [Fintype ι] [DecidableEq ι]
++    (n : R) (A A' C B B' : Submodule R Z) (s t : ι → Z →ₗ[R] Z)
++    (hsA : ∀ i, ∀ a ∈ A, s i a ∈ B) (hsA' : ∀ i, ∀ a ∈ A', s i a ∈ B')
++    (htB : ∀ i, ∀ b ∈ B, t i b ∈ A) (htB' : ∀ i, ∀ b ∈ B', t i b ∈ A')
++    (hts : ∀ i j, ∀ a ∈ A, t i (s j a) = if i = j then n • a else 0)
++    (hC : ∀ c ∈ C, c ∈ A → ∃ a ∈ A, c = n • a) :
++    (Fintype.card ι : ℕ∞) * Module.length R (A ⧸ A'.comap A.subtype) ≤
++      Module.length R (B ⧸ B'.comap B.subtype) +
++        (Fintype.card ι : ℕ∞) * Module.length R (A ⧸ C.comap A.subtype) :=
++  (gg_core_with_depth n A A' C B B' s t hsA hsA' htB htB' hts hC).1
+ 
+ end Abstract
+ 
+@@ -215,7 +252,23 @@
+ 
+ end Concrete
+ 
+-theorem lemmaGG_of (hSc : IdxScaleIn) : LemmaGG := by
++def LemmaGGWithDepth : Prop :=
++  ∀ (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z] [Module K Z]
++    [Module (𝓞 K) Z] [IsScalarTower (𝓞 K) K Z] [FiniteDimensional K Z]
++    (w : HeightOneSpectrum (𝓞 K)) (P : Type) [Group P] [Finite P] (ρ : Representation K P Z)
++    (U : Subgroup P) (ψ : P → 𝓞 K), IsMackey U ψ →
++    ∀ (B B' : Submodule (𝓞 K) Z), IsLatIn ⊤ B → IsLatIn ⊤ B' → B' ≤ B →
++    (∀ g : P, B.map ((ρ g).restrictScalars (𝓞 K)) ≤ B) →
++    (∀ g : P, B'.map ((ρ g).restrictScalars (𝓞 K)) ≤ B') →
++      (∀ a : 𝓞 K, (U.index : ℕ∞) * scalarImageLength (a * (Nat.card U : 𝓞 K))
++        (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal (cut (eig ρ U ψ) B))
++        (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal (cut (eig ρ U ψ) B')) ≤
++        scalarImageLength a (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal B)
++          (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal B')) ∧
++      (U.index : ℤ) * lix w (cut (eig ρ U ψ) B) (cut (eig ρ U ψ) B') ≤
++        lix w B B' + (finrank K Z : ℤ) * vw w ((Nat.card U : ℕ) : K)
++
++theorem lemmaGG_with_depth (hSc : IdxScaleIn) : LemmaGGWithDepth := by
+   intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk B B' hB hB' hle hst hst'
+   classical
+   have : Fintype P := Fintype.ofFinite P
+@@ -279,7 +332,7 @@
+       rw [← algebraMap_smul K σ a, smul_smul, inv_mul_cancel₀ hσ0, one_smul]
+     rw [e]
+     exact W.smul_mem _ ha.2
+-  have hcore := gg_core (N : 𝓞 K) (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal (cut W B))
++  have hboth := gg_core_with_depth (N : 𝓞 K) (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal (cut W B))
+     (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal (cut W B')) (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal (sc (N : K) (cut W B)))
+     (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal B) (Formalism.HermitianLatticesTheory.localization₂ w.asIdeal B') s t
+     (fun i => mapsTo_locP _ _ _ _ (fun x hx => hst _ ⟨x, hx.1, rfl⟩))
+@@ -310,6 +363,9 @@
+         rw [← algebraMap_smul K (N : 𝓞 K), map_natCast, smul_comm, hyc', smul_smul,
+           inv_mul_cancel₀ hσ0, one_smul])
+ 
++  refine ⟨hboth.2, ?_⟩
++  have hcore := hboth.1
++  clear hboth
+   have hA := gg_isLatIn_cut W B hB
+   obtain ⟨d, hd, hdB⟩ : ∃ d ∈ nonZeroDivisors (𝓞 K), ∀ x ∈ B, d • x ∈ B' := by
+     apply Formalism.HermitianLatticesTheory.indexBasic_denom _ B B' hB.1
+@@ -364,6 +420,10 @@
+   have := mul_le_mul_of_nonneg_right hdim' hv
+   linarith
+ 
++theorem lemmaGG_of (hSc : IdxScaleIn) : LemmaGG := by
++  intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk B B' hb hb' hle hs hs'
++  exact (lemmaGG_with_depth hSc K Z w P ρ U ψ hMk B B' hb hb' hle hs hs').2
++
+ theorem good_index_GG : LemmaGG := lemmaGG_of index_scale_inclusion
+ 
+ theorem data_trace : DataTrace := by
+--- a/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/LocalConditionsWeightedConditional.lean
++++ b/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/LocalConditionsWeightedConditional.lean
+@@ -80,15 +80,17 @@
+ 
+ end Gen
+ 
+-theorem local_conditions_weighted_at_place : LocalConditionsWeightedAtPlace := by
++theorem local_conditions_weighted_at_place_for (direct : Bool) (row : LocalConditionsWeighted direct) : LocalConditionsWeightedAtPlace direct := by
+   intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hr M Th1 Th ThK Th0 ThJ X₃ hM hTh1 hTh hThK h1le hle hFG hEig
+     hMs hTs σ hσ hsc hdata a E r ha hE hT0 h0 hJ h0J h3 X _ _ _ _ θ' eX pr Mt hc hpr h4 h34 ε hTW d φ hinj hrng
+     Mj Tj hMj hTj
+-  exact local_conditions_weighted K Z w P ρ U ψ hMk V₀ e he hr M Th1 Th ThK Th0 ThJ
++  exact row K Z w P ρ U ψ hMk V₀ e he hr M Th1 Th ThK Th0 ThJ
+     (X₃ ⊓ (Mt.map (θ'.restrictScalars (𝓞 K))).map (e.restrictScalars (𝓞 K)))
+     hM hTh1 hTh hThK h1le hle hFG hEig hMs hTs σ hσ hsc hdata a E r ha hE hT0 h0 hJ h0J
+     (idxRules_inf_lat h3 h4) X θ' eX pr Mt hc hpr h4 inf_le_right ε
+     (by rw [locP w _ _ _ h34]; exact hTW) d φ hinj hrng Mj Tj hMj hTj
++
++theorem local_conditions_weighted_at_place : LocalConditionsWeightedAtPlace := local_conditions_weighted_at_place_for false local_conditions_weighted
+ 
+ section Instance
+ 
+--- a/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/OnLocal.lean
++++ b/src/Formalism/MirabolicMackeyTheory/MirabolicMackeyProofs/OnLocal.lean
+@@ -7,14 +7,12 @@
+ 
+ open Formalism.DivisionValues
+ 
+-theorem onLocal_of (hMono : IdxMono) (hCut : IdxCutLe) (hTr : IdxTransport) (hInt : LatInter)
+-    (h3 : ThreeForms) (hPG : IdxPsiGood) (hGG : LemmaGG) : OnLocal := by
++theorem onLocal_excess_of (hMono : IdxMono) (hCut : IdxCutLe) (hTr : IdxTransport) (hInt : LatInter)
++    (hPG : IdxPsiGood) (hGG : LemmaGG) : OnLocal true := by
+   unfold OnLocal
+   intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hrange M Th ThK Th0 X₃ X₄ hM hTh hThK
+-    hThM hTh0fg hTh0 hMst hThst σ hσ hThσ hucut a E r ha hE hW hT0 hX3 hX4 hX34 ε hε d φ hφ
++    hThM hTh0fg hTh0 hMst hThst σ hσ hThσ hucut a E r ha hE hr hT0 hX3 hX4 hX34 ε hε d φ hφ
+     hφr Mj Tj hMj hTj
+-  have hr : (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r :=
+-    (h3 K Z w M Th hM hTh hThM a E r ha hE).mp hW
+   have hNl : IsLatIn ⊤ (M ⊓ sc a⁻¹ Th) := hInt K Z M Th hM hTh a⁻¹ (inv_ne_zero ha)
+ 
+   have hNst : ∀ g : P, (M ⊓ sc a⁻¹ Th).map ((ρ g).restrictScalars (𝓞 K)) ≤ M ⊓ sc a⁻¹ Th := by
+@@ -59,6 +57,12 @@
+     exact_mod_cast h2
+   linarith
+ 
++theorem onLocal_of (hMono : IdxMono) (hCut : IdxCutLe) (hTr : IdxTransport) (hInt : LatInter)
++    (h3 : ThreeForms) (hPG : IdxPsiGood) (hGG : LemmaGG) : OnLocal := by
++  intro K _ _ _ Z _ _ _ _ _ w P _ _ ρ U ψ hMk V₀ e he hr M Th ThK Th0 X₃ X₄ hM ht hk hle hfg hEig hMs hTs σ hσ hs hu a E r ha hv hW
++  exact onLocal_excess_of hMono hCut hTr hInt hPG hGG K Z w P ρ U ψ hMk V₀ e he hr M Th ThK Th0 X₃ X₄ hM ht hk hle hfg hEig hMs hTs σ hσ hs hu a E r ha hv
++    ((h3 K Z w M Th hM ht hle a E r ha hv).mp hW)
++
+ theorem mackey_product : MackeyProd := by
+   unfold MackeyProd
+   intro ι A _ _ _ P _ U ψ hψ
+--- a/src/Formalism/MirabolicMackeyTheory/StatementL.lean
++++ b/src/Formalism/MirabolicMackeyTheory/StatementL.lean
+@@ -178,7 +178,7 @@
+     ∀ (M : Type) [AddCommGroup M] [Module O M], Module.length O M ≠ ⊤ →
+       Module.length O' (TensorProduct O O' M) = (e : ℕ∞) * Module.length O M
+ 
+-def OnLocal : Prop :=
++def OnLocal (direct : Bool := false) : Prop :=
+   ∀ (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z] [Module K Z]
+     [Module (𝓞 K) Z] [IsScalarTower (𝓞 K) K Z] [FiniteDimensional K Z]
+     (w : HeightOneSpectrum (𝓞 K)) (P : Type) [Group P] [Finite P] (ρ : Representation K P Z)
+@@ -192,7 +192,8 @@
+     ∀ (σ : K), σ ≠ 0 → Th ≤ sc σ ThK →
+     sc ((Nat.card U : ℕ) : K) (cut (eig ρ U ψ) ThK) ≤ Th0 →
+     ∀ (a : K) (E : ℕ) (r : ℝ), a ≠ 0 → vw w a = (E : ℤ) →
+-    (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r) →
++    (if direct then (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r else
++      (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r)) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (Th0.map (e.restrictScalars (𝓞 K))) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) X₃ → IsLatIn (eig ρ U ψ ⊓ V₀) X₄ → X₃ ≤ X₄ →
+     ∀ (ε : ℝ),
+--- a/src/Formalism/MirabolicMackeyTheory/StatementLoc.lean
++++ b/src/Formalism/MirabolicMackeyTheory/StatementLoc.lean
+@@ -81,7 +81,7 @@
+         ((E : ℝ) - (vw w σ : ℝ) + (vw w ((Nat.card U : ℕ) : K) : ℝ)) * (d : ℝ) +
+           (r + (finrank K Z : ℝ) * (vw w ((Nat.card U : ℕ) : K) : ℝ)) / (U.index : ℝ) + ε
+ 
+-def LocalConditionsWeightedAtPlace : Prop :=
++def LocalConditionsWeightedAtPlace (direct : Bool := false) : Prop :=
+   ∀ (K : Type) [Field K] [NumberField K] [StarRing K] (Z : Type) [AddCommGroup Z] [Module K Z]
+     [Module (𝓞 K) Z] [IsScalarTower (𝓞 K) K Z] [FiniteDimensional K Z]
+     (w : HeightOneSpectrum (𝓞 K)) (P : Type) [Group P] [Finite P] (ρ : Representation K P Z)
+@@ -95,7 +95,8 @@
+     ∀ (σ : K), σ ≠ 0 → Th ≤ sc σ ThK →
+     sc ((Nat.card U : ℕ) : K) (cut (eig ρ U ψ) ThK) ≤ Th0 →
+     ∀ (a : K) (E : ℕ) (r : ℝ), a ≠ 0 → vw w a = (E : ℤ) →
+-    (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th1) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r) →
++    (if direct then (lix w M (M ⊓ sc a⁻¹ Th) : ℝ) ≤ r else
++      (∀ W : Submodule K Z, (lix w (cut W M) (cut W Th1) : ℝ) ≤ (E : ℝ) * (finrank K W : ℝ) + r)) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (Th0.map (e.restrictScalars (𝓞 K))) →
+     IsLatIn (eig ρ U ψ ⊓ V₀) (ThJ.map (e.restrictScalars (𝓞 K))) → Th0 ≤ ThJ →
+     IsLatIn (eig ρ U ψ ⊓ V₀) X₃ →
+--- a/src/Formalism/SharpRestriction/GenusPolyhedralBounds/RelativeIndexClassSets/LengthLeOfSemilinear.lean
++++ b/src/Formalism/SharpRestriction/GenusPolyhedralBounds/RelativeIndexClassSets/LengthLeOfSemilinear.lean
+@@ -63,6 +63,59 @@
+     rfl
+   rw [e1, e2]
+   exact (Submodule.quotientQuotientEquivQuotientSup S T).length_eq
++
++def LocalStepExcessQ : Prop :=
++  ∀ (O K V W : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] [Field K] [Algebra O K]
++    [IsFractionRing O K] [AddCommGroup V] [Module K V] [Module O V] [IsScalarTower O K V]
++    [FiniteDimensional K V] [AddCommGroup W] [Module O W]
++    (ϖ : O), Irreducible ϖ → ∀ (M Θ N₁ Z Zm N' Mgg : Submodule O V) (e n q : ℕ) (th : Fin n → V)
++    (AA AA' N₁' : Submodule O W) (ρ : ↥N' →ₗ[O] W),
++    Formalism.LatticeIndexTer.IsLat O K V M → Formalism.LatticeIndexTer.IsLat O K V Θ →
++    N₁ ⊔ Z ≤ Θ → (∀ j, th j ∈ M) → (∀ j, th j ∈ Θ) →
++    Mgg ≤ M →
++    Submodule.span K (Mgg : Set V) ≤ Submodule.span K ((N₁ ⊔ Z : Submodule O V) : Set V) →
++    Module.length O (↥M ⧸ (Mgg ⊔ Submodule.span O (Set.range th)).comap M.subtype) ≤ (q : ℕ∞) →
++    M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊓
++      (Submodule.span K ((N₁ ⊔ Z : Submodule O V) : Set V)).restrictScalars O ≤ N' →
++    N₁ ≤ N' → Z ≤ Zm → Zm ≤ N' → (∀ x, ρ x ∈ AA') →
++    LinearMap.ker ρ = Zm.comap N'.subtype → (N₁.comap N'.subtype).map ρ = N₁' → N₁' ≤ AA →
++    AA ≤ AA' →
++    Module.length O (↥AA' ⧸ AA.comap AA'.subtype) ≠ ⊤ →
++    Module.length O (↥AA ⧸ N₁'.comap AA.subtype) ≠ ⊤ →
++    Module.length O (↥Zm ⧸ Z.comap Zm.subtype) ≠ ⊤ →
++    (Formalism.LatticeIndexTer.qlen O V
++      (M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ) Θ) ≤
++        (((Module.length O (↥AA' ⧸ AA.comap AA'.subtype)).toNat +
++        (Module.length O (↥AA ⧸ N₁'.comap AA.subtype)).toNat +
++        (Module.length O (↥Zm ⧸ Z.comap Zm.subtype)).toNat + q : ℕ) : ℕ∞)
++
++theorem localStepExcessQ : LocalStepExcessQ := by
++  intro O K V W _ _ _ _ _ _ _ _ _ _ _ _ _ ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁'
++    ρ hMl hΘl hNΘ _ hthΘ hgg hggK hq hXN hN₁ hZ hZm hρ hkρ himg _ _ hf1 hf2 hf3
++  set X : Submodule O V := M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) with hX
++  set NK : Submodule O V :=
++    (Submodule.span K ((N₁ ⊔ Z : Submodule O V) : Set V)).restrictScalars O with hNK
++  let Tj : Submodule O V := Submodule.span O (Set.range fun j => ϖ ^ e • th j)
++  have hTΘ : Tj ≤ Θ := Submodule.span_le.2 (by
++    rintro _ ⟨j, rfl⟩
++    exact Θ.smul_mem _ (hthΘ j))
++  have hggNK : Mgg ≤ NK := fun x hx => hggK (Submodule.subset_span hx)
++  have r1 := reduction X Θ (N₁ ⊔ Z) Tj NK hNΘ hTΘ
++  have r2 := levels N' ((X ⊓ NK) ⊔ (N₁ ⊔ Z)) N₁ Z Zm AA AA' N₁' ρ
++    (sup_le hXN (sup_le hN₁ (hZ.trans hZm))) hρ hkρ himg
++  have r3 : ql X ((X ⊓ NK) ⊔ Tj) ≤ (q : ℕ∞) := (ql_scaled_le (ϖ ^ e) M Mgg NK th hgg hggNK).trans hq
++  set L1 := Module.length O (↥AA' ⧸ AA.comap AA'.subtype)
++  set L2 := Module.length O (↥AA ⧸ N₁'.comap AA.subtype)
++  set L3 := Module.length O (↥Zm ⧸ Z.comap Zm.subtype)
++  set L := Formalism.LatticeIndexTer.qlen O V (X ⊔ Θ) Θ with hL
++  have hLA' : L ≤ L1 + L2 + L3 + ((q : ℕ) : ℕ∞) := r1.trans (add_le_add r2 r3)
++  have hsum : L1 + L2 + L3 + ((q : ℕ) : ℕ∞) =
++      ((L1.toNat + L2.toNat + L3.toNat + q : ℕ) : ℕ∞) := by
++    rw [← ENat.natCast_toNat hf1, ← ENat.natCast_toNat hf2, ← ENat.natCast_toNat hf3]
++    simp only [ENat.toNat_natCast]
++    push_cast; rfl
++  rw [hsum] at hLA'
++  exact hLA'
+ 
+ def LocalStepQ : Prop :=
+   ∀ (O K V W : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] [Field K] [Algebra O K]
+@@ -92,10 +145,8 @@
+ 
+ theorem localStepQ : LocalStepQ := by
+   intro O K V W _ _ _ _ _ _ _ _ _ _ _ _ _ ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁'
+-    ρ hMl hΘl hNΘ _ hthΘ hgg hggK hq hXN hN₁ hZ hZm hρ hkρ himg _ _ hf1 hf2 hf3 V'
++    ρ hMl hΘl hNΘ hthM hthΘ hgg hggK hq hXN hN₁ hZ hZm hρ hkρ himg hNAA hAA hf1 hf2 hf3 V'
+   set X : Submodule O V := M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) with hX
+-  set NK : Submodule O V :=
+-    (Submodule.span K ((N₁ ⊔ Z : Submodule O V) : Set V)).restrictScalars O with hNK
+   have hsm : ∀ v : V, (algebraMap O K ϖ) ^ e • v = ϖ ^ e • v := by
+     intro v
+     rw [← map_pow, algebraMap_smul]
+@@ -109,35 +160,13 @@
+     · rintro ⟨y, hy, rfl⟩; exact ⟨y, hy, (hsm y).symm⟩
+     · rintro ⟨y, hy, rfl⟩; exact ⟨y, hy, hsm y⟩
+   rw [hbridge] at hIdx
+-  let Tj : Submodule O V := Submodule.span O (Set.range fun j => ϖ ^ e • th j)
+-  have hTΘ : Tj ≤ Θ := Submodule.span_le.2 (by
+-    rintro _ ⟨j, rfl⟩
+-    exact Θ.smul_mem _ (hthΘ j))
+-  have hggNK : Mgg ≤ NK := fun x hx => hggK (Submodule.subset_span hx)
+-  have r1 := reduction X Θ (N₁ ⊔ Z) Tj NK hNΘ hTΘ
+-  have r2 := levels N' ((X ⊓ NK) ⊔ (N₁ ⊔ Z)) N₁ Z Zm AA AA' N₁' ρ
+-    (sup_le hXN (sup_le hN₁ (hZ.trans hZm))) hρ hkρ himg
+-  have r3 : ql X ((X ⊓ NK) ⊔ Tj) ≤ (q : ℕ∞) := (ql_scaled_le (ϖ ^ e) M Mgg NK th hgg hggNK).trans hq
+-  set L1 := Module.length O (↥AA' ⧸ AA.comap AA'.subtype)
+-  set L2 := Module.length O (↥AA ⧸ N₁'.comap AA.subtype)
+-  set L3 := Module.length O (↥Zm ⧸ Z.comap Zm.subtype)
+-  set L := Formalism.LatticeIndexTer.qlen O V (X ⊔ Θ) Θ with hL
+-  have hLA' : L ≤ L1 + L2 + L3 + ((q : ℕ) : ℕ∞) := r1.trans (add_le_add r2 r3)
+-  have hsum : L1 + L2 + L3 + ((q : ℕ) : ℕ∞) =
+-      ((L1.toNat + L2.toNat + L3.toNat + q : ℕ) : ℕ∞) := by
+-    rw [← ENat.natCast_toNat hf1, ← ENat.natCast_toNat hf2, ← ENat.natCast_toNat hf3]
+-    simp only [ENat.toNat_natCast]
+-    push_cast; rfl
+-  rw [hsum] at hLA'
+-  have hLt : L.toNat ≤ L1.toNat + L2.toNat + L3.toNat + q := by
+-    have hLne : L ≠ ⊤ := ne_top_of_le_ne_top (by simp) hLA'
+-    rw [← ENat.natCast_toNat hLne] at hLA'
+-    exact_mod_cast hLA'
+-  have h5 : ((L.toNat : ℕ) : ℤ) ≤ (L1.toNat : ℤ) + (L2.toNat : ℤ) + (L3.toNat : ℤ) + (q : ℤ) := by
+-    exact_mod_cast hLt
+-  linarith
+-
+-def LocalStepLevelsQ : Prop :=
++  have hLt := localStepExcessQ O K V W ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁' ρ
++    hMl hΘl hNΘ hthM hthΘ hgg hggK hq hXN hN₁ hZ hZm hρ hkρ himg hNAA hAA hf1 hf2 hf3
++  have hNat := ENat.toNat_le_of_le_natCast hLt
++  rw [← hX] at hNat
++  exact hIdx.trans (by omega)
++
++def LocalStepLevelsQ (direct : Bool := false) : Prop :=
+   ∀ (ι : Type) [Fintype ι] (ep f : ι → ℕ) (ν v : ι → ℝ) (νs c' : ℝ) (T R I : ℕ),
+     (∀ z, 1 ≤ ep z) → 1 ≤ T → 0 ≤ c' → (∀ z, 0 ≤ v z) → (∀ z, ν z ≤ νs + c' * v z) →
+   ∀ (O K V W : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] [Field K] [Algebra O K]
+@@ -160,19 +189,23 @@
+     Module.length O (↥AA' ⧸ AA.comap AA'.subtype) ≤
+       ((R * ∑ z, (max 0 ⌈(ep z : ℝ) * ((T : ℝ) * ν z - (e : ℝ))⌉).toNat * f z : ℕ) : ℕ∞) →
+     Module.length O (↥AA ⧸ N₁'.comap AA.subtype) ≤ ((R * I : ℕ) : ℕ∞) →
+-    ∀ V' : Submodule K V,
++    if direct then ((Formalism.LatticeIndexTer.qlen O V
++      (M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ) Θ).toNat : ℝ) ≤
++      (R : ℝ) * ((T : ℝ) * c' * ∑ z, ((ep z : ℝ) * f z) * v z) + (R : ℝ) * (I : ℝ) +
++            ((Module.length O (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ)
++    else ∀ V' : Submodule K V,
+       (Formalism.LatticeIndexTer.idx O V (M ⊓ V'.restrictScalars O) (Θ ⊓ V'.restrictScalars O) : ℝ) ≤
+         (e : ℝ) * (finrank K V' : ℝ) +
+             (R : ℝ) * ((T : ℝ) * c' * ∑ z, ((ep z : ℝ) * f z) * v z) + (R : ℝ) * (I : ℝ) +
+             ((Module.length O (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ)
+ 
+-theorem localStepLevelsQ : LocalStepLevelsQ := by
++theorem localStepLevelsExcessQ : LocalStepLevelsQ true := by
+   intro ι _ ep f ν v νs c' T R I hep hT hc hv hν O K V W _ _ _ _ _ _ _ _ _ _ _ _ _
+     ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁' ρ hM hΘ h1 h2 h3 h4 h5 h6 h8 h9 h10
+-    h11 h12 h13 h14 h15 h16 h17 hcase hA hN V'
+-  have h := localStepQ O K V W ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁' ρ hM hΘ h1 h2 h3
++    h11 h12 h13 h14 h15 h16 h17 hcase hA hN
++  have h := localStepExcessQ O K V W ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁' ρ hM hΘ h1 h2 h3
+     h4 h5 h6 h8 h9 h10 h11 h12 h13 h14 h15 h16
+-    (ne_top_of_le_ne_top (ENat.natCast_ne_top _) hA) (ne_top_of_le_ne_top (ENat.natCast_ne_top _) hN) h17 V'
++    (ne_top_of_le_ne_top (ENat.natCast_ne_top _) hA) (ne_top_of_le_ne_top (ENat.natCast_ne_top _) hN) h17
+   have hAn := ENat.toNat_le_of_le_natCast hA
+   have hNn := ENat.toNat_le_of_le_natCast hN
+   have hlev : ∑ z, ((max 0 ⌈(ep z : ℝ) * ((T : ℝ) * ν z - ((e : ℤ) : ℝ))⌉ : ℤ) : ℝ) * f z ≤
+@@ -200,12 +233,53 @@
+           exact mul_le_mul_of_nonneg_left hlev hRnn
+   have key2 : ((Module.length O (↥AA ⧸ N₁'.comap AA.subtype)).toNat : ℝ) ≤ (R : ℝ) * (I : ℝ) := by
+     exact_mod_cast hNn
+-  have hR : (Formalism.LatticeIndexTer.idx O V (M ⊓ V'.restrictScalars O) (Θ ⊓ V'.restrictScalars O) : ℝ) ≤
+-      (e : ℝ) * (finrank K V' : ℝ) +
++  have hR : ((Formalism.LatticeIndexTer.qlen O V
++      (M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ) Θ).toNat : ℝ) ≤
+           ((Module.length O (↥AA' ⧸ AA.comap AA'.subtype)).toNat : ℝ) +
+           ((Module.length O (↥AA ⧸ N₁'.comap AA.subtype)).toNat : ℝ) +
+           ((Module.length O (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ) := by
+-    exact_mod_cast h
++    exact_mod_cast ENat.toNat_le_of_le_natCast h
++  change _ ≤ (R : ℝ) * ((T : ℝ) * c' * ∑ z, ((ep z : ℝ) * f z) * v z) + (R : ℝ) * (I : ℝ) +
++    ((Module.length O (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ)
++  linarith
++
++theorem subspace_bound_of_excess {O K V : Type} [CommRing O] [IsDomain O]
++    [IsDiscreteValuationRing O] [Field K] [Algebra O K] [IsFractionRing O K] [AddCommGroup V]
++    [Module K V] [Module O V] [IsScalarTower O K V] [FiniteDimensional K V]
++    (ϖ : O) (hϖ : Irreducible ϖ) (M Θ : Submodule O V)
++    (hM : Formalism.LatticeIndexTer.IsLat O K V M) (hΘ : Formalism.LatticeIndexTer.IsLat O K V Θ)
++    (e : ℕ) (r : ℝ) (h :
++      ((Formalism.LatticeIndexTer.qlen O V (M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ) Θ).toNat : ℝ) ≤ r)
++    (V' : Submodule K V) :
++    (Formalism.LatticeIndexTer.idx O V (M ⊓ V'.restrictScalars O) (Θ ⊓ V'.restrictScalars O) : ℝ) ≤
++      (e : ℝ) * (finrank K V' : ℝ) + r := by
++  set X : Submodule O V := M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) with hX
++  have hsm : ∀ v : V, (algebraMap O K ϖ) ^ e • v = ϖ ^ e • v := by
++    intro v
++    rw [← map_pow, algebraMap_smul]
++  have hIdx := Formalism.IncomingBounds.index_last_reduction_holds O K V ϖ hϖ (e : ℤ) M Θ hM hΘ V'
++  have hbridge : M.map ((((algebraMap O K ϖ) ^ (e : ℤ)) • LinearMap.id : V →ₗ[K] V).restrictScalars O)
++      = X := by
++    ext x
++    simp only [Submodule.mem_map, LinearMap.restrictScalars_apply, LinearMap.smul_apply,
++      LinearMap.id_coe, id_eq, zpow_natCast, X, LinearMap.smul_apply]
++    constructor
++    · rintro ⟨y, hy, rfl⟩; exact ⟨y, hy, (hsm y).symm⟩
++    · rintro ⟨y, hy, rfl⟩; exact ⟨y, hy, hsm y⟩
++  rw [hbridge] at hIdx
++  have hh : (Formalism.LatticeIndexTer.idx O V (M ⊓ V'.restrictScalars O) (Θ ⊓ V'.restrictScalars O) : ℝ) ≤
++      (e : ℝ) * (finrank K V' : ℝ) + ((Formalism.LatticeIndexTer.qlen O V (X ⊔ Θ) Θ).toNat : ℝ) := by
++    exact_mod_cast hIdx
++  linarith
++
++theorem localStepLevelsQ : LocalStepLevelsQ := by
++  intro ι _ ep f ν v νs c' T R I hep hT hc hv hν O K V W _ _ _ _ _ _ _ _ _ _ _ _ _
++    ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁' ρ hM hΘ h1 h2 h3 h4 h5 h6 h8 h9 h10
++    h11 h12 h13 h14 h15 h16 h17 hcase hA hN V'
++  have h := localStepLevelsExcessQ ι ep f ν v νs c' T R I hep hT hc hv hν O K V W
++    ϖ hϖ M Θ N₁ Z Zm N' Mgg e n q th AA AA' N₁' ρ hM hΘ h1 h2 h3 h4 h5 h6 h8 h9 h10
++    h11 h12 h13 h14 h15 h16 h17 hcase hA hN
++  have hh := subspace_bound_of_excess (K := K) ϖ hϖ M Θ hM hΘ e _ h V'
+   linarith
+ 
+ def LocalStepClosedQ : Prop :=
+@@ -344,6 +418,71 @@
+   | smul r a ha ih => exact Submodule.smul_mem _ r ih
+ 
+ end Semilinear
++
++/-- Integral scalar images commute with scalar extension and with adding the theta lattice. -/
++theorem excess_span_image {O O' V V' : Type} [CommRing O] [CommRing O'] [Algebra O O']
++    [AddCommGroup V] [Module O V] [AddCommGroup V'] [Module O' V']
++    (j : V →ₛₗ[algebraMap O O'] V') (a : O) (M Θ : Submodule O V) :
++    Submodule.span O' (j '' ((M.map (a • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ : Submodule O V) : Set V)) =
++      (Submodule.span O' (j '' (M : Set V))).map
++        ((algebraMap O O' a) • (LinearMap.id : V' →ₗ[O'] V')) ⊔ Submodule.span O' (j '' (Θ : Set V)) := by
++  rw [Submodule.map_span]
++  apply le_antisymm
++  · apply Submodule.span_le.mpr
++    rintro _ ⟨x, hx, rfl⟩
++    obtain ⟨y, ⟨m, hm, rfl⟩, t, ht, rfl⟩ := Submodule.mem_sup.mp hx
++    rw [map_add]
++    apply add_mem
++    · apply Submodule.mem_sup_left
++      apply Submodule.subset_span
++      exact ⟨j m, ⟨m, hm, rfl⟩, (j.map_smulₛₗ a m).symm⟩
++    · exact Submodule.mem_sup_right (Submodule.subset_span ⟨t, ht, rfl⟩)
++  · apply sup_le
++    · apply Submodule.span_le.mpr
++      rintro _ ⟨_, ⟨m, hm, rfl⟩, rfl⟩
++      apply Submodule.subset_span
++      exact ⟨a • m, Submodule.mem_sup_left ⟨m, hm, rfl⟩, j.map_smulₛₗ a m⟩
++    · exact Submodule.span_mono (Set.image_mono (show (Θ : Set V) ⊆ _ from fun _ hx => Submodule.mem_sup_right hx))
++
++def ExcessBaseChange : Prop :=
++  ∀ (O O' K K' V V₁ : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O]
++    [CommRing O'] [IsDomain O'] [IsDiscreteValuationRing O'] [Algebra O O']
++    [Field K] [Algebra O K] [IsFractionRing O K] [Field K'] [Algebra O' K'] [IsFractionRing O' K']
++    [Algebra K K'] [Algebra O K'] [IsScalarTower O K K'] [IsScalarTower O O' K']
++    [AddCommGroup V] [Module K V] [Module O V] [IsScalarTower O K V] [FiniteDimensional K V]
++    [AddCommGroup V₁] [Module K' V₁] [Module O' V₁] [IsScalarTower O' K' V₁]
++    [Module K V₁] [IsScalarTower K K' V₁] (j : V →ₗ[K] V₁), IsBaseChange K' j →
++    ∀ ϖ : O, Irreducible ϖ → Irreducible (algebraMap O O' ϖ) →
++    ∀ (M Θ : Submodule O V) (e : ℕ),
++      Formalism.LatticeIndexTer.IsLat O K V M → Formalism.LatticeIndexTer.IsLat O K V Θ →
++      (Formalism.LatticeIndexTer.qlen O' V₁
++        ((Submodule.span O' (j '' (M : Set V))).map
++          ((algebraMap O O' ϖ ^ e) • (LinearMap.id : V₁ →ₗ[O'] V₁)) ⊔
++          Submodule.span O' (j '' (Θ : Set V))) (Submodule.span O' (j '' (Θ : Set V)))).toNat =
++      (Formalism.LatticeIndexTer.qlen O V (M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ) Θ).toNat
++
++theorem excess_base_change : ExcessBaseChange := by
++  intro O O' K K' V V₁ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ j hj ϖ hϖ hϖ' M Θ e hM hΘ
++  let jj : V →ₛₗ[algebraMap O O'] V₁ :=
++    { toFun := j, map_add' := j.map_add, map_smul' := fun a x => by
++        show j (a • x) = algebraMap O O' a • j x
++        rw [← algebraMap_smul K a x, j.map_smul, ← algebraMap_smul K' (algebraMap O K a) (j x),
++          ← IsScalarTower.algebraMap_apply O K K', IsScalarTower.algebraMap_apply O O' K', algebraMap_smul] }
++  let A := M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ
++  have hle : Θ ≤ A := le_sup_right
++  have hspan : Submodule.span K (A : Set V) = Submodule.span K (Θ : Set V) := by
++    apply le_antisymm _ (Submodule.span_mono hle)
++    rw [hΘ.2]
++    exact le_top
++  have h := index_baseChange_lattice O O' K K' V V₁ j hj ϖ hϖ hϖ' A Θ
++    ((hM.1.map _).sup hΘ.1) hΘ.1 hspan
++  have hle' := Submodule.span_mono (R := O') (Set.image_mono (f := j) (show (Θ : Set V) ⊆ A from hle))
++  simp only [Formalism.LatticeIndexTer.idx, Formalism.LatticeIndexTer.subgroupData.qlen_eq_zero hle,
++    Formalism.LatticeIndexTer.subgroupData.qlen_eq_zero hle', ENat.toNat_zero, Nat.cast_zero, sub_zero, Nat.cast_inj] at h
++  have hh := excess_span_image jj (ϖ ^ e) M Θ
++  rw [map_pow] at hh
++  change Submodule.span O' (j '' (A : Set V)) = _ at hh
++  rwa [hh] at h
+ 
+ def LocalStepClosedQDescUp : Prop :=
+   ∀ (ι : Type) [Fintype ι] (ep f : ι → ℕ) (ν v : ι → ℝ) (νs c' : ℝ) (T R I : ℕ),
+--- a/src/Formalism/SharpRestriction/GenusPolyhedralBounds/RelativeIndexClassSets/LevelsQDesc.lean
++++ b/src/Formalism/SharpRestriction/GenusPolyhedralBounds/RelativeIndexClassSets/LevelsQDesc.lean
+@@ -5,6 +5,77 @@
+ namespace Formalism.MainNotions.Gaps.EtaleWeightGaps
+ 
+ open Module Formalism.LatticeBaseChangeAlt Formalism.LatticeBaseChangeAlt.BQuot Formalism.MainNotions.Gaps.T0
++
++theorem levelsExcessDesc (ι : Type) [Fintype ι] (ep f : ι → ℕ) (ν v : ι → ℝ) (νs c' : ℝ) (T R I : ℕ)
++    (hep : ∀ z, 1 ≤ ep z) (hT : 1 ≤ T) (hc' : 0 ≤ c') (hv : ∀ z, 0 ≤ v z) (hν : ∀ z, ν z ≤ νs + c' * v z)
++    (O O' K K' V V₁ W : Type) [CommRing O] [IsDomain O] [IsDiscreteValuationRing O]
++    [CommRing O'] [IsDomain O'] [IsDiscreteValuationRing O'] [Algebra O O']
++    [Field K] [Algebra O K] [IsFractionRing O K] [Field K'] [Algebra O' K'] [IsFractionRing O' K']
++    [Algebra K K'] [Algebra O K'] [IsScalarTower O K K'] [IsScalarTower O O' K']
++    [AddCommGroup V] [Module K V] [Module O V] [IsScalarTower O K V] [FiniteDimensional K V]
++    [AddCommGroup V₁] [Module K' V₁] [Module O' V₁] [IsScalarTower O' K' V₁]
++    [Module K V₁] [IsScalarTower K K' V₁] [AddCommGroup W] [Module O' W]
++    (j : V →ₗ[K] V₁) (hj : IsBaseChange K' j)
++    (ϖ : O) (hϖ : Irreducible ϖ) (hϖ' : Irreducible (algebraMap O O' ϖ))
++    (M Θ Mgg : Submodule O V) (N₁ Z Zm N' : Submodule O' V₁) (e n q : ℕ) (th : Fin n → V)
++    (AA AA' N₁' : Submodule O' W) (ρ : ↥N' →ₗ[O'] W)
++    (hM : Formalism.LatticeIndexTer.IsLat O K V M) (hΘ : Formalism.LatticeIndexTer.IsLat O K V Θ)
++    (h1 : N₁ ⊔ Z ≤ Submodule.span O' (j '' (Θ : Set V))) (h2 : ∀ i, th i ∈ M) (h3 : ∀ i, th i ∈ Θ)
++    (h4 : Mgg ≤ M)
++    (h5 : ∀ x ∈ Mgg, j x ∈ Submodule.span K' ((N₁ ⊔ Z : Submodule O' V₁) : Set V₁))
++    (h6 : Module.length O (↥M ⧸ (Mgg ⊔ Submodule.span O (Set.range th)).comap M.subtype) ≤ (q : ℕ∞))
++    (h8 : (Submodule.span O' (j '' (M : Set V))).map
++        ((algebraMap O O' ϖ ^ e) • (LinearMap.id : V₁ →ₗ[O'] V₁)) ⊓
++      (Submodule.span K' ((N₁ ⊔ Z : Submodule O' V₁) : Set V₁)).restrictScalars O' ≤ N')
++    (h9 : N₁ ≤ N') (h10 : Z ≤ Zm) (h11 : Zm ≤ N') (h12 : ∀ x, ρ x ∈ AA')
++    (h13 : LinearMap.ker ρ = Zm.comap N'.subtype) (h14 : (N₁.comap N'.subtype).map ρ = N₁') (h15 : N₁' ≤ AA)
++    (h16 : AA ≤ AA')
++    (h17 : Module.length O' (↥Zm ⧸ Z.comap Zm.subtype) ≠ ⊤)
++    (hcase : ((T : ℝ) * νs ≤ (e : ℝ) ∧ ∀ z, ∃ m : ℤ, (ep z : ℝ) * ν z = m) ∨ (T : ℝ) * νs + 1 ≤ (e : ℝ))
++    (hA : Module.length O' (↥AA' ⧸ AA.comap AA'.subtype) ≤
++      ((R * ∑ z, (max 0 ⌈(ep z : ℝ) * ((T : ℝ) * ν z - (e : ℝ))⌉).toNat * f z : ℕ) : ℕ∞))
++    (hN : Module.length O' (↥AA ⧸ N₁'.comap AA.subtype) ≤ ((R * I : ℕ) : ℕ∞)) :
++    ((Formalism.LatticeIndexTer.qlen O V (M.map ((ϖ ^ e) • (LinearMap.id : V →ₗ[O] V)) ⊔ Θ) Θ).toNat : ℝ) ≤
++          (R : ℝ) * ((T : ℝ) * c' * ∑ z, ((ep z : ℝ) * f z) * v z) + (R : ℝ) * (I : ℝ) +
++          ((Module.length O' (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ) := by
++  let jj : V →ₛₗ[algebraMap O O'] V₁ :=
++    { toFun := j
++      map_add' := j.map_add
++      map_smul' := fun a x => by
++        show j (a • x) = algebraMap O O' a • j x
++        rw [← algebraMap_smul K a x, j.map_smul, ← algebraMap_smul K' (algebraMap O K a) (j x),
++          ← IsScalarTower.algebraMap_apply O K K', IsScalarTower.algebraMap_apply O O' K',
++          algebraMap_smul] }
++  have hlen : ql (Submodule.span O' (j '' (M : Set V)))
++      (Submodule.span O' (j '' (Mgg : Set V)) ⊔ Submodule.span O' (Set.range fun i => j (th i))) ≤
++      ql M (Mgg ⊔ Submodule.span O (Set.range th)) := by
++    refine ql_span_le ϖ hϖ hϖ' jj M _ _ ?_
++    have hle : Mgg ⊔ Submodule.span O (Set.range th) ≤
++        (Submodule.span O' (j '' (Mgg : Set V)) ⊔
++          Submodule.span O' (Set.range fun i => j (th i))).comap jj := by
++      refine sup_le (fun x hx => ?_) (Submodule.span_le.2 ?_)
++      · exact Submodule.mem_sup_left (Submodule.subset_span ⟨x, hx, rfl⟩)
++      · rintro _ ⟨i, rfl⟩
++        exact Submodule.mem_sup_right (Submodule.subset_span ⟨i, rfl⟩)
++    exact fun x hx => hle hx
++  have h5' : Submodule.span K' ((Submodule.span O' (j '' (Mgg : Set V)) : Submodule O' V₁) : Set V₁) ≤
++      Submodule.span K' ((N₁ ⊔ Z : Submodule O' V₁) : Set V₁) := by
++    rw [Submodule.span_le]
++    have hle : Submodule.span O' (j '' (Mgg : Set V)) ≤
++        (Submodule.span K' ((N₁ ⊔ Z : Submodule O' V₁) : Set V₁)).restrictScalars O' := by
++      rw [Submodule.span_le]
++      rintro _ ⟨x, hx, rfl⟩
++      exact h5 x hx
++    exact fun x hx => hle hx
++  have : FiniteDimensional K' V₁ := Module.Finite.equiv hj.equiv
++  have h := localStepLevelsExcessQ ι ep f ν v νs c' T R I hep hT hc' hv hν O' K' V₁ W (algebraMap O O' ϖ) hϖ'
++    (Submodule.span O' (j '' (M : Set V))) (Submodule.span O' (j '' (Θ : Set V))) N₁ Z Zm N'
++    (Submodule.span O' (j '' (Mgg : Set V))) e n q (fun i => j (th i)) AA AA' N₁' ρ
++    (isLattice_span_image_alt O O' K K' V V₁ j hj M hM) (isLattice_span_image_alt O O' K K' V V₁ j hj Θ hΘ) h1
++    (fun i => Submodule.subset_span ⟨th i, h2 i, rfl⟩) (fun i => Submodule.subset_span ⟨th i, h3 i, rfl⟩)
++    (Submodule.span_mono (Set.image_mono h4)) h5' (hlen.trans h6) h8 h9 h10 h11 h12 h13 h14 h15 h16 h17 hcase hA hN
++  change ((_ : ℕ) : ℝ) ≤ _ at h
++  rwa [excess_base_change O O' K K' V V₁ j hj ϖ hϖ hϖ' M Θ e hM hΘ] at h
+ 
+ theorem levelsQDesc (ι : Type) [Fintype ι] (ep f : ι → ℕ) (ν v : ι → ℝ) (νs c' : ℝ) (T R I : ℕ)
+     (hep : ∀ z, 1 ≤ ep z) (hT : 1 ≤ T) (hc' : 0 ≤ c') (hv : ∀ z, 0 ≤ v z) (hν : ∀ z, ν z ≤ νs + c' * v z)
+@@ -40,46 +111,10 @@
+       (e : ℝ) * (finrank K V' : ℝ) +
+           (R : ℝ) * ((T : ℝ) * c' * ∑ z, ((ep z : ℝ) * f z) * v z) + (R : ℝ) * (I : ℝ) +
+           ((Module.length O' (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ) := by
+-  let jj : V →ₛₗ[algebraMap O O'] V₁ :=
+-    { toFun := j
+-      map_add' := j.map_add
+-      map_smul' := fun a x => by
+-        show j (a • x) = algebraMap O O' a • j x
+-        rw [← algebraMap_smul K a x, j.map_smul, ← algebraMap_smul K' (algebraMap O K a) (j x),
+-          ← IsScalarTower.algebraMap_apply O K K', IsScalarTower.algebraMap_apply O O' K',
+-          algebraMap_smul] }
+-  have hlen : ql (Submodule.span O' (j '' (M : Set V)))
+-      (Submodule.span O' (j '' (Mgg : Set V)) ⊔ Submodule.span O' (Set.range fun i => j (th i))) ≤
+-      ql M (Mgg ⊔ Submodule.span O (Set.range th)) := by
+-    refine ql_span_le ϖ hϖ hϖ' jj M _ _ ?_
+-    have hle : Mgg ⊔ Submodule.span O (Set.range th) ≤
+-        (Submodule.span O' (j '' (Mgg : Set V)) ⊔
+-          Submodule.span O' (Set.range fun i => j (th i))).comap jj := by
+-      refine sup_le (fun x hx => ?_) (Submodule.span_le.2 ?_)
+-      · exact Submodule.mem_sup_left (Submodule.subset_span ⟨x, hx, rfl⟩)
+-      · rintro _ ⟨i, rfl⟩
+-        exact Submodule.mem_sup_right (Submodule.subset_span ⟨i, rfl⟩)
+-    exact fun x hx => hle hx
+-  have h5' : Submodule.span K' ((Submodule.span O' (j '' (Mgg : Set V)) : Submodule O' V₁) : Set V₁) ≤
+-      Submodule.span K' ((N₁ ⊔ Z : Submodule O' V₁) : Set V₁) := by
+-    rw [Submodule.span_le]
+-    have hle : Submodule.span O' (j '' (Mgg : Set V)) ≤
+-        (Submodule.span K' ((N₁ ⊔ Z : Submodule O' V₁) : Set V₁)).restrictScalars O' := by
+-      rw [Submodule.span_le]
+-      rintro _ ⟨x, hx, rfl⟩
+-      exact h5 x hx
+-    exact fun x hx => hle hx
+-  have : FiniteDimensional K' V₁ := Module.Finite.equiv hj.equiv
+-  have h := localStepLevelsQ ι ep f ν v νs c' T R I hep hT hc' hv hν O' K' V₁ W (algebraMap O O' ϖ) hϖ'
+-    (Submodule.span O' (j '' (M : Set V))) (Submodule.span O' (j '' (Θ : Set V))) N₁ Z Zm N'
+-    (Submodule.span O' (j '' (Mgg : Set V))) e n q (fun i => j (th i)) AA AA' N₁' ρ
+-    (isLattice_span_image_alt O O' K K' V V₁ j hj M hM) (isLattice_span_image_alt O O' K K' V V₁ j hj Θ hΘ) h1
+-    (fun i => Submodule.subset_span ⟨th i, h2 i, rfl⟩) (fun i => Submodule.subset_span ⟨th i, h3 i, rfl⟩)
+-    (Submodule.span_mono (Set.image_mono h4)) h5' (hlen.trans h6) h8 h9 h10 h11 h12 h13 h14 h15 h16 h17 hcase hA hN
+-    (Submodule.span K' (j '' (V' : Set V)))
+-  have hd := localStepDescent O O' K K' V V₁ j hj ϖ hϖ hϖ' M Θ V' hM hΘ 1
+-    ((R : ℝ) * ((T : ℝ) * c' * ∑ z, ((ep z : ℝ) * f z) * v z) + (R : ℝ) * (I : ℝ) +
+-      ((Module.length O' (↥Zm ⧸ Z.comap Zm.subtype)).toNat : ℝ) + (q : ℝ)) 0 e (by linarith)
++  have h := levelsExcessDesc ι ep f ν v νs c' T R I hep hT hc' hv hν
++    O O' K K' V V₁ W j hj ϖ hϖ hϖ' M Θ Mgg N₁ Z Zm N' e n q th AA AA' N₁' ρ
++    hM hΘ h1 h2 h3 h4 h5 h6 h8 h9 h10 h11 h12 h13 h14 h15 h16 h17 hcase hA hN
++  have hh := subspace_bound_of_excess (K := K) ϖ hϖ M Θ hM hΘ e _ h V'
+   linarith
+ 
+ end Formalism.MainNotions.Gaps.EtaleWeightGaps
