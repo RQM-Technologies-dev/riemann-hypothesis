@@ -79,3 +79,5 @@ run_cmd
     if deps.contains detour then throwError "Example still reaches threeForms_of"
   logInfo "Both example proofs use the direct row. Only the legacy row reaches threeForms_of."
 
+  logInfo m!"Filtered transitive declarations from row entry points: legacy {legacy.toList.length}, direct {direct.toList.length}."
+  logInfo m!"Legacy-only {(legacy.toList.filter fun n => !direct.contains n).length}; direct-only {(direct.toList.filter fun n => !legacy.contains n).length}."

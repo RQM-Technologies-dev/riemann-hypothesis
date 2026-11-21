@@ -25,6 +25,10 @@ The code uses extended natural lengths, so this inequality also makes sense befo
 
 `AtPair S` quantifies over both places of each pair for w ∈ S.Tw. The new pair input retains the same a, E, r₁, r₂, δ₂ and the same finite weighted-sum inequalities on those remainder functions. The output retains S.Tw, the tuple S.μ w, both index terms, the local allowance 2/plc(w)² and the final N.E1 j. Applying this output to the full family still requires a direct construction of those same remainders.
 
+## Local proof dependencies
+
+Starting at `on_core`, the audit reaches 518 project declarations. From `on_core_excess` it reaches 488. Their intersection has 487 declarations. The original path uniquely reaches 31 and the direct path uniquely reaches one. The walk follows used constants whose names begin with `Formalism`, `Development`, or `_private.Formalism.`, counting each root once. The counts measure the transitive dependencies of these two row entry points in the patched environment. Whole-project dependencies and build time require a replay of the arithmetic entry point. [Executable audit](DirectProjectorAudit.lean)
+
 ## Reproduction
 
 The baseline is the November 20 source archive with SHA-256 `9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc`. The ten pre-edit sources were also compared byte for byte with mirror revision `712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9`. The replay uses the project's Lean 4.33.1 and Mathlib revision `0df444a360eaa60ab8c11dca51a86af692955474`. Set PROJECTOR to the directory containing the patch and audit file. From the upstream project root run

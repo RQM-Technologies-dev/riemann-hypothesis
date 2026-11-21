@@ -8,6 +8,7 @@ import tempfile
 
 HERE = Path(__file__).resolve().parent
 OWNER = "Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.WeightParameterMemUnitInterval"
+UNIFORMIZER = "Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.ExistsIrreducibleLocToCompl"
 WEIGHT = "Formalism.LocalRingCardinality.DataArith"
 ROW = "Formalism.LocalToGlobal.IndefiniteForms.IndefiniteTree.ExampleSatisfiesConditionsAtFive"
 SPAN = "Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.LengthLeOfSemilinear"
@@ -38,6 +39,7 @@ def main():
     root = parser.parse_args().upstream.resolve()
     core = pinned(root, OWNER, "e08fa8017b40fc9b07514b91304e38d11382d6586df6e13c15be9366a5470c19")
     weights = pinned(root, WEIGHT, "f9cd7b6481f0f48c1d914de7aa3cdb06e8d3548403e803d7f9a4d0e9a5b8e895")
+    uniformizer = pinned(root, UNIFORMIZER, "98378281e1788079559d151c5b5d3c439b181021277d8d9cc7e587e7ac43e58a")
     subprocess.run(["lake", "build", *[f"+{n}:olean" for n in (ROW, SPAN, FORMS, BASIS, VAL)]], cwd=root, check=True)
     lean_path = subprocess.check_output(["lake", "env", "printenv", "LEAN_PATH"], cwd=root, text=True).strip()
     with tempfile.TemporaryDirectory(prefix="scalar-passage-") as tmp:
@@ -60,8 +62,15 @@ def main():
             source = (HERE / f"{name}.lean").read_text()
             check(name, source.replace("import " + OWNER + "\n", "import " + owner + "\n"))
         check("ScalarPassage", (HERE / "ScalarPassage.lean").read_text())
-        for name in ("ScalarDepth", "ScalarAmbient", "ScalarCompletion", "ScalarRamification", "ScalarPassage"):
-            subprocess.run(["leanchecker", name], cwd=root, env=env, check=True)
+        check("UniformizerFacts", imports("Mathlib") + "noncomputable section\nopen Module NumberField IsDedekindDomain\n" +
+              "namespace Formalism.MainNotions.Gaps.EtaleWeightGaps\n" + slices(uniformizer, [(12, 24), (49, 94)]) +
+              "end Formalism.MainNotions.Gaps.EtaleWeightGaps\n")
+        depth = (HERE / "ThetaDepth.lean").read_text().replace("import " + UNIFORMIZER + "\n", "import UniformizerFacts\n")
+        check("ThetaDepth", depth)
+        for name in ("ThetaCoordinates", "ThetaRowInput", "ThetaWitnessRows"):
+            check(name, (HERE / f"{name}.lean").read_text())
+        for name in ("ThetaDepth", "ThetaCoordinates", "ThetaRowInput", "ThetaWitnessRows", "ScalarDepth", "ScalarAmbient", "ScalarCompletion", "ScalarRamification", "ScalarPassage"):
+            subprocess.run(["leanchecker", "-v", name], cwd=root, env=env, check=True)
 
 
 if __name__ == "__main__":
