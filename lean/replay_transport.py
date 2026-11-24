@@ -56,6 +56,9 @@ def main():
                         "Development.AbelianVarietyTheory.Definitions.Divisors.IsDeltaDelAtOwnAt",
                         "Development.AbelianVarietyTheory.Proofs.HeightProofs.ExistsPageRunRecordSubFour",
                         "Development.AbelianVarietyTheory.Proofs.HeightProofs.FieldSmallIffOpo"])
+    if args.family:
+        targets.extend(["Development.AbelianVarietyTheory.Proofs.HeightProofs.ParametersOkOfLaws",
+                        "Development.AbelianVarietyTheory.Proofs.DivisorProofs.HasIndexBoundOfRuns"])
     if args.family_original:
         targets = ["Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.TheoremZeroBundledOfLift"]
     subprocess.run(["lake", "build", *[f"+{n}:olean" for n in targets]], cwd=root, check=True)
@@ -84,7 +87,9 @@ def main():
                             "candidates/ThetaFamilyComparison", "candidates/FamilyAuditCounts",
                             "candidates/OriginalFamilyAudit", "candidates/ThetaFamilyAudit", "candidates/ThetaRunAudit"])
             if args.family:
-                sources.append("candidates/ThetaFamilyWitness")
+                sources.extend(["candidates/ThetaFamilyRow", "candidates/ThetaRowBound", "candidates/ThetaRunRows",
+                                "candidates/ThetaTieParameters", "candidates/ThetaTieRows", "candidates/ThetaFamilyWitness"])
+
             for source in sources:
                 path = HERE / (source + ".lean")
                 check(path.stem, path.read_text())
