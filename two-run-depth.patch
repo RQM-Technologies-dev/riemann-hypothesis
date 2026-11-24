@@ -1,0 +1,11 @@
+--- a/src/Development/AbelianVarietyTheory/Proofs/FoundationProofs/TraceLatticeLeThetaLatticeAtPlace.lean
++++ b/src/Development/AbelianVarietyTheory/Proofs/FoundationProofs/TraceLatticeLeThetaLatticeAtPlace.lean
+@@ -1,2 +1,3 @@
+ import Mathlib
++import Formalism.LocalToGlobal.IndefiniteForms.IndefiniteTree.TwoRunDepth
+ import Development.AbelianVarietyTheory.Proofs.FoundationProofs.KernelSpanOverClasses
+@@ -240,3 +241,3 @@
+     (hJS : LeafJSum O) (hJE : LeafJExp N O) (hCE : c.CE ≤ CE) (tE1 : ErrorConstantMatchesDefinition N O CE) : ONwith S N O.errOn :=
+-  on_core N (fillJ O) CE hRk hMk hSup hProj hC hSp hS hT0 hD (leafRankJ_fillJ hJ) hI h2 (leafTW1_fillJ hJ h1) hSh hIU hBS hUn
++  on_core_excess N (fillJ O) CE hRk hMk hSup hProj hC hSp hS (depth_of_run_bounds O hSup hS hT0) hD (leafRankJ_fillJ hJ) hI h2 (leafTW1_fillJ hJ h1) hSh hIU hBS hUn
+     hG hR h2p hL hPg hSz hX hBad hJS hJE hCE tE1

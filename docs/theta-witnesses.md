@@ -62,4 +62,65 @@ For run $k$ and row $i$, the formula at the upgraded family is therefore $r_{k,i
 
 The draft `thetaWitnessOfIntrinsic` returns that transported family, its points and their scalar allowance immediately, using the original `CombBound` before it is specialized by branch. This bypasses construction of both the bundled all-subspace conclusion and its terminal proof in this function. `thetaWitnessOfNet` carries the result through the norm change. `thetaRunOnPage` takes the particular finite-net hypothesis on the prescribed page as input, so it can reuse a prior choice without choosing a threshold again. `exists_theta_run` uses the original numerical-threshold constructor to supply that input. Equality of the normalized and original scalar lengths, and identification of the selected windows in the final caller, are part of the proposed specialization. These declarations are drafts. A dependency audit of their checked application is still necessary. [Run draft](../lean/candidates/ThetaChosenInputs.lean) · [Upstream normalized run](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsThresholdRunHolds.lean#L48)
 
-Finally, `on_of_has_atPlaces` opens `HasIndexBound` and passes its fields to `on_core_atPlaces`, which calls the original `on_core`. A successful replacement must carry the direct variant through that caller and replay the modified `Main`. The targeted kernel replay covers the coordinate, depth and row lemmas. The concrete two-run application and final replay are open. [Upstream row contract](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Development/AbelianVarietyTheory/Definitions/Divisors/RealisedChainTorusEq.lean#L77) · [Row caller](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/TwistedPlacesBoundChainTwoRunChain.lean#L34) · [Kernel replay instructions](scalar-transport.md#reproduce-the-targeted-experiment)
+Finally, `on_of_has_atPlaces` opens `HasIndexBound` and passes its fields to `on_core_atPlaces`, which calls the original `on_core`. A successful replacement must carry the direct variant through that caller and replay the modified `Main`. The original targeted replay covers the coordinate, depth and row lemmas. The experiment below checks the caller using the existing two-run output. Producing both allowances directly and replaying the modified final theorem remain open. [Upstream row contract](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Development/AbelianVarietyTheory/Definitions/Divisors/RealisedChainTorusEq.lean#L77) · [Row caller](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/TwistedPlacesBoundChainTwoRunChain.lean#L34) · [Kernel replay instructions](scalar-transport.md#reproduce-the-targeted-experiment)
+
+## Testing the existing two-run output
+
+The upstream `hasIndexBound_of_runs` returns `HasIndexBound O`. Opening this
+package gives one lattice, one scalar at each place and row, two separate
+allowance functions, and their weighted bounds. At each place the package
+supplies the subspace inequality for the selected run. This gives a way to
+test the depth proposal without making new choices of local points.
+
+The [paired conversion](../lean/TwoRunDepth.lean) uses `three_forms` to turn
+the subspace inequality into a bound on the intersection index.
+`three_forms_sum` identifies that index with the surviving quotient length,
+expressed as the index of `a M + Θ` over `Θ`. The proof does this at both
+members of every place pair. It copies the two weighted bounds directly
+from the input. In particular, it never takes a pointwise maximum of the
+two runs' allowances, which could increase the weighted sum.
+
+The [consumer replay](../lean/replay_two_run_depth.py) extracts the relevant
+definitions and consumers from three hash-checked upstream source files.
+It compares the original `on_of_has_atPlaces` with a version that opens the
+same package and feeds the converted bound to `on_core_excess`. Both take
+the upstream `HasIndexBound` as input. The experiment measures the cost of
+using an existing pair of arithmetic runs. Constructing their scalar outputs
+directly from the theta families is a separate experiment. Both the consumer and
+`hasIndexBound_of_runs` appear in the published declaration graph rooted at the
+classical RH theorem. [Upstream dependency graph](https://proofsandreasons.io/rh-graph.html)
+
+
+### Measured at the same consumer
+
+| Source and route | Reachable project declarations | Lean expression nodes |
+| --- | ---: | ---: |
+| Pinned upstream, original consumer | 508 | 677,821 |
+| RQM projector patch, original consumer | 531 | 705,781 |
+| RQM projector patch, depth-based consumer | 527 | 708,156 |
+
+The experimental route adds **19 declarations and 30,335 expression nodes**
+relative to the pinned upstream baseline. Within the patched environment,
+eight declarations drop out and four enter, but the exclusive declarations
+grow from 17,239 to 19,614 nodes. Both consumers still reach
+`threeForms_of` through the subspace-to-depth conversion.
+
+The audit follows references within the Formalism, Development and GlobalTheory
+namespaces, including the corresponding private names. For each reached
+declaration it counts the type and available body separately after sharing
+identical subexpressions within each. The baseline build's 636 local upstream
+source files matched the pinned originals byte for byte. The final RH entry
+point, build time and export size were outside this comparison. The gain from
+518 to 488 reported elsewhere is for a row in the patched environment with
+a scalar bound already supplied.
+
+From this repository, supply the upstream source directory and the patched
+build directory from the [projector replay](../direct-projector-replay.md).
+A full patched checkout can serve as both arguments.
+
+```sh
+python3 lean/replay_two_run_depth.py "$UPSTREAM" "$PATCHED_BUILD"
+python3 lean/replay_two_run_depth.py "$UPSTREAM" "$ORIGINAL_BUILD" --original
+```
+
+To install this variant in a separate upstream checkout after the direct projector patch, copy [TwoRunDepth.lean](../lean/TwoRunDepth.lean) into `src/Formalism/LocalToGlobal/IndefiniteForms/IndefiniteTree/` and apply the [caller patch](../two-run-depth.patch). The patch retains the original public theorem name and assumptions.

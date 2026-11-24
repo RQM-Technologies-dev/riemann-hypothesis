@@ -40,6 +40,8 @@ Quaternions compress the bookkeeping at conjugate places. For an invertible matr
 
 **Open globally.** Both arithmetic branches specify their allowance by the same function `rLa`. At the terminal index it reduces to the base-index term plus the Gauss term. The concrete two-run family still needs a checked Lean connection from those allowances to the row inputs. A replay of the modified `Main` and an end-to-end proof-length or runtime saving remain open. [Exact witnesses and remaining obligations](docs/theta-witnesses.md) · [Reproduce the transport checks](docs/scalar-transport.md)
 
+**Two-run test.** Lean accepts the depth bound when the existing arithmetic runs supply their subspace estimates. At the theorem that consumes their output, the depth route reaches 527 project declarations and 708,156 expression nodes. The pinned upstream route reaches 508 and 677,821. Reconstructing the depth count at this point costs more than it saves. [Experiment, baselines and replay](docs/theta-witnesses.md#testing-the-existing-two-run-output)
+
 ## Earlier RQM research
 
 The research index preserves the exploratory quaternionic models, numerical tests, and obstructions that preceded this project’s study of Alpöge’s proof. [Browse the research index](RESEARCH-INDEX.md)
