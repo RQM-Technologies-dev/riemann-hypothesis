@@ -35,8 +35,13 @@ def imports(*names):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("upstream", type=Path, help="Patched, pinned Lean project")
-    parser.add_argument("--family", action="store_true",
+    parser.add_argument("upstream", type=Path, help="Pinned Lean project (pristine for --family-original)")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--family-original", action="store_true",
+                       help="Measure the original family theorem in a pristine upstream checkout")
+    modes.add_argument("--family-depth", action="store_true",
+                       help="Replay the direct family and two-run theorems and measure the family step")
+    modes.add_argument("--family", action="store_true",
                         help="Check the arithmetic candidates with their full upstream modules")
     args = parser.parse_args()
     root = args.upstream.resolve()
@@ -44,10 +49,15 @@ def main():
     weights = pinned(root, WEIGHT, "f9cd7b6481f0f48c1d914de7aa3cdb06e8d3548403e803d7f9a4d0e9a5b8e895")
     uniformizer = pinned(root, UNIFORMIZER, "98378281e1788079559d151c5b5d3c439b181021277d8d9cc7e587e7ac43e58a")
     targets = [ROW, SPAN, FORMS, BASIS, VAL]
-    if args.family:
+    if args.family or args.family_depth:
         targets.extend([OWNER, UNIFORMIZER,
                         "Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.TheoremZeroBundledOfLift",
-                        "Development.AbelianVarietyTheory.Proofs.HeightProofs.ExistsThresholdRunHolds"])
+                        "Development.AbelianVarietyTheory.Proofs.HeightProofs.ExistsThresholdRunHolds",
+                        "Development.AbelianVarietyTheory.Definitions.Divisors.IsDeltaDelAtOwnAt",
+                        "Development.AbelianVarietyTheory.Proofs.HeightProofs.ExistsPageRunRecordSubFour",
+                        "Development.AbelianVarietyTheory.Proofs.HeightProofs.FieldSmallIffOpo"])
+    if args.family_original:
+        targets = ["Formalism.SharpRestriction.GenusPolyhedralBounds.RelativeIndexClassSets.TheoremZeroBundledOfLift"]
     subprocess.run(["lake", "build", *[f"+{n}:olean" for n in targets]], cwd=root, check=True)
     lean_path = subprocess.check_output(["lake", "env", "printenv", "LEAN_PATH"], cwd=root, text=True).strip()
     with tempfile.TemporaryDirectory(prefix="scalar-passage-") as tmp:
@@ -59,10 +69,22 @@ def main():
             subprocess.run(["lean", f"--root={out}", "-j", "2", "-DmaxSynthPendingDepth=3", "-DmaxHeartbeats=4000000",
                             "-o", str(out / f"{name}.olean"), str(path)], cwd=root, env=env, check=True)
 
-        if args.family:
-            sources = ["ScalarDepth", "ScalarAmbient", "ScalarCompletion", "ScalarRamification", "ScalarPassage",
-                       "ThetaDepth", "ThetaCoordinates", "ThetaRowInput", "ThetaWitnessRows", "candidates/ThetaScalar",
-                       "candidates/ThetaFamilyWitness", "candidates/ThetaChosenInputs"]
+        if args.family_original:
+            for name in ("FamilyAuditCounts", "OriginalFamilyAudit"):
+                check(name, (HERE / "candidates" / f"{name}.lean").read_text())
+            return
+        if args.family or args.family_depth:
+            sources = []
+            if args.family:
+                sources.extend(["ScalarDepth", "ScalarAmbient", "ScalarCompletion", "ScalarRamification",
+                                "ScalarPassage", "ThetaDepth", "ThetaCoordinates", "ThetaRowInput",
+                                "ThetaWitnessRows"])
+            sources.extend(["candidates/ThetaScalar", "candidates/ThetaFamilyProducer",
+                            "candidates/ThetaChosenInputs", "candidates/ThetaRunSelectors",
+                            "candidates/ThetaFamilyComparison", "candidates/FamilyAuditCounts",
+                            "candidates/OriginalFamilyAudit", "candidates/ThetaFamilyAudit", "candidates/ThetaRunAudit"])
+            if args.family:
+                sources.append("candidates/ThetaFamilyWitness")
             for source in sources:
                 path = HERE / (source + ".lean")
                 check(path.stem, path.read_text())

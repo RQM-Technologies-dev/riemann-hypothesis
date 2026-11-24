@@ -38,7 +38,13 @@ Quaternions compress the bookkeeping at conjugate places. For an invertible matr
 
 **Checked locally.** The scalar estimate passes through completion and ramification. The two transported remainder functions can be installed in the row object and passed to `paired_of_completed` on its original window. The original row entry point reaches **518** project declarations under the audit’s namespace filter. The direct row reaches **488**. It drops 31 declarations, including `threeForms_of`, and adds one. These counts cover the local row proof. [Reproduce the dependency count](direct-projector-replay.md)
 
-**Open globally.** Both arithmetic branches specify their allowance by the same function `rLa`. At the terminal index it reduces to the base-index term plus the Gauss term. The concrete two-run family still needs a checked Lean connection from those allowances to the row inputs. A replay of the modified `Main` and an end-to-end proof-length or runtime saving remain open. [Exact witnesses and remaining obligations](docs/theta-witnesses.md) · [Reproduce the transport checks](docs/scalar-transport.md)
+**Direct theta-family bound.** For each place and admissible row, the selected theta family supplies an allowance that bounds the surviving quotient length at every allowed depth. The allowances also satisfy the required weighted sum bound. An independent Lean kernel checker replayed this construction and the comparison theorem, which recovers the original family theorem’s conclusion. [Construction, dependency counts and replay commands](docs/theta-witnesses.md#direct-construction-and-same-statement-comparison)
+
+At that family theorem, the direct proof with the projector patch reaches 25,748 fewer Lean expression nodes (1.03%) and six fewer project declarations than pinned upstream. With the projector patch held fixed, changing the family proof alone saves 12,978 nodes and adds one declaration.
+
+**Two-run test.** Lean accepts the depth bound when the existing arithmetic runs supply their subspace estimates. At the theorem that consumes their output, the depth route reaches 527 project declarations and 708,156 expression nodes. The pinned upstream route reaches 508 and 677,821. Reconstructing the depth count at this point costs more than it saves. [Experiment, baselines and replay](docs/theta-witnesses.md#testing-the-existing-two-run-output)
+
+**Open globally.** The next step is to pass the family allowances into the arithmetic row. The recorded Lean check for `rowOfFamily` timed out. An end-to-end saving in proof size or runtime remains unverified until the modified `Main` is replayed and measured. [Row integration status](docs/theta-witnesses.md#direct-construction-and-same-statement-comparison)
 
 ## Earlier RQM research
 
