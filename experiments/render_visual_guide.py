@@ -119,8 +119,30 @@ def divisibility():
     return image
 
 
+def divisibility_window():
+    image, draw = page(660, 440)
+    center, unit = 330, 30
+    for row, level in enumerate((2, 3)):
+        top = 18 + 208 * row
+        axis = top + 101
+        bound = level * 3
+        label(draw, 24, top + 18, f"{level} classes: total size at most {bound}", 28)
+        draw.line((center-10*unit, axis, center+10*unit, axis), fill=INK, width=2)
+        draw.rectangle((center-bound*unit, axis-12, center+bound*unit, axis+12),
+                       fill=FAINT, outline=TEAL, width=2)
+        for value in (-8, 0, 8):
+            x = center + value * unit
+            inside = abs(value) <= bound
+            draw.ellipse((x-8, axis-8, x+8, axis+8), fill=INK if inside else PAPER,
+                         outline=INK, width=3)
+            label(draw, x, axis+35, str(value), 25, anchor="mm")
+        label(draw, 24, top+171, "Only 0 fits." if bound < 8 else "−8, 0 and 8 fit.", 26, TEAL)
+    return image
+
+
 if __name__ == "__main__":
     for name, render in [("proof-map",proof_map),("critical-strip",zeros),
                          ("smoothed-weights",weights),("theta-chain",lifts),
-                         ("lift-divisibility", divisibility)]:
+                         ("lift-divisibility", divisibility),
+                         ("divisibility-window", divisibility_window)]:
         render().save(OUT / (name + ".png"))

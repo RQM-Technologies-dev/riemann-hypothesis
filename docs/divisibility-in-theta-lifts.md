@@ -31,4 +31,4 @@ Two passes double both coordinates. Applying that identity twice gives $(4a,4b)$
 
 </details>
 
-[Previous: why repeat a theta lift?](chain-of-theta-lifts.md) · [Return to the proof map](../README.md)
+[Previous: why repeat a theta lift?](chain-of-theta-lifts.md) · [Next: weigh divisibility against size and level](divisibility-size-and-level.md) · [Return to the proof map](../README.md)

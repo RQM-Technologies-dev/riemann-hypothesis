@@ -10,6 +10,7 @@ Read the map **from the bottom up** to understand the problem. Then follow the a
 2. **[What does the proof actually count?](docs/smoothed-prime-powers.md)** Calculate the contribution of every prime power through 10 and see why powers of two receive different weights after smoothing.
 3. **[Why repeat a theta lift?](docs/chain-of-theta-lifts.md)** Follow one form through a chain of groups and see why the proof needs both multiplicity and a bound on its arithmetic cost.
 4. **[Where does divisibility enter the lifts?](docs/divisibility-in-theta-lifts.md)** Apply a sum-and-difference rule twice and see why a factor of two is guaranteed for every integer input.
+5. **[When is the divisibility gain enough?](docs/divisibility-size-and-level.md)** Put the possible multiples on a number line and see how a finer level can let a nonzero value back in.
 
 ## Read the original proof
 
