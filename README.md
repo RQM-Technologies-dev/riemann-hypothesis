@@ -9,6 +9,7 @@ Read the map **from the bottom up** to understand the problem. Then follow the a
 1. **[How can a zero affect a prime count?](docs/zeros-and-primes.md)** Move a hypothetical zero sideways in the critical strip and watch what happens to its oscillation.
 2. **[What does the proof actually count?](docs/smoothed-prime-powers.md)** Calculate the contribution of every prime power through 10 and see why powers of two receive different weights after smoothing.
 3. **[Why repeat a theta lift?](docs/chain-of-theta-lifts.md)** Follow one form through a chain of groups and see why the proof needs both multiplicity and a bound on its arithmetic cost.
+4. **[Where does divisibility enter the lifts?](docs/divisibility-in-theta-lifts.md)** Apply a sum-and-difference rule twice and see why a factor of two is guaranteed for every integer input.
 
 ## Read the original proof
 

@@ -16,4 +16,4 @@ The argument needs an arithmetic comparison. On one side, the iterated construct
 
 **Read the figure.** Suppose you can construct one more lift. What extra information would you need before claiming a better prime-sum estimate? You would need quantitative control of the new divisibility and the accompanying size and level costs. The existence of another form gives you an object on which to make that comparison.
 
-[Return to the proof map](../README.md) · [Read the formal conclusion in Lean](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Main.lean#L4)
+[Next: where divisibility enters the lifts](divisibility-in-theta-lifts.md) · [Return to the proof map](../README.md) · [Read the formal conclusion in Lean](https://github.com/leanprover-community/riemann-hypothesis/blob/712a6aef8fe265fb6f3a5fa1f3101a017aec8fe9/src/Main.lean#L4)

@@ -99,7 +99,28 @@ def lifts():
     return image
 
 
+def divisibility():
+    image, draw = page(640, 420)
+    a, b = 3, 2
+    for step in range(3):
+        y = 52 + 120 * step
+        label(draw, 22, y, ["Input", "One pass", "Two passes"][step], 29)
+        draw.rounded_rectangle((212, y-31, 378, y+31), radius=9, outline=TEAL, width=3)
+        label(draw, 295, y, f"({a}, {b})", 33, anchor="mm")
+        odd = a % 2 or b % 2
+        label(draw, 398, y, "Odd entry" if odd else "Both even", 27,
+              INK if odd else TEAL)
+        if step < 2:
+            arrow(draw, 295, y+34, y+86)
+            label(draw, 318, y+61, "sum, difference", 23)
+        a, b = a+b, a-b
+    draw.line((22, 353, 616, 353), fill=FAINT, width=3)
+    label(draw, 22, 385, "Divide (6, 4) by 2 to recover (3, 2).", 28)
+    return image
+
+
 if __name__ == "__main__":
     for name, render in [("proof-map",proof_map),("critical-strip",zeros),
-                         ("smoothed-weights",weights),("theta-chain",lifts)]:
+                         ("smoothed-weights",weights),("theta-chain",lifts),
+                         ("lift-divisibility", divisibility)]:
         render().save(OUT / (name + ".png"))
