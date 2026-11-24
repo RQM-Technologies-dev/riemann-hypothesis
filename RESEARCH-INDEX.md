@@ -1,4 +1,13 @@
-# Riemann Hypothesis — Quaternionic Polar Closure
+# Research archive
+
+RQM Technologies keeps its experiments and their measured outcomes here. The [visual guide](README.md) follows Alpöge’s proof.
+
+- [Local length examples and animations](docs/reading-the-proof.md)
+- [Projector experiment and replay instructions](direct-projector-replay.md)
+- [Theta-family witnesses and the two-run comparison](docs/theta-witnesses.md)
+- [Quaternionic descent and local lattice examples](quaternionic-descent.md)
+
+## Earlier quaternionic models
 
 **Status:** exploratory mathematical research, not a proof of the Riemann Hypothesis.  
 **Updated:** 2026-11-06  
